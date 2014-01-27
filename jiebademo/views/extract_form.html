@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Jieba Demo Site</title>
+	<title>走向未来 - 数位人文 － 关键词</title>
 </head>
 <body>
 <style type="text/css">
@@ -16,7 +16,6 @@
 	}
 
 	#Content{
-		width: 960px;
 		margin: 0 auto 0 auto;
 	}
 
@@ -26,26 +25,30 @@
 </style>
 
 <div id="Top">
-	<h2>Demo of Jieba</h2>
+	<h2>走向未来 - 数位人文 － 关键词</h2>
 </div>
+
+<form enctype="multipart/form-data" action="/extract" method="post">
 <div id="Wrapper">
+
 	<div id="Content">
-		<form action="/extract" method="post">
+<div>上传文件: <input type="file" name="file"><input type="submit" name="upload" value="上传"></div>
 		<div>
 			<textarea rows="15" cols="100" name="text">{{content}}</textarea>
 		</div>
 		<div>
-			<textarea rows="3" cols="100" name="tags">{{tags}}</textarea>
+			<textarea rows="3" cols="100" name="tags">{{tags}}</textarea><img src="{{keyImgUrl}}" />
 		</div>
 		<span>
 			关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
 		</span>
 		
-		<input type="submit" value="开始提取"/>
+		<input type="submit" name="extract" value="开始提取" />
 		<input type="button" value="重置" onclick="javascript:window.location.href='/extract'"/>
-	</div>
-</form>
+        </div>
+
 </div>
+    </form>
 <div id="Bottom">
 	<span>项目主页：<a href="http://github.com/fxsjy/jieba">http://github.com/fxsjy/jieba</a></span>
 	<span>作者微博：<a href="http://weibo.com/TreapDB">http://weibo.com/TreapDB</a></span>

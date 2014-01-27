@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#encoding=utf-8
+#coding=utf-8
 import os
 from bottle import route,run,default_app,request, response,get,post,template,debug,static_file
 import jieba
@@ -8,10 +8,17 @@ jieba.initialize()
 from jieba import posseg
 import jieba.analyse
 import functools
+from nltk.probability import FreqDist
 
 @route('/static/:filename')
 def serve_static(filename):
-    return static_file(filename, root='static')
+    return static_file(filename, root='./static')
+
+@route('/static/temp/:filename')
+def serve_temp(filename):
+    tempfile = static_file(filename, root='./static/temp')
+    os.remove('./static/temp/' + filename)
+    return tempfile
 
 def match(a,b):
   if a==b:
@@ -60,14 +67,68 @@ def extract():
 习近平在周日的演讲中强调了中国的经济吸引力，预测5年内中国的进口将达到10万亿美元，而对外投资将超过5000亿美元。他还表示，出国旅游的中国人将超过4亿。（吉密欧 博鳌报道　译者/何黎）
 
 (原标题：外媒关注：习近平警告不准任何人搞乱亚洲)'''
-    return template("extract_form",content=sample_text,tags="",topk=10)
-    
+    return template("extract_form",content=sample_text,tags="",topk=10,keyImgUrl="")
+
+import cgi, os
+from datetime import *
+import cgitb; cgitb.enable()
+
 @post('/extract')
-def extract_action():
-    text = request.forms.text
-    topk = int(request.forms.topk)
+def extractSubmit_action():
+    if "extract" in request.forms:
+        text = request.forms.text
+        topk = int(request.forms.topk)
+    elif "upload" in request.forms:
+        try: # Windows needs stdio set for binary mode.
+            import msvcrt
+            msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+            msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+        except ImportError:
+            pass
+
+        form = cgi.FieldStorage()
+
+        # A nested FieldStorage instance holds the file
+        fileitem = request.files.file
+        # Test if the file was uploaded
+        if fileitem.filename:
+
+           # strip leading path from file name to avoid directory traversal attacks
+           fn = os.path.basename(fileitem.filename)
+           text =fileitem.file.read()
+           open('files/' + fn, 'wb').write(text)
+           message = 'The file "' + fn + '" was uploaded successfully'
+
+        else:
+           message = 'No file was uploaded'
+
+        topk = int(request.forms.topk)
+        import chardet
+        charencoding = chardet.detect(text)  # "utf-8" "us-ascii" etc
+        text = unicode(text, charencoding['encoding'], errors="ignore")
     tags = jieba.analyse.extract_tags(text,topK=topk)
-    return template("extract_form",content=text,tags=", ".join(tags),topk=topk)
+    tagsString = ""
+    fd = FreqDist(tags)
+    counts = []
+    for keyword in tags:
+        #keyword = keyword.encode("utf-8")
+        count = text.count(keyword)
+        fd[keyword] = count
+        counts.append(str(count))
+    for key,val in fd.iteritems():
+        tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
+    from pylab import mpl,plt
+    from matplotlib.font_manager import FontProperties
+    fontPath = u'/Library/Fonts/Songti.ttc'
+    font = FontProperties(fname=fontPath)
+    plt.xlabel(u'')
+    plt.ylabel(u'')
+    plt.title(u'')
+    plt.bar(range(len(fd)), fd.values(), align='center')
+    plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
+    plt.savefig(imgUrl, bbox_inches='tight', dpi=80)
+    return template("extract_form",content=text,tags=tagsString,topk=topk,keyImgUrl=imgUrl)
 
 @get('/')
 def main():
