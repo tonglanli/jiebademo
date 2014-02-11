@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#coding=utf-8
+# -*- coding: utf-8 -*-
 import os
 from bottle import route,run,default_app,request, response,get,post,template,debug,static_file
 import jieba
@@ -9,6 +9,8 @@ from jieba import posseg
 import jieba.analyse
 import functools
 from nltk.probability import FreqDist
+import sqlitedb
+import chardet
 
 @route('/static/:filename')
 def serve_static(filename):
@@ -25,6 +27,8 @@ def match(a,b):
     return "checked"
   else:
     return ""
+
+defaulttopk=15
 
 @get('/extract')
 def extract():
@@ -67,17 +71,53 @@ def extract():
 习近平在周日的演讲中强调了中国的经济吸引力，预测5年内中国的进口将达到10万亿美元，而对外投资将超过5000亿美元。他还表示，出国旅游的中国人将超过4亿。（吉密欧 博鳌报道　译者/何黎）
 
 (原标题：外媒关注：习近平警告不准任何人搞乱亚洲)'''
-    return template("extract_form",content=sample_text,tags="",topk=10,keyImgUrl="")
+    return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts())
 
 import cgi, os
 from datetime import *
 import cgitb; cgitb.enable()
 
+@get('/:filename')
+def extractFile_action(filename):
+    text = open('files/'+filename, 'rb').read()
+    topk = defaulttopk
+    tags = jieba.analyse.extract_tags(text,topK=topk)
+    tagsString = ""
+    fd = FreqDist(tags)
+    counts = []
+    charencoding = chardet.detect(text)
+    for keyword in tags:
+        if charencoding['encoding'] != 'utf-8':
+            keywordtext = keyword.encode(charencoding['encoding'])
+        else:
+            keywordtext = keyword.encode("utf-8")
+        count = text.count(keywordtext)
+        fd[keyword] = count
+        counts.append(str(count))
+    for key,val in fd.iteritems():
+        #key = key.decode('ascii').encode('utf-8')
+        tagsString += '{0}:{1} '.format(key.encode('gbk'), val)
+    from pylab import mpl,plt
+    from matplotlib.font_manager import FontProperties
+    fontPath = u'/Library/Fonts/Songti.ttc'
+    font = FontProperties(fname=fontPath,size=9)
+    plt.xlabel(u'')
+    plt.ylabel(u'')
+    plt.title(u'')
+    plt.bar(range(len(fd)), fd.values(), align='center')
+    plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
+    plt.savefig(imgUrl, bbox_inches='tight')
+    plt.close()
+    print charencoding
+    if charencoding['encoding'] != 'utf-8':
+        text = unicode(text, charencoding['encoding'], errors="ignore")
+    return template("extract_form",content=text,tags=tagsString.decode('gbk'),topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
+
 @post('/extract')
 def extractSubmit_action():
     if "extract" in request.forms:
         text = request.forms.text
-        topk = int(request.forms.topk)
     elif "upload" in request.forms:
         try: # Windows needs stdio set for binary mode.
             import msvcrt
@@ -93,19 +133,23 @@ def extractSubmit_action():
         # Test if the file was uploaded
         if fileitem.filename:
 
-           # strip leading path from file name to avoid directory traversal attacks
-           fn = os.path.basename(fileitem.filename)
-           text =fileitem.file.read()
-           open('files/' + fn, 'wb').write(text)
-           message = 'The file "' + fn + '" was uploaded successfully'
-
+            # strip leading path from file name to avoid directory traversal attacks
+            fn = os.path.basename(fileitem.filename)
+            text =fileitem.file.read()
+            open('files/' + fn, 'wb').write(text)
+            charencoding = chardet.detect(request.forms.name)
+            name = unicode(request.forms.name, charencoding['encoding'], errors="ignore")
+            author = request.forms.author
+            period = request.forms.period
+            uploader = request.forms.uploader
+            sqlitedb.addText(name,author,period,fn,uploader)
+            message = 'The file "' + fn + '" was uploaded successfully'
+            charencoding = chardet.detect(text)
+            text = unicode(text, charencoding['encoding'], errors="ignore")
         else:
            message = 'No file was uploaded'
 
-        topk = int(request.forms.topk)
-        import chardet
-        charencoding = chardet.detect(text)  # "utf-8" "us-ascii" etc
-        text = unicode(text, charencoding['encoding'], errors="ignore")
+    topk = int(request.forms.topk)
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
     fd = FreqDist(tags)
@@ -120,15 +164,16 @@ def extractSubmit_action():
     from pylab import mpl,plt
     from matplotlib.font_manager import FontProperties
     fontPath = u'/Library/Fonts/Songti.ttc'
-    font = FontProperties(fname=fontPath)
+    font = FontProperties(fname=fontPath, size=9)
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
     plt.bar(range(len(fd)), fd.values(), align='center')
     plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
-    plt.savefig(imgUrl, bbox_inches='tight', dpi=80)
-    return template("extract_form",content=text,tags=tagsString,topk=topk,keyImgUrl=imgUrl)
+    plt.savefig(imgUrl, bbox_inches='tight')
+    plt.close()
+    return template("extract_form",content=text,tags=tagsString,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
 
 @get('/')
 def main():

@@ -32,7 +32,45 @@
 <div id="Wrapper">
 
 	<div id="Content">
-<div>上传文件: <input type="file" name="file"><input type="submit" name="upload" value="上传"></div>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        上传文件:
+                    </td>
+                </tr>
+                <tr>
+                    <td>名称: <input type="text" name="name" /></td>
+                    <td>作者: <input type="text" name="author" /></td>
+                    <td>年代: <input type="text" name="period" /></td>
+                    <td>上传者: <input type="text" name="uploader" /></td>
+                    <td><input type="file" name="file"><input type="submit" name="upload" value="上传"></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>文献列表:</td>
+                </tr>
+                <tr>
+                  <td>文献名称</a></td>
+                  <td>作者</td>
+                  <td>年代</td>
+                  <td>上传者</td>
+                  <td>上传时间</td>
+              </tr>
+            %for text in texts:
+              <tr>
+                  <td><a href="{{text.path}}">{{text.name}}</a></td>
+                  <td>{{text.author}}</td>
+                  <td>{{text.period}}</td>
+                  <td>{{text.uploader}}</td>
+                  <td>{{text.uploadDate}}</td>
+              </tr>
+            %end
+            </table>
+        </div>
 		<div>
 			<textarea rows="15" cols="100" name="text">{{content}}</textarea>
 		</div>
