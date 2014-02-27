@@ -18,7 +18,11 @@
 	#Content{
 		margin: 0 auto 0 auto;
 	}
-
+    table{
+        margin: auto;
+        border-width: 1px;
+        border-style: solid;
+    }
 	#Bottom{
 		text-align: center;
 	}
@@ -75,8 +79,11 @@
 			<textarea rows="15" cols="100" name="text">{{content}}</textarea>
 		</div>
 		<div>
-			<textarea rows="3" cols="100" name="tags">{{tags}}</textarea><img src="{{keyImgUrl}}" />
+			<textarea rows="3" cols="100" name="tags">{{tags}}</textarea>
 		</div>
+        <div>
+            <img src="{{keyImgUrl}}" />
+        </div>
 		<span>
 			关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
 		</span>

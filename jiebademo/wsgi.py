@@ -4,11 +4,13 @@ import os
 from bottle import route,run,default_app,request, response,get,post,template,debug,static_file
 import jieba
 jieba.set_dictionary("jieba/dict.txt.big")
-jieba.initialize()
+#import threading
+#thr = threading.Thread(target=jieba.initialize)
+#thr.start()
 from jieba import posseg
 import jieba.analyse
 import functools
-from nltk.probability import FreqDist
+#from nltk.probability import FreqDist
 import sqlitedb
 import chardet
 
@@ -29,6 +31,7 @@ def match(a,b):
     return ""
 
 defaulttopk=15
+defaultrotation=45
 
 @get('/extract')
 def extract():
@@ -76,6 +79,8 @@ def extract():
 import cgi, os
 from datetime import *
 import cgitb; cgitb.enable()
+import matplotlib
+matplotlib.use('Agg')
 
 @get('/:filename')
 def extractFile_action(filename):
@@ -83,6 +88,7 @@ def extractFile_action(filename):
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
+    from nltk.probability import FreqDist
     fd = FreqDist(tags)
     counts = []
     charencoding = chardet.detect(text)
@@ -104,8 +110,9 @@ def extractFile_action(filename):
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
-    plt.bar(range(len(fd)), fd.values(), align='center')
     plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    plt.plot(range(len(fd)), fd.values())
+    plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
     plt.savefig(imgUrl, bbox_inches='tight')
     plt.close()
@@ -137,8 +144,7 @@ def extractSubmit_action():
             fn = os.path.basename(fileitem.filename)
             text =fileitem.file.read()
             open('files/' + fn, 'wb').write(text)
-            charencoding = chardet.detect(request.forms.name)
-            name = unicode(request.forms.name, charencoding['encoding'], errors="ignore")
+            name = str(request.forms.name)
             author = request.forms.author
             period = request.forms.period
             uploader = request.forms.uploader
@@ -152,13 +158,18 @@ def extractSubmit_action():
     topk = int(request.forms.topk)
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
+    from nltk.probability import FreqDist
     fd = FreqDist(tags)
+
     counts = []
     for keyword in tags:
         #keyword = keyword.encode("utf-8")
         count = text.count(keyword)
         fd[keyword] = count
         counts.append(str(count))
+    import nltk
+    #fd = sorted(fd, key=fd.get, reverse=True)
+    #fd = sorted(fd.items(), key=lambda x: x[1])
     for key,val in fd.iteritems():
         tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
     from pylab import mpl,plt
@@ -168,11 +179,16 @@ def extractSubmit_action():
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
-    plt.bar(range(len(fd)), fd.values(), align='center')
+    #plt.bar(range(len(fd)), fd.values(), align='center')
     plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    plt.plot(range(len(fd)), fd.values())
+    plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
     plt.savefig(imgUrl, bbox_inches='tight')
     plt.close()
+    #fd = sorted(fd.items(), key=lambda x: x[1])
+    #for key,val in fd.iteritems():
+        #tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
     return template("extract_form",content=text,tags=tagsString,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
 
 @get('/')
@@ -239,15 +255,21 @@ def cut_action():
       result = ""
     return template("cut_form",content=result,selected=functools.partial(match,int(request.forms.opt)))
 
-if __name__ == "__main__":
+
+#if __name__ == "__main__":
     # Interactive mode
     #debug(True)
-    #run()
-    from wsgiref.simple_server import make_server
-    httpd = make_server('localhost', 8080, default_app())
+    #run(server='CherryPy',host='localhost', port=8080, debug=True)
+    #run(host='localhost', port=8080, debug=True)
+    #from cherrypy import wsgiserver
+    #from bottle import CherryPyServer
+    #run(host='localhost', port=8099, server=CherryPyServer)
+    #from wsgiref.simple_server import make_server
+    #httpd = make_server('localhost', 8090, default_app())
     # Wait for a single request, serve it and quit.
-    httpd.serve_forever()
-else:
+    #httpd.serve_forever()
+
+#else:
     # Mod WSGI launch
-    os.chdir(os.path.dirname(__file__))
-    application = default_app()
+    #os.chdir(os.path.dirname(__file__))
+    #application = default_app()

@@ -1,7 +1,7 @@
 import sqlite3
 import domain
 
-createDb = sqlite3.connect('lemon_keyword.db')
+createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
 
 queryCurs = createDb.cursor()
 
