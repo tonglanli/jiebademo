@@ -3,30 +3,6 @@
 	<title>思想史研究－关键词文本分析</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet" />
     <link href="../static/css/MyCss.css" rel="stylesheet" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("a").hover(function(){
-            $("#fileOperation-sub-menu").css("display","inherent");
-        });
-        $("#fileOperation-sub-menu").mouseout(function() {
-            $("#fileOperation-sub-menu").css("display","none");
-        });
-        $('#selectFile').bind('change', function () {
-          var url = $(this).val(); // get selected value
-          if (url) { // require a URL
-              window.location = url; // redirect
-          }
-          return false;
-        });
-        $(".fileItem").filter(function() {
-            //may want to use $.trim in here
-            return this.value == $("#selectedFile").val();
-        }).attr('selected', true);
-    });
-
-
-    </script>
 </head>
 <body>
 <style type="text/css">
@@ -71,25 +47,21 @@
     </div>
 </header>
 
-<ul id="fileOperation-sub-menu" style="display: none">
-    <li><a href="#">删除</a></li>
-</ul>
-
-<form enctype="multipart/form-data" action="/extract" method="post">
+ <form enctype="multipart/form-data" action="/extract" method="post" accept-charset="GB18030">
 <div class="container-main">
     <section class="row-fluid">
         <article class="span12">
             <div class="sidebar-nav well">
+                名称: <input type="text" name="name" />
                 <input type="file" name="file"><input type="submit" name="upload" value="上传">
             </div>
         </article>
     </section>
     <section class="row-fluid">
         <div class="sidebar-nav well">
-            <input type="hidden" id="selectedFile" name="selectedFile" value="{{selectedFile}}">
-            <select id="selectFile">
+            <select id="textDropdown">
                 %for text in texts:
-                  <option class="fileItem" value="{{text.path}}">{{text.name}}</option>
+                  <option><a href="{{text.path}}">{{text.name}}</a></option>
                 %end
             </select>
             关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
@@ -98,19 +70,19 @@
     </section>
     <section class="row-fluid">
         <div>
-            <textarea id="text" rows="10" cols="100" name="text" style="width: 1226px;">{{content}}</textarea>
+            <textarea rows="10" cols="100" name="text" style="width: 1226px;">{{content}}</textarea>
         </div>
     </section>
-    <section class="row-fluid" style="text-align: center; max-height: 580px; overflow-y: scroll">
-         <table class="table table-bordered table-striped span2" style="background-color: #ffffff; margin-top: 10px; height: 540px; max-height: 670px; overflow-y: scroll;">
+    <section class="row-fluid" style="text-align: center">
+         <table class="table table-bordered table-striped span2" style="background-color: #ffffff; margin-top: 10px;">
             <thead>
                 <tr>
                     <th style="text-align: left; ">关键词</th>
                 </tr>
             </thead>
-            <tbody style="max-height: 670px; overflow-y: scroll">
-                <tr style="max-height: 670px; overflow-y: scroll">
-                    <td style="background-color: #ffffff; max-height: 540px; overflow-y: scroll">
+            <tbody>
+                <tr>
+                    <td style="background-color: #ffffff">
                          %for tag in tags:
                             {{tag.key}}:{{tag.count}}
                             <br />

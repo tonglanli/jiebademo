@@ -19,10 +19,20 @@ import chardet
 def serve_static(filename):
     return static_file(filename, root='./static')
 
+@route('/files/:filename')
+def serve_files(filename):
+    return static_file(filename, root='./files')
+
 @route('/static/temp/:filename')
 def serve_temp(filename):
     tempfile = static_file(filename, root='./static/temp')
     os.remove('./static/temp/' + filename)
+    return tempfile
+
+@route('/static/js/:filename')
+def serve_temp(filename):
+    tempfile = static_file(filename, root='./static/js')
+    os.remove('./static/js/' + filename)
     return tempfile
 
 @route('/static/css/:filename')
@@ -38,6 +48,7 @@ def match(a,b):
 defaulttopk=15
 defaultrotation=45
 
+@get('/')
 @get('/extract')
 def extract():
     sample_text='''
@@ -79,7 +90,7 @@ def extract():
 习近平在周日的演讲中强调了中国的经济吸引力，预测5年内中国的进口将达到10万亿美元，而对外投资将超过5000亿美元。他还表示，出国旅游的中国人将超过4亿。（吉密欧 博鳌报道　译者/何黎）
 
 (原标题：外媒关注：习近平警告不准任何人搞乱亚洲)'''
-    return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts())
+    return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts(), selectedFile="")
 
 import cgi, os
 from datetime import *
@@ -89,7 +100,6 @@ matplotlib.use('Agg')
 
 @get('/:filename')
 def extractFile_action(filename):
-    print filename
     text = open('files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
@@ -106,32 +116,41 @@ def extractFile_action(filename):
         count = text.count(keywordtext)
         fd[keyword] = count
         counts.append(str(count))
+    keyCounts = []
+    yValues = []
+    yTexts = []
     for key,val in fd.iteritems():
-        #key = key.decode('ascii').encode('utf-8')
-        tagsString += '{0}:{1} '.format(key.encode('gbk'), val)
+        keyCount = domain.KeyCount(key, val)
+        keyCounts.append(keyCount)
+        tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
+        if (val in yValues):
+            yTexts.append("," + key)
+        else:
+            yValues.append(val)
+            yTexts.append(key)
     from pylab import plt
     from matplotlib.font_manager import FontProperties
     fontPath = u'/Library/Fonts/Songti.ttc'
-    font = FontProperties(fname=fontPath,size=9)
+    font = FontProperties(fname=fontPath, size=9)
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
+    plt.grid()
+    #plt.bar(range(len(fd)), fd.values(), align='center')
     plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
     plt.plot(range(len(fd)), fd.values())
     plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
     plt.savefig(imgUrl, bbox_inches='tight')
     plt.close()
-    print charencoding
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
-    return template("extract_form",content=text,tags=tagsString.decode('gbk'),topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=filename)
 
 @post('/extract')
 def extractSubmit_action():
     if "extract" in request.forms:
         text = request.forms.text
-        print request.forms.text
     elif "upload" in request.forms:
         try: # Windows needs stdio set for binary mode.
             import msvcrt
@@ -139,24 +158,15 @@ def extractSubmit_action():
             msvcrt.setmode (1, os.O_BINARY) # stdout = 1
         except ImportError:
             pass
-        print request.forms
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
-        print fileitem
         # Test if the file was uploaded
         if fileitem.filename:
 
             # strip leading path from file name to avoid directory traversal attacks
             fn = fileitem.raw_filename.decode('utf-8').encode('cp936')
-            #print fileitem.raw_filename.decode('utf-8').rfind(".")
-            print fn
-            #index = fn.rfind(r".")
-            #print index
-            #fn = fn[fn.rfind("/"):]
-            #print fn
             filename = fn.split('.')[0]
             text =fileitem.file.read()
-            print filename
             open('/Users/mac/NLTK/jiebademo/jiebademo/files/' + fn, 'wb').write(text)
             name = filename
             author = ""
@@ -170,6 +180,7 @@ def extractSubmit_action():
            message = 'No file was uploaded'
 
     topk = int(request.forms.topk)
+    defaulttopk = topk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
     from nltk.probability import FreqDist
@@ -208,15 +219,14 @@ def extractSubmit_action():
     plt.plot(range(len(fd)), fd.values())
     plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
-    print "filename2"
     plt.savefig(imgUrl, bbox_inches='tight')
+    print request.forms.selectFile
     plt.close()
     #fd = sorted(fd.items(), key=lambda x: x[1])
     #for key,val in fd.iteritems():
         #tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=request.forms.selectedFile)
 
-@get('/')
 def main():
     sample_sentences='''
 我不喜欢日本和服。
@@ -285,7 +295,7 @@ if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8081, debug=True)
+    run(host='localhost', port=8082, debug=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
