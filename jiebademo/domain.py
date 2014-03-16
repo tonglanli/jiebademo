@@ -8,3 +8,12 @@ class Text:
         self.uploader = uploader
         self.uploadDate = uploadDate
 
+class KeyCount:
+    def __init__(self, key, count):
+        self.key = key
+        self.count = count
+
+class YKeyCount:
+    def __init__(self, key, count):
+        self.key = key
+        self.count = count

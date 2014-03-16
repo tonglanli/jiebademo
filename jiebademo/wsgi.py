@@ -1,9 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import os
-from bottle import route,run,default_app,request, response,get,post,template,debug,static_file
+from bottle import route,run, request, get,post,template, static_file, default_app
 import jieba
-jieba.set_dictionary("jieba/dict.txt.big")
+import domain
+
+jieba.set_dictionary("/Users/mac/NLTK/jiebademo/jiebademo/jieba/dict.txt.big")
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
@@ -23,6 +24,10 @@ def serve_temp(filename):
     tempfile = static_file(filename, root='./static/temp')
     os.remove('./static/temp/' + filename)
     return tempfile
+
+@route('/static/css/:filename')
+def serve_css(filename):
+    return static_file(filename, root='./static/css')
 
 def match(a,b):
   if a==b:
@@ -84,6 +89,7 @@ matplotlib.use('Agg')
 
 @get('/:filename')
 def extractFile_action(filename):
+    print filename
     text = open('files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
@@ -103,7 +109,7 @@ def extractFile_action(filename):
     for key,val in fd.iteritems():
         #key = key.decode('ascii').encode('utf-8')
         tagsString += '{0}:{1} '.format(key.encode('gbk'), val)
-    from pylab import mpl,plt
+    from pylab import plt
     from matplotlib.font_manager import FontProperties
     fontPath = u'/Library/Fonts/Songti.ttc'
     font = FontProperties(fname=fontPath,size=9)
@@ -125,6 +131,7 @@ def extractFile_action(filename):
 def extractSubmit_action():
     if "extract" in request.forms:
         text = request.forms.text
+        print request.forms.text
     elif "upload" in request.forms:
         try: # Windows needs stdio set for binary mode.
             import msvcrt
@@ -132,24 +139,31 @@ def extractSubmit_action():
             msvcrt.setmode (1, os.O_BINARY) # stdout = 1
         except ImportError:
             pass
-
-        form = cgi.FieldStorage()
-
+        print request.forms
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
+        print fileitem
         # Test if the file was uploaded
         if fileitem.filename:
 
             # strip leading path from file name to avoid directory traversal attacks
-            fn = os.path.basename(fileitem.filename)
+            fn = fileitem.raw_filename.decode('utf-8').encode('cp936')
+            #print fileitem.raw_filename.decode('utf-8').rfind(".")
+            print fn
+            #index = fn.rfind(r".")
+            #print index
+            #fn = fn[fn.rfind("/"):]
+            #print fn
+            filename = fn.split('.')[0]
             text =fileitem.file.read()
-            open('files/' + fn, 'wb').write(text)
-            name = str(request.forms.name)
-            author = request.forms.author
-            period = request.forms.period
-            uploader = request.forms.uploader
-            sqlitedb.addText(name,author,period,fn,uploader)
-            message = 'The file "' + fn + '" was uploaded successfully'
+            print filename
+            open('/Users/mac/NLTK/jiebademo/jiebademo/files/' + fn, 'wb').write(text)
+            name = filename
+            author = ""
+            period = ""
+            uploader = ""
+            sqlitedb.addText(unicode(name, "cp936"),author,period,unicode(fn, "cp936"),uploader)
+            message = 'The file "' + filename + '" was uploaded successfully'
             charencoding = chardet.detect(text)
             text = unicode(text, charencoding['encoding'], errors="ignore")
         else:
@@ -167,29 +181,40 @@ def extractSubmit_action():
         count = text.count(keyword)
         fd[keyword] = count
         counts.append(str(count))
-    import nltk
     #fd = sorted(fd, key=fd.get, reverse=True)
     #fd = sorted(fd.items(), key=lambda x: x[1])
+    keyCounts = []
+    yValues = []
+    yTexts = []
     for key,val in fd.iteritems():
+        keyCount = domain.KeyCount(key, val)
+        keyCounts.append(keyCount)
         tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-    from pylab import mpl,plt
+        if (val in yValues):
+            yTexts.append("," + key)
+        else:
+            yValues.append(val)
+            yTexts.append(key)
+    from pylab import plt
     from matplotlib.font_manager import FontProperties
     fontPath = u'/Library/Fonts/Songti.ttc'
     font = FontProperties(fname=fontPath, size=9)
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
+    plt.grid()
     #plt.bar(range(len(fd)), fd.values(), align='center')
     plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
     plt.plot(range(len(fd)), fd.values())
     plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
+    print "filename2"
     plt.savefig(imgUrl, bbox_inches='tight')
     plt.close()
     #fd = sorted(fd.items(), key=lambda x: x[1])
     #for key,val in fd.iteritems():
         #tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-    return template("extract_form",content=text,tags=tagsString,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts())
 
 @get('/')
 def main():
@@ -256,11 +281,11 @@ def cut_action():
     return template("cut_form",content=result,selected=functools.partial(match,int(request.forms.opt)))
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    #run(host='localhost', port=8080, debug=True)
+    run(host='localhost', port=8081, debug=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
@@ -269,7 +294,7 @@ def cut_action():
     # Wait for a single request, serve it and quit.
     #httpd.serve_forever()
 
-#else:
+else:
     # Mod WSGI launch
-    #os.chdir(os.path.dirname(__file__))
-    #application = default_app()
+    os.chdir(os.path.dirname(__file__))
+    application = default_app()

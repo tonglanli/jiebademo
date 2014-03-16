@@ -1,6 +1,8 @@
 <html>
 <head>
-	<title>走向未来 - 数位人文 － 关键词</title>
+	<title>思想史研究－关键词文本分析</title>
+    <link href="../static/css/bootstrap.css" rel="stylesheet" />
+    <link href="../static/css/MyCss.css" rel="stylesheet" />
 </head>
 <body>
 <style type="text/css">
@@ -28,82 +30,82 @@
 	}
 </style>
 
-<div id="Top">
-	<h2>走向未来 - 数位人文 － 关键词</h2>
-</div>
+<header class="container-fluid well well-small">
+    <div class="container-main">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="pull-left">
+                    <h4>思想史研究</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <a href="/extract">关键词文本分析</a>
+            </div>
+        </div>
+    </div>
+</header>
 
 <form enctype="multipart/form-data" action="/extract" method="post">
-<div id="Wrapper">
-
-	<div id="Content">
+<div class="container-main">
+    <section class="row-fluid">
+        <article class="span12">
+            <div class="sidebar-nav well">
+                <input type="file" name="file"><input type="submit" name="upload" value="上传">
+            </div>
+        </article>
+    </section>
+    <section class="row-fluid">
+        <div class="sidebar-nav well">
+            <select id="textDropdown">
+                %for text in texts:
+                  <option><a href="{{text.path}}">{{text.name}}</a></option>
+                %end
+            </select>
+            关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
+            <input type="submit" name="extract" value="开始提取" />
+        </div>
+    </section>
+    <section class="row-fluid">
         <div>
-            <table>
+            <textarea rows="10" cols="100" name="text" style="width: 1226px;">{{content}}</textarea>
+        </div>
+    </section>
+    <section class="row-fluid" style="text-align: center; max-height: 580px; overflow-y: scroll">
+         <table class="table table-bordered table-striped span2" style="background-color: #ffffff; margin-top: 10px; height: 540px; max-height: 670px; overflow-y: scroll;">
+            <thead>
                 <tr>
-                    <td>
-                        上传文件:
+                    <th style="text-align: left; ">关键词</th>
+                </tr>
+            </thead>
+            <tbody style="max-height: 670px; overflow-y: scroll">
+                <tr style="max-height: 670px; overflow-y: scroll">
+                    <td style="background-color: #ffffff; max-height: 540px; overflow-y: scroll">
+                         %for tag in tags:
+                            {{tag.key}}:{{tag.count}}
+                            <br />
+                         %end
                     </td>
                 </tr>
-                <tr>
-                    <td>名称: <input type="text" name="name" /></td>
-                    <td>作者: <input type="text" name="author" /></td>
-                    <td>年代: <input type="text" name="period" /></td>
-                    <td>上传者: <input type="text" name="uploader" /></td>
-                    <td><input type="file" name="file"><input type="submit" name="upload" value="上传"></td>
-                </tr>
-            </table>
+            </tbody>
+        </table>
+        <div class="span9">
+            <img src="{{keyImgUrl}}" style="width: 680px;"/>
         </div>
-        <div>
-            <table>
-                <tr>
-                    <td>文献列表:</td>
-                </tr>
-                <tr>
-                  <td>文献名称</a></td>
-                  <td>作者</td>
-                  <td>年代</td>
-                  <td>上传者</td>
-                  <td>上传时间</td>
-              </tr>
-            %for text in texts:
-              <tr>
-                  <td><a href="{{text.path}}">{{text.name}}</a></td>
-                  <td>{{text.author}}</td>
-                  <td>{{text.period}}</td>
-                  <td>{{text.uploader}}</td>
-                  <td>{{text.uploadDate}}</td>
-              </tr>
-            %end
-            </table>
-        </div>
-		<div>
-			<textarea rows="15" cols="100" name="text">{{content}}</textarea>
-		</div>
-		<div>
-			<textarea rows="3" cols="100" name="tags">{{tags}}</textarea>
-		</div>
-        <div>
-            <img src="{{keyImgUrl}}" />
-        </div>
-		<span>
-			关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
-		</span>
-		
-		<input type="submit" name="extract" value="开始提取" />
-		<input type="button" value="重置" onclick="javascript:window.location.href='/extract'"/>
-        </div>
+    </section>
+    <footer class="well well-small">
+        <span>项目主页：<a href="http://github.com/tonglanli/jiebademo">http://github.com/tonglanli/jiebademo</a></span>
+	    <span>作者微博：<a href="http://weibo.com/u/1654146914">http://weibo.com/u/1654146914</a></span>
+    </footer>
+</div>
+</form>
 
-</div>
-    </form>
-<div id="Bottom">
-	<span>项目主页：<a href="http://github.com/fxsjy/jieba">http://github.com/fxsjy/jieba</a></span>
-	<span>作者微博：<a href="http://weibo.com/TreapDB">http://weibo.com/TreapDB</a></span>
-	
-</div>
 <div style="text-align: center;">
 	<script type="text/javascript">
 	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F21954964d948ae1cf3c35471630f6fa7' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-</div>
+	</script></div>
+
 </body>
 </html>

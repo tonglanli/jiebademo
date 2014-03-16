@@ -1,0 +1,82 @@
+.table th {
+    text-align: center;
+}
+
+.container-main {
+    width: 1232px;
+    margin: 0 auto;
+}
+
+table {
+    table-layout: fixed;
+}
+
+td {
+    width: 10%;
+    word-wrap:break-word;
+}
+
+.table-detail {
+    margin-bottom:0px;
+}
+
+.section-detail {
+    margin-bottom: 20px;
+    overflow-x:scroll;
+}
+
+th.DefectID {
+    width: 56.625px;
+}
+
+td.DefectID {
+    text-align: right;
+}
+
+th.Application {
+    width: 147.3px;
+}
+
+th.Synopsis {
+    width: 343.65px;
+}
+
+th.Status {
+    width: 91.35px;
+}
+
+th.Severity {
+    width: 133.65px;
+}
+
+th.Priority {
+    width: 73.65px;
+}
+
+th.DiscoveryDate {
+    width: 105.675px;
+}
+
+td.DiscoveryDate {
+    text-align: right;
+}
+
+th.Cycle {
+    width: 188.85px;
+}
+
+th.DetectedInBuild {
+    width: 118.65px;
+}
+
+th.ImpactedEnvironment {
+    width: 126.15px;
+}
+
+th.OriginTeam {
+    width: 124.8px;
+}
+
+th.DetectedBy {
+    width: 120.675px;
+}
