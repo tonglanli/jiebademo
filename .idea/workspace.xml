@@ -5,12 +5,7 @@
       <change type="MOVED" beforePath="$PROJECT_DIR$/jiebademo/files/zengguofang.txt" afterPath="$PROJECT_DIR$/jiebademo/files/zengguofang4.txt" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/jiebademo/files/曾国藩家训.txt" afterPath="$PROJECT_DIR$/jiebademo/files/曾国藩家训2.txt" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/jiebademo/files/纯粹理性批判[德]康德着蓝公武译.txt" afterPath="$PROJECT_DIR$/jiebademo/files/纯粹理性批判德康德着蓝公武译.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jiebademo/lemon_keyword.db" afterPath="$PROJECT_DIR$/jiebademo/lemon_keyword.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jiebademo/adapter.wsgi" afterPath="$PROJECT_DIR$/jiebademo/adapter.wsgi" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jiebademo.iml" afterPath="$PROJECT_DIR$/.idea/jiebademo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jiebademo/wsgi.py" afterPath="$PROJECT_DIR$/jiebademo/wsgi.py" />
     </list>
     <ignored path="jiebademo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +43,7 @@
       <file leaf-file-name="wsgi.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jiebademo/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="221" column="0" selection-start="7302" selection-end="7302" vertical-scroll-proportion="0.10070258" vertical-offset="3272" max-vertical-offset="4890">
+            <state line="221" column="0" selection-start="7302" selection-end="7302" vertical-scroll-proportion="0.10117647" vertical-offset="3272" max-vertical-offset="4890">
               <folding>
                 <element signature="e#42#124#0" expanded="true" />
               </folding>
@@ -536,29 +531,33 @@
       <created>1395040499487</created>
       <updated>1395040499487</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="make website runs successfully on server">
+      <created>1395069187420</created>
+      <updated>1395069187420</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="22" width="1400" height="812" extended-state="0" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26440176" sideWeight="0.6743516" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26440176" sideWeight="0.6734104" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39884394" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32564843" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32658958" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32708934" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947975" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -573,7 +572,8 @@
     </option>
     <MESSAGE value="make it working after pull from git" />
     <MESSAGE value="add os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()" />
-    <option name="LAST_COMMIT_MESSAGE" value="add os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()" />
+    <MESSAGE value="make website runs successfully on server" />
+    <option name="LAST_COMMIT_MESSAGE" value="make website runs successfully on server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -719,7 +719,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jiebademo/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="0" selection-start="7302" selection-end="7302" vertical-scroll-proportion="0.10070258" vertical-offset="3272" max-vertical-offset="4890">
+        <state line="221" column="0" selection-start="7302" selection-end="7302" vertical-scroll-proportion="0.10117647" vertical-offset="3272" max-vertical-offset="4890">
           <folding>
             <element signature="e#42#124#0" expanded="true" />
           </folding>
