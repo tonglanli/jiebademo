@@ -95,6 +95,8 @@ def extract():
 import cgi, os
 from datetime import *
 import cgitb; cgitb.enable()
+import tempfile
+os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
 matplotlib.use('Agg')
 
@@ -300,7 +302,7 @@ if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8083)
+    run(host='localhost', port=8084)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
