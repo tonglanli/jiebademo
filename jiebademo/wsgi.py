@@ -4,7 +4,7 @@ from bottle import route,run, request, get,post,template, static_file, default_a
 import jieba
 import domain
 
-jieba.set_dictionary("/Users/mac/NLTK/jiebademo/jiebademo/jieba/dict.txt.big")
+jieba.set_dictionary("jieba/dict.txt.big")
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
@@ -149,6 +149,7 @@ def extractFile_action(filename):
 
 @post('/extract')
 def extractSubmit_action():
+    selectedFileName = request.forms.selectedFile
     if "extract" in request.forms:
         text = request.forms.text
     elif "upload" in request.forms:
@@ -167,8 +168,10 @@ def extractSubmit_action():
             fn = fileitem.raw_filename.decode('utf-8').encode('cp936')
             filename = fn.split('.')[0]
             text =fileitem.file.read()
-            open('/Users/mac/NLTK/jiebademo/jiebademo/files/' + fn, 'wb').write(text)
+            path = os.path.dirname(os.path.abspath(__file__))
+            open(path + '/files/' + fn, 'wb').write(text)
             name = filename
+            selectedFileName = fn.decode('cp936').encode('utf-8')
             author = ""
             period = ""
             uploader = ""
@@ -225,7 +228,7 @@ def extractSubmit_action():
     #fd = sorted(fd.items(), key=lambda x: x[1])
     #for key,val in fd.iteritems():
         #tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=request.forms.selectedFile)
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=selectedFileName)
 
 def main():
     sample_sentences='''

@@ -6,12 +6,6 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $("a").hover(function(){
-            $("#fileOperation-sub-menu").css("display","inherent");
-        });
-        $("#fileOperation-sub-menu").mouseout(function() {
-            $("#fileOperation-sub-menu").css("display","none");
-        });
         $('#selectFile').bind('change', function () {
           var url = $(this).val(); // get selected value
           if (url) { // require a URL
@@ -70,10 +64,6 @@
         </div>
     </div>
 </header>
-
-<ul id="fileOperation-sub-menu" style="display: none">
-    <li><a href="#">删除</a></li>
-</ul>
 
 <form enctype="multipart/form-data" action="/extract" method="post">
 <div class="container-main">
