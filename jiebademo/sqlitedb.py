@@ -2,7 +2,7 @@ import sqlite3
 import domain
 
 createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
-
+createDb.text_factory = str
 queryCurs = createDb.cursor()
 
 def createTable():

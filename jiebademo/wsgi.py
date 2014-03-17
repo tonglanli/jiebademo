@@ -100,6 +100,8 @@ matplotlib.use('Agg')
 
 @get('/:filename')
 def extractFile_action(filename):
+    if(filename == 'favicon.ico'):
+        return ''
     text = open('files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
@@ -165,17 +167,17 @@ def extractSubmit_action():
         if fileitem.filename:
 
             # strip leading path from file name to avoid directory traversal attacks
-            fn = fileitem.raw_filename.decode('utf-8').encode('cp936')
+            fn = fileitem.filename
             filename = fn.split('.')[0]
             text =fileitem.file.read()
             path = os.path.dirname(os.path.abspath(__file__))
             open(path + '/files/' + fn, 'wb').write(text)
             name = filename
-            selectedFileName = fn.decode('cp936').encode('utf-8')
+            selectedFileName = fn
             author = ""
             period = ""
             uploader = ""
-            sqlitedb.addText(unicode(name, "cp936"),author,period,unicode(fn, "cp936"),uploader)
+            sqlitedb.addText(name,author,period,fn,uploader)
             message = 'The file "' + filename + '" was uploaded successfully'
             charencoding = chardet.detect(text)
             text = unicode(text, charencoding['encoding'], errors="ignore")
@@ -298,7 +300,7 @@ if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8082, debug=True)
+    run(host='localhost', port=8083)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)

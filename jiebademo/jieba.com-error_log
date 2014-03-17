@@ -2431,3 +2431,4 @@
 [Thu Feb 27 14:41:29 2014] [error] [client 127.0.0.1]   File "/Users/mac/NLTK/jiebademo/jiebademo/wsgi.py", line 87, in extractFile_action
 [Thu Feb 27 14:41:29 2014] [error] [client 127.0.0.1]     text = open('files/'+filename, 'rb').read()
 [Thu Feb 27 14:41:29 2014] [error] [client 127.0.0.1] IOError: [Errno 2] No such file or directory: 'files/favicon.ico'
+ddd
