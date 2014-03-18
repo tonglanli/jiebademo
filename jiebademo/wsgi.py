@@ -27,8 +27,8 @@ def serve_files(filename):
 @route('/static/temp/:filename')
 def serve_temp(filename):
     tempfile = static_file(filename, root='./static/temp')
-    path = os.path.dirname(os.path.abspath(__file__))
-    os.remove(path + '/static/temp/' + filename)
+    #path = os.path.dirname(os.path.abspath(__file__))
+    os.remove('static/temp/' + filename)
     return tempfile
 
 @route('/static/js/:filename')
