@@ -6,6 +6,7 @@ import domain
 #import sys, os
 #path = os.path.dirname(os.path.abspath(__file__))
 #jieba.set_dictionary(path + "/jieba/dict.txt.big")
+#kk
 jieba.initialize()
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
