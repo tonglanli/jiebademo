@@ -1,4 +1,4 @@
-# -*- coding: cp936 -*-
+# -*- coding: utf-8 -*-
 import sys, os, bottle
 #path = '/Users/mac/NLTK/jiebademo/jiebademo'
 #if path not in sys.path:

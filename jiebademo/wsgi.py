@@ -1,10 +1,11 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
 from bottle import route,run, request, get,post,template, static_file, default_app
 import jieba
 import domain
-
-jieba.set_dictionary("jieba/dict.txt.big")
+import sys, os
+#path = os.path.dirname(os.path.abspath(__file__))
+#jieba.set_dictionary(path + "/jieba/dict.txt.big")
+jieba.initialize()
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
@@ -26,7 +27,8 @@ def serve_files(filename):
 @route('/static/temp/:filename')
 def serve_temp(filename):
     tempfile = static_file(filename, root='./static/temp')
-    os.remove('./static/temp/' + filename)
+    path = os.path.dirname(os.path.abspath(__file__))
+    os.remove(path + '/static/temp/' + filename)
     return tempfile
 
 @route('/static/js/:filename')
@@ -95,6 +97,8 @@ def extract():
 import cgi, os
 from datetime import *
 import cgitb; cgitb.enable()
+import tempfile
+os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
 matplotlib.use('Agg')
 
@@ -102,7 +106,8 @@ matplotlib.use('Agg')
 def extractFile_action(filename):
     if(filename == 'favicon.ico'):
         return ''
-    text = open('files/'+filename, 'rb').read()
+    path = os.path.dirname(os.path.abspath(__file__))
+    text = open(path + '/files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
@@ -130,16 +135,17 @@ def extractFile_action(filename):
         else:
             yValues.append(val)
             yTexts.append(key)
-    from pylab import plt
-    from matplotlib.font_manager import FontProperties
-    fontPath = u'/Library/Fonts/Songti.ttc'
-    font = FontProperties(fname=fontPath, size=9)
+    from pylab import plt, mpl
+    #fontPath = u'/Library/Fonts/Songti.ttc'
+    #font = FontProperties(fname=fontPath, size=9)
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
     plt.grid()
     #plt.bar(range(len(fd)), fd.values(), align='center')
-    plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    plt.xticks(range(len(fd)), fd.keys())
+    #plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
     plt.plot(range(len(fd)), fd.values())
     plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
@@ -164,14 +170,14 @@ def extractSubmit_action():
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
         # Test if the file was uploaded
-        if fileitem.filename:
+	if fileitem.filename:
 
             # strip leading path from file name to avoid directory traversal attacks
             fn = fileitem.filename
-            filename = fn.split('.')[0]
+	    filename = fn.split('.')[0]
             text =fileitem.file.read()
-            path = os.path.dirname(os.path.abspath(__file__))
-            open(path + '/files/' + fn, 'wb').write(text)
+            #path = os.path.dirname(os.path.abspath(__file__))
+            open('files/' + fn, 'wb').write(text)
             name = filename
             selectedFileName = fn
             author = ""
@@ -211,16 +217,17 @@ def extractSubmit_action():
         else:
             yValues.append(val)
             yTexts.append(key)
-    from pylab import plt
-    from matplotlib.font_manager import FontProperties
-    fontPath = u'/Library/Fonts/Songti.ttc'
-    font = FontProperties(fname=fontPath, size=9)
+    from pylab import plt, mpl
+    #fontPath = u'/Library/Fonts/Songti.ttc'
+    #font = FontProperties(fname=fontPath, size=9)
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
     plt.grid()
     #plt.bar(range(len(fd)), fd.values(), align='center')
-    plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
+    plt.xticks(range(len(fd)), fd.keys())
+    #plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
     plt.plot(range(len(fd)), fd.values())
     plt.xticks(rotation=defaultrotation)
     imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
