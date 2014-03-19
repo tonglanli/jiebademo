@@ -34,7 +34,6 @@ def serve_temp(filename):
 @route('/static/js/:filename')
 def serve_temp(filename):
     tempfile = static_file(filename, root='./static/js')
-    os.remove('./static/js/' + filename)
     return tempfile
 
 @route('/static/css/:filename')
@@ -92,7 +91,26 @@ def extract():
 习近平在周日的演讲中强调了中国的经济吸引力，预测5年内中国的进口将达到10万亿美元，而对外投资将超过5000亿美元。他还表示，出国旅游的中国人将超过4亿。（吉密欧 博鳌报道　译者/何黎）
 
 (原标题：外媒关注：习近平警告不准任何人搞乱亚洲)'''
-    return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts(), selectedFile="")
+    topk = defaulttopk
+    tags = jieba.analyse.extract_tags(sample_text,topK=topk)
+    tagsString = ""
+    from nltk.probability import FreqDist
+    fd = FreqDist(tags)
+    counts = []
+    charencoding = chardet.detect(sample_text)
+    for keyword in tags:
+        if charencoding['encoding'] != 'utf-8':
+            keywordtext = keyword.encode(charencoding['encoding'])
+        else:
+            keywordtext = keyword.encode("utf-8")
+        count = sample_text.count(keywordtext)
+        fd[keyword] = count
+        counts.append(str(count))
+    keyCounts = []
+    for key,val in fd.iteritems():
+        keyCount = domain.KeyCount(key, val)
+        keyCounts.append(keyCount)
+    return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
 
 import cgi, os
 from datetime import *
@@ -106,8 +124,8 @@ matplotlib.use('Agg')
 def extractFile_action(filename):
     if(filename == 'favicon.ico'):
         return ''
-    path = os.path.dirname(os.path.abspath(__file__))
-    text = open(path + '/files/'+filename, 'rb').read()
+    #path = os.path.dirname(os.path.abspath(__file__))
+    text = open('files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
@@ -124,17 +142,9 @@ def extractFile_action(filename):
         fd[keyword] = count
         counts.append(str(count))
     keyCounts = []
-    yValues = []
-    yTexts = []
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
-        tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-        if (val in yValues):
-            yTexts.append("," + key)
-        else:
-            yValues.append(val)
-            yTexts.append(key)
     from pylab import plt, mpl
     #fontPath = u'/Library/Fonts/Songti.ttc'
     #font = FontProperties(fname=fontPath, size=9)
@@ -193,7 +203,6 @@ def extractSubmit_action():
     topk = int(request.forms.topk)
     defaulttopk = topk
     tags = jieba.analyse.extract_tags(text,topK=topk)
-    tagsString = ""
     from nltk.probability import FreqDist
     fd = FreqDist(tags)
 
@@ -206,17 +215,9 @@ def extractSubmit_action():
     #fd = sorted(fd, key=fd.get, reverse=True)
     #fd = sorted(fd.items(), key=lambda x: x[1])
     keyCounts = []
-    yValues = []
-    yTexts = []
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
-        tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
-        if (val in yValues):
-            yTexts.append("," + key)
-        else:
-            yValues.append(val)
-            yTexts.append(key)
     from pylab import plt, mpl
     #fontPath = u'/Library/Fonts/Songti.ttc'
     #font = FontProperties(fname=fontPath, size=9)
