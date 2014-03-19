@@ -5,7 +5,9 @@ import domain
 import sys, os
 #path = os.path.dirname(os.path.abspath(__file__))
 #jieba.set_dictionary(path + "/jieba/dict.txt.big")
-jieba.initialize()
+import thread
+thread.start_new_thread(jieba.initialize, ())
+
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
@@ -171,12 +173,12 @@ def extractSubmit_action():
     if "extract" in request.forms:
         text = request.forms.text
     elif "upload" in request.forms:
-        try: # Windows needs stdio set for binary mode.
-            import msvcrt
-            msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
-            msvcrt.setmode (1, os.O_BINARY) # stdout = 1
-        except ImportError:
-            pass
+        #try: # Windows needs stdio set for binary mode.
+            #import msvcrt
+            #msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+            #msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+        #except ImportError:
+            #pass
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
         # Test if the file was uploaded
