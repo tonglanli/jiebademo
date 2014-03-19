@@ -1,3 +1,4 @@
+
 [Wed Feb 19 11:57:56 2014] [error] [client 127.0.0.1] OSError: [Errno 2] No such file or directory: './static/temp/test2014-02-19 11:57:56.864374.png', referer: http://localhost:8087/extract
 [Wed Feb 19 11:58:16 2014] [error] [client 127.0.0.1] Traceback (most recent call last):, referer: http://localhost:8087/extract
 [Wed Feb 19 11:58:16 2014] [error] [client 127.0.0.1]   File "/Library/Python/2.7/site-packages/bottle.py", line 862, in _handle, referer: http://localhost:8087/extract
@@ -1405,3 +1406,393 @@ ddd[Mon Mar 17 14:51:57 2014] [error] [client 114.90.24.54] mod_wsgi (pid=27363)
 [Wed Mar 19 09:51:03 2014] [error] [client 114.90.26.209] IOError: failed to write data
 [Wed Mar 19 09:51:06 2014] [error] [client 114.90.26.209] mod_wsgi (pid=19542): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
 [Wed Mar 19 09:51:06 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 09:58:02 2014] [error] [client 114.90.26.209] mod_wsgi (pid=20079): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:58:02 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 10:00:35 2014] [error] [client 123.124.62.93] mod_wsgi (pid=20079): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:00:35 2014] [error] [client 123.124.62.93] IOError: failed to write data
+[Wed Mar 19 10:01:57 2014] [error] [client 114.90.26.209] mod_wsgi (pid=20138): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:01:57 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 10:06:09 2014] [error] [client 220.181.108.112] mod_wsgi (pid=20138): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:06:09 2014] [error] [client 220.181.108.112] IOError: failed to write data
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/employeelist.aspx'
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36] mod_wsgi (pid=20287): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:19:46 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84] Traceback (most recent call last):
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]     return route.call(**args)
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]     rv = callback(*a, **ka)
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84] mod_wsgi (pid=20353): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:22:28 2014] [error] [client 203.208.60.84] IOError: failed to write data
+[Wed Mar 19 10:22:30 2014] [error] [client 203.208.60.78] mod_wsgi (pid=20353): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:22:30 2014] [error] [client 203.208.60.78] IOError: failed to write data
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] Traceback (most recent call last):
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]     return route.call(**args)
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]     rv = callback(*a, **ka)
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] mod_wsgi (pid=20382): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] mod_wsgi (pid=20382): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:25:02 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163] mod_wsgi (pid=20382): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:25:37 2014] [error] [client 183.60.212.163] IOError: failed to write data
+[Wed Mar 19 10:37:36 2014] [error] [client 110.75.105.165] mod_wsgi (pid=20443): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:37:36 2014] [error] [client 110.75.105.165] IOError: failed to write data
+[Wed Mar 19 10:50:05 2014] [error] [client 66.249.74.161] mod_wsgi (pid=20505): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 10:50:05 2014] [error] [client 66.249.74.161] IOError: failed to write data
+[Wed Mar 19 11:02:50 2014] [error] [client 114.90.26.209] mod_wsgi (pid=20505): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:02:50 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] Traceback (most recent call last):
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]     return route.call(**args)
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]     rv = callback(*a, **ka)
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20590): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20590): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20590): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:14:02 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99] Traceback (most recent call last):
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]     return route.call(**args)
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]     rv = callback(*a, **ka)
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99] mod_wsgi (pid=20590): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:14:09 2014] [error] [client 203.208.60.99] IOError: failed to write data
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] Traceback (most recent call last):
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]     return route.call(**args)
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]     rv = callback(*a, **ka)
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20653): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20653): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] mod_wsgi (pid=20653): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:30:59 2014] [error] [client 106.37.173.131] IOError: failed to write data
+[Wed Mar 19 11:31:40 2014] [error] [client 220.181.108.89] mod_wsgi (pid=20653): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:31:40 2014] [error] [client 220.181.108.89] IOError: failed to write data
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] Traceback (most recent call last):
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]     return route.call(**args)
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]     rv = callback(*a, **ka)
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] mod_wsgi (pid=20725): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] mod_wsgi (pid=20725): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 11:45:09 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 12:11:16 2014] [error] [client 110.75.105.205] mod_wsgi (pid=20788): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 12:11:16 2014] [error] [client 110.75.105.205] IOError: failed to write data
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36] mod_wsgi (pid=20856): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 12:24:43 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 12:30:55 2014] [error] [client 123.125.71.30] mod_wsgi (pid=20856): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 12:30:55 2014] [error] [client 123.125.71.30] IOError: failed to write data
+[Wed Mar 19 12:33:16 2014] [error] [client 210.216.30.142] mod_wsgi (pid=20926): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 12:33:16 2014] [error] [client 210.216.30.142] IOError: failed to write data
+[Wed Mar 19 12:36:10 2014] [error] [client 157.55.33.253] mod_wsgi (pid=20926): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 12:36:10 2014] [error] [client 157.55.33.253] IOError: failed to write data
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] Traceback (most recent call last):
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]     return route.call(**args)
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]     rv = callback(*a, **ka)
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] mod_wsgi (pid=21003): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] mod_wsgi (pid=21003): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:29:20 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 13:33:42 2014] [error] [client 180.166.28.68] mod_wsgi (pid=21072): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:33:42 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 13:41:09 2014] [error] [client 180.166.28.68] mod_wsgi (pid=21134): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:41:09 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 13:42:22 2014] [error] [client 114.90.31.211] mod_wsgi (pid=21134): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:42:22 2014] [error] [client 114.90.31.211] IOError: failed to write data
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] Traceback (most recent call last):
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]     return route.call(**args)
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]     rv = callback(*a, **ka)
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 113, in extract
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] ProgrammingError: Recursive use of cursors not allowed.
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] mod_wsgi (pid=21400): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] IOError: failed to write data
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] mod_wsgi (pid=21400): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 13:43:38 2014] [error] [client 114.90.31.211] IOError: failed to write data
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106] Traceback (most recent call last):
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]     return route.call(**args)
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]     rv = callback(*a, **ka)
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 13:54:46 2014] [error] [client 183.60.214.106] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 14:01:06 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106] Traceback (most recent call last):
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]     return route.call(**args)
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]     rv = callback(*a, **ka)
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 14:16:43 2014] [error] [client 183.60.214.106] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 128, in extractFile_action
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 14:47:04 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174] Traceback (most recent call last):
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]     return route.call(**args)
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]     rv = callback(*a, **ka)
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 14:52:46 2014] [error] [client 114.90.6.174] OperationalError: no such table: texts
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 14:55:52 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 14:58:30 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:00:17 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:02:33 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:06:18 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:08:02 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:09:18 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102] Traceback (most recent call last):
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]     return route.call(**args)
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]     rv = callback(*a, **ka)
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:09:52 2014] [error] [client 203.208.60.102] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51] Traceback (most recent call last):
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]     return route.call(**args)
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]     rv = callback(*a, **ka)
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51] OperationalError: no such table: texts
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51] mod_wsgi (pid=23170): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 15:11:25 2014] [error] [client 123.125.71.51] IOError: failed to write data
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:11:48 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:12:05 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:12:15 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:13:45 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:13:58 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:15:32 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:15:45 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178] Traceback (most recent call last):
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]     return route.call(**args)
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]     rv = callback(*a, **ka)
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 115, in extract
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Wed Mar 19 15:16:38 2014] [error] [client 114.90.0.178] OperationalError: no such table: texts
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:17:15 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:18:52 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217] Traceback (most recent call last):
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]     return route.call(**args)
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]     rv = callback(*a, **ka)
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 130, in extractFile_action
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 15:19:08 2014] [error] [client 218.30.103.217] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
