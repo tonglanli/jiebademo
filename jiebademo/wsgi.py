@@ -106,8 +106,8 @@ matplotlib.use('Agg')
 def extractFile_action(filename):
     if(filename == 'favicon.ico'):
         return ''
-    path = os.path.dirname(os.path.abspath(__file__))
-    text = open(path + '/files/'+filename, 'rb').read()
+    #path = os.path.dirname(os.path.abspath(__file__))
+    text = open('files/'+filename, 'rb').read()
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
@@ -161,12 +161,12 @@ def extractSubmit_action():
     if "extract" in request.forms:
         text = request.forms.text
     elif "upload" in request.forms:
-        try: # Windows needs stdio set for binary mode.
-            import msvcrt
-            msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
-            msvcrt.setmode (1, os.O_BINARY) # stdout = 1
-        except ImportError:
-            pass
+        #try: # Windows needs stdio set for binary mode.
+            #import msvcrt
+            #msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+            #msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+        #except ImportError:
+            #pass
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
         # Test if the file was uploaded

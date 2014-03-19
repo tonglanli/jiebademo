@@ -1085,3 +1085,323 @@ ddd[Mon Mar 17 14:51:57 2014] [error] [client 114.90.24.54] mod_wsgi (pid=27363)
 [Tue Mar 18 17:07:11 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 31, in serve_temp, referer: http://42.121.109.6:8088/extract
 [Tue Mar 18 17:07:11 2014] [error] [client 114.91.185.137]     os.remove(path + '/static/temp/' + filename), referer: http://42.121.109.6:8088/extract
 [Tue Mar 18 17:07:11 2014] [error] [client 114.91.185.137] OSError: [Errno 2] No such file or directory: '/home/lanli/jiebademo/jiebademo/static/temp/test2014-03-18 17:06:54.830754.png', referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 180, in extractSubmit_action, referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137]     open('files/' + fn, 'wb').write(text), referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 18:54:41 2014] [error] [client 114.91.185.137] IOError: [Errno 13] Permission denied: 'files/zengguofang.txt', referer: http://42.121.109.6:8088/zengguofang4.txt
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 240, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137]     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl='', texts=sqlitedb.getTexts(), selectedFile=selectedFileName), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:02:55 2014] [error] [client 114.91.185.137] NameError: global name 'topk' is not defined, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 194, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137]     defaulttopk = topk, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:08:16 2014] [error] [client 114.91.185.137] NameError: global name 'topk' is not defined, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 240, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137]     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl='', texts=sqlitedb.getTexts(), selectedFile=selectedFileName), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:12:51 2014] [error] [client 114.91.185.137] NameError: global name 'topk' is not defined, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 240, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137]     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl='', texts=sqlitedb.getTexts(), selectedFile=selectedFileName), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:18:27 2014] [error] [client 114.91.185.137] NameError: global name 'topk' is not defined, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 240, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl='', texts=sqlitedb.getTexts(), selectedFile=selectedFileName), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2791, in template, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     return TEMPLATES[tpl].render(kwargs), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2765, in render, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     self.execute(stdout, kwargs), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2753, in execute, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     eval(self.co, env), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/views/extract_form.html", line 91, in <module>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     <textarea id="text" rows="10" cols="100" name="text" style="width: 1226px;">{{content}}</textarea>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2638, in <lambda>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     self._escape = lambda x: escape_func(touni(x, enc)), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 117, in touni, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     return x if isinstance(x, unicode) else unicode(str(x), enc, err), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/encodings/utf_8.py", line 16, in decode, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137]     return codecs.utf_8_decode(input, errors, True), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:19:50 2014] [error] [client 114.91.185.137] UnicodeDecodeError: 'utf8' codec can't decode byte 0xa1 in position 0: invalid start byte, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137] Traceback (most recent call last):, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     return route.call(**args), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 240, in extractSubmit_action, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl='', texts=sqlitedb.getTexts(), selectedFile=selectedFileName), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2791, in template, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     return TEMPLATES[tpl].render(kwargs), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2765, in render, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     self.execute(stdout, kwargs), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2753, in execute, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     eval(self.co, env), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/views/extract_form.html", line 91, in <module>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     <textarea id="text" rows="10" cols="100" name="text" style="width: 1226px;">{{content}}</textarea>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 2638, in <lambda>, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     self._escape = lambda x: escape_func(touni(x, enc)), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 117, in touni, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     return x if isinstance(x, unicode) else unicode(str(x), enc, err), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/encodings/utf_8.py", line 16, in decode, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137]     return codecs.utf_8_decode(input, errors, True), referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 19:20:23 2014] [error] [client 114.91.185.137] UnicodeDecodeError: 'utf8' codec can't decode byte 0xa1 in position 0: invalid start byte, referer: http://42.121.109.6:8088/extract
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137] Traceback (most recent call last):
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]     return route.call(**args)
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka)
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 95, in extract
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]     return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts(), selectedFile="")
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Tue Mar 18 22:28:16 2014] [error] [client 114.91.185.137] ProgrammingError: Recursive use of cursors not allowed.
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137] Traceback (most recent call last):
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]     return route.call(**args)
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]     rv = callback(*a, **ka)
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 95, in extract
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]     return template("extract_form",content=sample_text,tags="",topk=15,keyImgUrl="", texts=sqlitedb.getTexts(), selectedFile="")
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]   File "/home/lanli/jiebademo/jiebademo/sqlitedb.py", line 20, in getTexts
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137]     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137] ProgrammingError: Recursive use of cursors not allowed.
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137] mod_wsgi (pid=17943): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Tue Mar 18 23:55:45 2014] [error] [client 114.91.185.137] IOError: failed to write data
+[Tue Mar 18 23:55:45 2014] [error] [client 123.125.71.35] mod_wsgi (pid=17943): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Tue Mar 18 23:55:45 2014] [error] [client 123.125.71.35] IOError: failed to write data
+[Tue Mar 18 23:56:59 2014] [error] [client 114.91.185.137] mod_wsgi (pid=18055): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Tue Mar 18 23:56:59 2014] [error] [client 114.91.185.137] IOError: failed to write data
+[Wed Mar 19 00:00:10 2014] [error] [client 114.91.185.137] mod_wsgi (pid=18055): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 00:00:10 2014] [error] [client 114.91.185.137] IOError: failed to write data
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92] Traceback (most recent call last):
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]     return route.call(**args)
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]     rv = callback(*a, **ka)
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92] mod_wsgi (pid=18115): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 00:15:51 2014] [error] [client 208.115.113.92] IOError: failed to write data
+[Wed Mar 19 00:53:57 2014] [error] [client 65.19.138.34] mod_wsgi (pid=18192): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 00:53:57 2014] [error] [client 65.19.138.34] IOError: failed to write data
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253] Traceback (most recent call last):
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]     return route.call(**args)
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]     rv = callback(*a, **ka)
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253] mod_wsgi (pid=18192): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 01:12:20 2014] [error] [client 157.55.33.253] IOError: failed to write data
+[Wed Mar 19 01:18:01 2014] [error] [client 157.55.33.253] mod_wsgi (pid=18226): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 01:18:01 2014] [error] [client 157.55.33.253] IOError: failed to write data
+[Wed Mar 19 01:20:33 2014] [error] [client 208.115.113.92] mod_wsgi (pid=18226): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 01:20:33 2014] [error] [client 208.115.113.92] IOError: failed to write data
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36] mod_wsgi (pid=18308): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 01:44:32 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 02:04:30 2014] [error] [client 220.181.108.99] mod_wsgi (pid=18308): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 02:04:30 2014] [error] [client 220.181.108.99] IOError: failed to write data
+[Wed Mar 19 02:08:55 2014] [error] [client 123.125.71.47] mod_wsgi (pid=18378): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 02:08:55 2014] [error] [client 123.125.71.47] IOError: failed to write data
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82] Traceback (most recent call last):
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]     return route.call(**args)
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]     rv = callback(*a, **ka)
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82] mod_wsgi (pid=18378): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 02:13:08 2014] [error] [client 208.115.113.82] IOError: failed to write data
+[Wed Mar 19 03:15:01 2014] [error] [client 123.125.244.217] mod_wsgi (pid=18467): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 03:15:01 2014] [error] [client 123.125.244.217] IOError: failed to write data
+[Wed Mar 19 03:16:47 2014] [error] [client 220.181.108.97] mod_wsgi (pid=18467): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 03:16:47 2014] [error] [client 220.181.108.97] IOError: failed to write data
+[Wed Mar 19 03:18:08 2014] [error] [client 208.115.113.82] mod_wsgi (pid=18496): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 03:18:08 2014] [error] [client 208.115.113.82] IOError: failed to write data
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/NannyDetailInfo.aspx'
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163] mod_wsgi (pid=18496): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 03:28:20 2014] [error] [client 183.60.212.163] IOError: failed to write data
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36] mod_wsgi (pid=18585): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 04:38:57 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163] mod_wsgi (pid=18585): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 04:50:02 2014] [error] [client 183.60.212.163] IOError: failed to write data
+[Wed Mar 19 05:04:23 2014] [error] [client 220.181.108.85] mod_wsgi (pid=18668): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 05:04:23 2014] [error] [client 220.181.108.85] IOError: failed to write data
+[Wed Mar 19 05:17:39 2014] [error] [client 208.115.113.92] mod_wsgi (pid=18668): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 05:17:39 2014] [error] [client 208.115.113.92] IOError: failed to write data
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106] Traceback (most recent call last):
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]     return route.call(**args)
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]     rv = callback(*a, **ka)
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106] mod_wsgi (pid=18737): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 05:35:50 2014] [error] [client 183.60.214.106] IOError: failed to write data
+[Wed Mar 19 05:59:45 2014] [error] [client 220.181.108.119] mod_wsgi (pid=18737): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 05:59:45 2014] [error] [client 220.181.108.119] IOError: failed to write data
+[Wed Mar 19 06:06:20 2014] [error] [client 123.125.71.24] mod_wsgi (pid=18817): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:06:20 2014] [error] [client 123.125.71.24] IOError: failed to write data
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76] Traceback (most recent call last):
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]     return route.call(**args)
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]     rv = callback(*a, **ka)
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76] mod_wsgi (pid=18817): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:29:17 2014] [error] [client 157.55.35.76] IOError: failed to write data
+[Wed Mar 19 06:31:10 2014] [error] [client 157.55.35.76] mod_wsgi (pid=19015): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:31:10 2014] [error] [client 157.55.35.76] IOError: failed to write data
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163] mod_wsgi (pid=19015): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:34:44 2014] [error] [client 183.60.212.163] IOError: failed to write data
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237] Traceback (most recent call last):
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]     return route.call(**args)
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]     rv = callback(*a, **ka)
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237] IOError: [Errno 2] No such file or directory: 'files/robots.txt'
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237] mod_wsgi (pid=19075): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.237] IOError: failed to write data
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.240] mod_wsgi (pid=19075): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 06:48:30 2014] [error] [client 217.69.133.240] IOError: failed to write data
+[Wed Mar 19 07:07:32 2014] [error] [client 220.181.108.104] mod_wsgi (pid=19145): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 07:07:32 2014] [error] [client 220.181.108.104] IOError: failed to write data
+[Wed Mar 19 07:11:31 2014] [error] [client 123.125.244.210] mod_wsgi (pid=19145): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 07:11:31 2014] [error] [client 123.125.244.210] IOError: failed to write data
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36] mod_wsgi (pid=19173): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 07:13:16 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106] Traceback (most recent call last):
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]     return route.call(**args)
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]     rv = callback(*a, **ka)
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106] mod_wsgi (pid=19173): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 07:30:20 2014] [error] [client 183.60.214.106] IOError: failed to write data
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106] Traceback (most recent call last):
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]     return route.call(**args)
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]     rv = callback(*a, **ka)
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106] IOError: [Errno 2] No such file or directory: 'files/NannyDetailInfo.aspx'
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106] mod_wsgi (pid=19201): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 07:56:13 2014] [error] [client 183.60.214.106] IOError: failed to write data
+[Wed Mar 19 08:03:42 2014] [error] [client 220.181.108.85] mod_wsgi (pid=19201): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 08:03:42 2014] [error] [client 220.181.108.85] IOError: failed to write data
+[Wed Mar 19 08:07:05 2014] [error] [client 123.125.71.60] mod_wsgi (pid=19288): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 08:07:05 2014] [error] [client 123.125.71.60] IOError: failed to write data
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163] Traceback (most recent call last):
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]     return route.call(**args)
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]     rv = callback(*a, **ka)
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163] IOError: [Errno 2] No such file or directory: 'files/EmployeeList.aspx'
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163] mod_wsgi (pid=19288): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 08:40:04 2014] [error] [client 183.60.212.163] IOError: failed to write data
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36] Traceback (most recent call last):
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 737, in _handle
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]     return route.call(**args)
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]   File "/usr/lib/python2.7/dist-packages/bottle.py", line 1454, in wrapper
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]     rv = callback(*a, **ka)
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]   File "/home/lanli/jiebademo/jiebademo/wsgi.py", line 110, in extractFile_action
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36]     text = open('files/'+filename, 'rb').read()
+[Wed Mar 19 09:22:46 2014] [error] [client 183.60.215.36] IOError: [Errno 2] No such file or directory: 'files/NannyDemandList.aspx'
+[Wed Mar 19 09:22:47 2014] [error] [client 183.60.215.36] mod_wsgi (pid=19373): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:22:47 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 09:31:02 2014] [error] [client 180.166.28.68] mod_wsgi (pid=19373): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:31:02 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 09:31:53 2014] [error] [client 180.166.28.68] mod_wsgi (pid=19449): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:31:53 2014] [error] [client 180.166.28.68] IOError: failed to write data
+[Wed Mar 19 09:47:10 2014] [error] [client 183.60.215.36] mod_wsgi (pid=19477): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:47:10 2014] [error] [client 183.60.215.36] IOError: failed to write data
+[Wed Mar 19 09:50:36 2014] [error] [client 114.90.26.209] mod_wsgi (pid=19477): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:50:36 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 09:51:03 2014] [error] [client 114.90.26.209] mod_wsgi (pid=19542): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:51:03 2014] [error] [client 114.90.26.209] IOError: failed to write data
+[Wed Mar 19 09:51:06 2014] [error] [client 114.90.26.209] mod_wsgi (pid=19542): Exception occurred processing WSGI script '/home/lanli/jiebademo/jiebademo/adapter.wsgi'.
+[Wed Mar 19 09:51:06 2014] [error] [client 114.90.26.209] IOError: failed to write data
