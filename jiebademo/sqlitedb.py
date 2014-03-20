@@ -15,6 +15,7 @@ def addText(text):
     queryCurs.execute('''INSERT INTO texts (name,author,period,path,uploader,uploadDate,content)
     VALUES (?,?,?,?,?,datetime('now'),?)''',(text.name,text.author,text.period,text.path,text.uploader,text.content))
     createDb.commit()
+    return queryCurs.lastrowid
 
 def getTexts():
     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')

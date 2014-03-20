@@ -209,7 +209,7 @@ def extractSubmit_action():
             charencoding = chardet.detect(text)
             text = unicode(text, charencoding['encoding'], errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
-            sqlitedb.addText(textObject)
+            id = sqlitedb.addText(textObject)
             message = 'The file "' + filename + '" was uploaded successfully'
         else:
            message = 'No file was uploaded'
@@ -231,7 +231,7 @@ def extractSubmit_action():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
     imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=selectedFileName)
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
 
 @get('/managefile')
 def managefile():
