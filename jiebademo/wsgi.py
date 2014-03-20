@@ -180,7 +180,7 @@ def extractFile_action(id):
 @post('/')
 @post('/extract')
 def extractSubmit_action():
-    selectedFileName = request.forms.selectedFile
+    id = request.forms.selectedFile
     if "extract" in request.forms:
         text = request.forms.text
     elif "upload" in request.forms:
