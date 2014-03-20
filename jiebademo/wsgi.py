@@ -70,7 +70,7 @@ def match(a,b):
   else:
     return ""
 
-defaulttopk=15
+defaulttopk=20
 defaultrotation=45
 
 @get('/')
@@ -134,7 +134,7 @@ def extract():
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
-    return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+    return template("extract_form",content=sample_text,tags=keyCounts,topk=defaulttopk,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
 
 import cgi, os
 from datetime import *
