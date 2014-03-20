@@ -11,18 +11,31 @@ def createTable():
     #queryCurs.execute('''CREATE TABLE uploadertexts
     #(textid INTEGER PRIMARY KEY, uploaderid INTEGER PRIMARY KEY)''')
 
-def addText(name,author,period,path,uploader):
-    queryCurs.execute('''INSERT INTO texts (name,author,period,path,uploader,uploadDate)
-    VALUES (?,?,?,?,?,datetime('now'))''',(name,author,period,path,uploader))
+def addText(text):
+    queryCurs.execute('''INSERT INTO texts (name,author,period,path,uploader,uploadDate,content)
+    VALUES (?,?,?,?,?,datetime('now'),?)''',(text.name,text.author,text.period,text.path,text.uploader,text.content))
     createDb.commit()
 
 def getTexts():
     queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
     texts = []
     for i in queryCurs:
-        text = domain.Text(i[0],i[1],i[2],i[3],i[4],i[5],i[6])
+        text = domain.Text(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7])
         texts.append(text)
     return texts
+
+def getText(id):
+    queryCurs.execute("SELECT * FROM texts where id = '%s' ORDER BY uploadDate" % id)
+    text = None
+    for i in queryCurs:
+        text = domain.Text(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7])
+        break
+    return text
+
+def deleteTexts(ids):
+    print ', '.join(ids)
+    queryCurs.execute("delete FROM texts where id in (%s)" % ', '.join(ids))
+    createDb.commit()
 
 def main():
     createTable()

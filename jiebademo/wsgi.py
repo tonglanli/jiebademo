@@ -6,7 +6,8 @@ import sys, os
 #path = os.path.dirname(os.path.abspath(__file__))
 #jieba.set_dictionary(path + "/jieba/dict.txt.big")
 import thread
-thread.start_new_thread(jieba.initialize, ())
+if jieba.initialized == False:
+    jieba.initialize()
 
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
@@ -143,12 +144,15 @@ os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
 matplotlib.use('Agg')
 
-@get('/:filename')
-def extractFile_action(filename):
-    if(filename == 'favicon.ico'):
+@get('/:id')
+def extractFile_action(id):
+    if(id == 'favicon.ico'):
         return ''
-    #path = os.path.dirname(os.path.abspath(__file__))
-    text = open('files/'+filename, 'rb').read()
+    textObject = sqlitedb.getText(id)
+    if textObject is not None:
+        text = textObject.content
+    else:
+        return None
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(text,topK=topk)
     tagsString = ""
@@ -171,7 +175,7 @@ def extractFile_action(filename):
     imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=filename)
+    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
 
 @post('/')
 @post('/extract')
@@ -202,10 +206,11 @@ def extractSubmit_action():
             author = ""
             period = ""
             uploader = ""
-            sqlitedb.addText(name,author,period,fn,uploader)
-            message = 'The file "' + filename + '" was uploaded successfully'
             charencoding = chardet.detect(text)
             text = unicode(text, charencoding['encoding'], errors="ignore")
+            textObject = domain.Text('',name,author,period,fn,uploader,'',text)
+            sqlitedb.addText(textObject)
+            message = 'The file "' + filename + '" was uploaded successfully'
         else:
            message = 'No file was uploaded'
 
@@ -227,6 +232,45 @@ def extractSubmit_action():
         keyCounts.append(keyCount)
     imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=selectedFileName)
+
+@get('/managefile')
+def managefile():
+    return template("managefile_form", texts=sqlitedb.getTexts())
+
+@post('/managefile')
+def managefile():
+    if "upload" in request.forms:
+        #try: # Windows needs stdio set for binary mode.
+            #import msvcrt
+            #msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+            #msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+        #except ImportError:
+            #pass
+        # A nested FieldStorage instance holds the file
+        fileitem = request.files.file
+        # Test if the file was uploaded
+        if fileitem.filename:
+
+            # strip leading path from file name to avoid directory traversal attacks
+            fn = fileitem.filename
+            filename = fn.split('.')[0]
+            text =fileitem.file.read()
+            #path = os.path.dirname(os.path.abspath(__file__))
+            open('files/' + fn, 'wb').write(text)
+            name = filename
+            selectedFileName = fn
+            author = ""
+            period = ""
+            uploader = ""
+            charencoding = chardet.detect(text)
+            text = unicode(text, charencoding['encoding'], errors="ignore")
+            textObject = domain.Text('',name,author,period,fn,uploader,'',text)
+            sqlitedb.addText(textObject)
+    else:
+        checkedtexts = request.forms.dict['checkedtext']
+        print checkedtexts
+        sqlitedb.deleteTexts(checkedtexts)
+    return template("managefile_form", texts=sqlitedb.getTexts())
 
 def main():
     sample_sentences='''
@@ -294,7 +338,7 @@ if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8083)
+    run(host='localhost', port=8083, reloader=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
