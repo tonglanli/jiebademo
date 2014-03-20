@@ -75,45 +75,8 @@ defaultrotation=45
 @get('/')
 @get('/extract')
 def extract():
-    sample_text='''
-外媒:习近平"一己之私"讲话似在警告朝鲜
-2013-04-08 08:37:01　来源: 新华网(广州)　有2641人参与
-英国《金融时报》4月8日刊发题为《习近平警告：不准任何人搞乱亚洲》的文章，主要内容如下：
-
-中国国家主席习近平表示，不能允许任何国家把亚洲搞乱。最近几周朝鲜半岛紧张升级，拥有核武的朝鲜威胁称，即将对美国及其盟友发起攻击。
-
-习近平周日在中国一个商务论坛上发表演讲时，对中国的盟友朝鲜发出上述含蓄谴责。来自亚洲、非洲和欧洲的数十名国家领导人出席了博鳌亚洲论坛。
-
-“不能为一己之私把一个地区乃至世界搞乱，”习近平表示，他没有点出具体国家的名称。“国家无论大小、强弱、贫富，都应该做和平的维护者和促进者。”
-
-这些言论暗示，中方对朝鲜的好战姿态和持续数周的战争叫嚣越来越烦。同时，美国军方官员对路透社(Reuters)表示，考虑到与朝鲜之间的紧张局势，美方决定推迟原定下周进行的导弹试验，“以避免任何误解或误判”。
-
-周日出席博鳌论坛的西方外交官表示，习近平刻意含糊的措辞似乎是在含蓄警告平壤方面：不要把事情做过头，但习近平的话也可能在一定程度上针对华盛顿方面，中国领导人经常指控美国插手亚洲事务。
-
-美国和亚洲其它国家呼吁中国作为朝鲜唯一真正的盟友采取更多行动，迫使这个“隐士王国”及其喜怒无常的年轻领导人金正恩(Kim Jong-eun)收敛行为。
-
-澳大利亚总理朱莉娅 吉拉德(Julia Gillard)周日在中国海南岛举行的博鳌论坛上发言时，提到了朝鲜问题。
-
-“（朝鲜半岛上的）任何攻击行为，都将威胁本地区每个国家的利益，”吉拉德表示。“出于这个原因，我确实欢迎亚洲所有国家的政府加强合作，防止朝鲜半岛爆发冲突，制止朝鲜的好战行为。”
-
-新西兰总理约翰 基(John Key)周日晚些时候在博鳌会晤习近平时，预计也将敦促中国运用其影响力约束平壤方面。
-
-中国外交部周日表示，已促请朝鲜方面确保在朝鲜的中国公民、外交官以及投资的安全，而中国驻朝鲜大使馆仍在正常运作。
-
-“当前朝鲜半岛形势不断紧张升级，中方对此表示严重关切，”中国外交部在一份声明中表示。
-
-上周朝鲜当局对常驻该国的外交使团表示，他们应当考虑撤离朝鲜，下周三（4月10日）后他们的安全将无法保证。近日朝鲜还宣称，核战争已经不可避免，但截至周日，没有迹象显示有任何国家在认真计划从平壤撤出外交人员。
-
-多数国家的判断是，战争叫嚣是朝鲜国内政治的一种反映，也是该国年轻领导人巩固其对军队和官僚体制掌控的企图的一部分。金正恩在他父亲2011年12月去世后上台。
-
-
-习近平发出警告的同一天，中国宣布将让邮轮前往南海有争议岛屿，此举本身也可能引起邻国不满，这些国家也对蕴藏丰富石油资源的南海有主权主张。
-
-反映中国经济和政治影响力与日俱增的一个迹象是，阵容空前的世界领导人出席博鳌论坛，包括哈萨克斯坦、缅甸、秘鲁、赞比亚、墨西哥、柬埔寨和芬兰的总统或总理，以及文莱苏丹。
-
-习近平在周日的演讲中强调了中国的经济吸引力，预测5年内中国的进口将达到10万亿美元，而对外投资将超过5000亿美元。他还表示，出国旅游的中国人将超过4亿。（吉密欧 博鳌报道　译者/何黎）
-
-(原标题：外媒关注：习近平警告不准任何人搞乱亚洲)'''
+    sample_text = open('static/sampleFile.txt', 'rb').read()
+    print 'ddd'
     topk = defaulttopk
     tags = jieba.analyse.extract_tags(sample_text,topK=topk)
     tagsString = ""
@@ -133,6 +96,8 @@ def extract():
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
+    if charencoding['encoding'] != 'utf-8':
+        sample_text = unicode(sample_text, charencoding['encoding'], errors="ignore")
     return template("extract_form",content=sample_text,tags=keyCounts,topk=15,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
 
 import cgi, os
@@ -173,6 +138,7 @@ def extractFile_action(filename):
         text = unicode(text, charencoding['encoding'], errors="ignore")
     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=filename)
 
+@post('/')
 @post('/extract')
 def extractSubmit_action():
     selectedFileName = request.forms.selectedFile
@@ -274,7 +240,6 @@ C++和c#是什么关系？11+122=133，是吗？
     return template("cut_form",content=sample_sentences,selected=functools.partial(match,1))
 
 
-@post('/')
 def cut_action():
     text = request.forms.text
     if request.forms.opt=="1":
