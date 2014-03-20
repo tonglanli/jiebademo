@@ -42,6 +42,27 @@ def serve_temp(filename):
 def serve_css(filename):
     return static_file(filename, root='./static/css')
 
+@route('/image/:name&:length&:keys&:values')
+def serve_css(name, length, keys, values):
+    from pylab import plt, mpl
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    plt.xlabel(u'')
+    plt.ylabel(u'')
+    plt.title(u'')
+    plt.grid()
+    keys = keys.decode("utf-8").split(' ')
+    values = values.split(' ')
+    plt.xticks(range(int(length)), keys)
+    plt.plot(range(int(length)), values)
+    plt.xticks(rotation=defaultrotation)
+    name = name + str(datetime.now()) + '.png'
+    imgUrl = 'static/temp/' + name
+    plt.savefig(imgUrl, bbox_inches='tight')
+    plt.close()
+    tempfile = static_file(name, root='./static/temp')
+    os.remove(imgUrl)
+    return tempfile
+
 def match(a,b):
   if a==b:
     return "checked"
@@ -147,22 +168,7 @@ def extractFile_action(filename):
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
-    from pylab import plt, mpl
-    #fontPath = u'/Library/Fonts/Songti.ttc'
-    #font = FontProperties(fname=fontPath, size=9)
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
-    plt.xlabel(u'')
-    plt.ylabel(u'')
-    plt.title(u'')
-    plt.grid()
-    #plt.bar(range(len(fd)), fd.values(), align='center')
-    plt.xticks(range(len(fd)), fd.keys())
-    #plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
-    plt.plot(range(len(fd)), fd.values())
-    plt.xticks(rotation=defaultrotation)
-    imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
-    plt.savefig(imgUrl, bbox_inches='tight')
-    plt.close()
+    imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=filename)
@@ -214,32 +220,11 @@ def extractSubmit_action():
         count = text.count(keyword)
         fd[keyword] = count
         counts.append(str(count))
-    #fd = sorted(fd, key=fd.get, reverse=True)
-    #fd = sorted(fd.items(), key=lambda x: x[1])
     keyCounts = []
     for key,val in fd.iteritems():
         keyCount = domain.KeyCount(key, val)
         keyCounts.append(keyCount)
-    from pylab import plt, mpl
-    #fontPath = u'/Library/Fonts/Songti.ttc'
-    #font = FontProperties(fname=fontPath, size=9)
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
-    plt.xlabel(u'')
-    plt.ylabel(u'')
-    plt.title(u'')
-    plt.grid()
-    #plt.bar(range(len(fd)), fd.values(), align='center')
-    plt.xticks(range(len(fd)), fd.keys())
-    #plt.xticks(range(len(fd)), fd.keys(), fontproperties=font)
-    plt.plot(range(len(fd)), fd.values())
-    plt.xticks(rotation=defaultrotation)
-    imgUrl = 'static/temp/test' + str(datetime.now()) + '.png'
-    plt.savefig(imgUrl, bbox_inches='tight')
-    print request.forms.selectFile
-    plt.close()
-    #fd = sorted(fd.items(), key=lambda x: x[1])
-    #for key,val in fd.iteritems():
-        #tagsString += '{0}:{1} '.format(key.encode('utf-8'), val)
+    imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
     return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=selectedFileName)
 
 def main():
