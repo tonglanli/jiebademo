@@ -28,10 +28,10 @@ def getTexts():
     createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
     createDb.text_factory = str
     queryCurs = createDb.cursor()
-    queryCurs.execute('SELECT * FROM texts ORDER BY uploadDate')
+    queryCurs.execute('SELECT id,name,author,period,path,uploader,uploadDate FROM texts ORDER BY uploadDate')
     texts = []
     for i in queryCurs:
-        text = domain.Text(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7])
+        text = domain.Text(i[0],i[1],i[2],i[3],i[4],i[5],i[6],'')
         texts.append(text)
     queryCurs.close()
     createDb.close()
