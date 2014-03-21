@@ -12,7 +12,6 @@ if jieba.initialized == False:
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
-from jieba import posseg
 import jieba.analyse
 import functools
 #from nltk.probability import FreqDist
@@ -272,6 +271,7 @@ def managefile():
         sqlitedb.deleteTexts(checkedtexts)
     return template("managefile_form", texts=sqlitedb.getTexts())
 
+@get('/cut')
 def main():
     sample_sentences='''
 我不喜欢日本和服。
@@ -318,7 +318,9 @@ C++和c#是什么关系？11+122=133，是吗？
 '''
     return template("cut_form",content=sample_sentences,selected=functools.partial(match,1))
 
+@post('/cut')
 def cut_action():
+    from jieba import posseg
     text = request.forms.text
     if request.forms.opt=="1":
       result = "/ ".join(jieba.cut(text))
