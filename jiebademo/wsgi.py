@@ -137,6 +137,8 @@ import os
 from datetime import *
 import tempfile
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
+import matplotlib
+matplotlib.use('Agg')
 
 @get('/:id')
 def extractFile_action(id):
