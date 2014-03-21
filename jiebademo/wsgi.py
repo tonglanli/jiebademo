@@ -2,10 +2,8 @@
 from bottle import route,run, request, get,post,template, static_file, default_app
 import jieba
 import domain
-import sys, os
 #path = os.path.dirname(os.path.abspath(__file__))
 #jieba.set_dictionary(path + "/jieba/dict.txt.big")
-import thread
 if jieba.initialized == False:
     jieba.initialize()
 
@@ -135,13 +133,10 @@ def extract():
         keyCounts.append(keyCount)
     return template("extract_form",content=sample_text,tags=keyCounts,topk=defaulttopk,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
 
-import cgi, os
+import os
 from datetime import *
-import cgitb; cgitb.enable()
 import tempfile
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
-import matplotlib
-matplotlib.use('Agg')
 
 @get('/:id')
 def extractFile_action(id):
