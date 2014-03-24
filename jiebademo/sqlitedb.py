@@ -1,12 +1,24 @@
 import sqlite3
 import domain
 
-def createTable():
+def createTextTable():
     createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
     createDb.text_factory = str
     queryCurs = createDb.cursor()
     queryCurs.execute('''CREATE TABLE texts
     (id INTEGER PRIMARY KEY, name TEXT, author TEXT, period TEXT, path TEXT, uploader TEXT, uploadDate TEXT, text Text)''')
+    #queryCurs.execute('''CREATE TABLE uploadertexts
+    #(textid INTEGER PRIMARY KEY, uploaderid INTEGER PRIMARY KEY)''')
+    createDb.commit()
+    queryCurs.close()
+    createDb.close()
+
+def createKeywordsTable():
+    createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
+    createDb.text_factory = str
+    queryCurs = createDb.cursor()
+    queryCurs.execute('''CREATE TABLE keywords
+    (id INTEGER PRIMARY KEY, textId INTEGER, name TEXT, count INTEGER, FOREIGN KEY (textId) REFERENCES texts(id))''')
     #queryCurs.execute('''CREATE TABLE uploadertexts
     #(textid INTEGER PRIMARY KEY, uploaderid INTEGER PRIMARY KEY)''')
     queryCurs.close()
@@ -60,7 +72,7 @@ def deleteTexts(ids):
     createDb.close()
 
 def main():
-    createTable()
+    createKeywordsTable()
 
     #addCust('Derek Banas','5708 Highway Ave','Verona','PA',150.76)
     #addCust('Karl Tong','5708 Highway Ave','Verona','PA',250.76)

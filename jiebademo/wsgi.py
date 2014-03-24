@@ -40,6 +40,10 @@ def serve_temp(filename):
 def serve_css(filename):
     return static_file(filename, root='./static/css')
 
+@route('/static/design/sequenceimage/:imageName')
+def serve_css(imageName):
+    return static_file(imageName, root='./static/design/sequenceimage')
+
 @route('/image/:name&:length&:keys&:values')
 def serve_css(name, length, keys, values):
     from pylab import plt, mpl
@@ -332,6 +336,9 @@ def cut_action():
       result = ""
     return template("cut_form",content=result,selected=functools.partial(match,int(request.forms.opt)))
 
+@get('/design/sequence')
+def desgin_sequence():
+    return template("design_sequence_form")
 
 if __name__ == "__main__":
     # Interactive mode
