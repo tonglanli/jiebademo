@@ -106,7 +106,7 @@
             <textarea id="text" rows="10" cols="80" name="text" style="width: 1024px;">{{content}}</textarea>
         </div>
     </section>
-    <section class="row-fluid" style="text-align: center; max-height: 500px; overflow-y: scroll;">
+    <section class="row-fluid" style="text-align: center; overflow-x: hidden">
          <table class="table table-bordered table-striped span2" style="background-color: #ffffff; margin-top: 10px;  height: 460px; max-height: 460px; overflow-y: scroll;">
             <thead>
                 <tr>
@@ -114,8 +114,8 @@
                 </tr>
             </thead>
             <tbody style="max-height: 460px; overflow-y: scroll">
-                <tr style="max-height: 460px; overflow-y: scroll">
-                    <td style="background-color: #ffffff; max-height: 460px; overflow-y: scroll">
+                <tr style="max-height: 540px; overflow-y: scroll">
+                    <td style="background-color: #ffffff; max-height: 540px; overflow-y: scroll">
                          %for tag in tags:
                             {{tag.name}}:{{tag.count}}
                             <br />
@@ -124,7 +124,7 @@
                 </tr>
             </tbody>
         </table>
-        <div style="text-align: center; width: 1024px; vertical-align: middle;">
+        <div style="text-align: center; width: 1012px; vertical-align: middle;">
             <img src="{{keyImgUrl}}" style="width: 580px"/>
         </div>
     </section>
