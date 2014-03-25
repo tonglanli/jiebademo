@@ -14,7 +14,7 @@ def createTextTable():
     createDb.close()
 
 def createKeywordsTable():
-    createDb = sqlite3.connect('/Users/mac/NLTK/PycharmProjects/jiebademo/jiebademo/lemon_keyword.db', check_same_thread=False)
+    createDb = sqlite3.connect('/home/lanli/jiebademo/jiebademo/lemon_keyword.db', check_same_thread=False)
     createDb.text_factory = str
     queryCurs = createDb.cursor()
     queryCurs.execute('''CREATE TABLE keywords
