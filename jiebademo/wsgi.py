@@ -131,11 +131,11 @@ def extract():
         count = sample_text.count(keywordtext)
         fd[keyword] = count
         counts.append(str(count))
-    keyCounts = []
+    keywords = []
     for key,val in fd.iteritems():
-        keyCount = domain.KeyCount(key, val)
-        keyCounts.append(keyCount)
-    return template("extract_form",content=sample_text,tags=keyCounts,topk=defaulttopk,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
+        keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
+        keywords.append(keyword)
+    return template("extract_form",content=sample_text,tags=keywords,topk=defaulttopk,keyImgUrl="static/sample_keywords.png", texts=sqlitedb.getTexts(), selectedFile="")
 
 import os
 from datetime import *
@@ -143,6 +143,13 @@ import tempfile
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
 matplotlib.use('Agg')
+
+
+def createKeywordImageUrl(keywords):
+    imgUrl = u"/image/" + u"test" + u"&" + str(len(keywords)) + u"&" + u" ".join(
+        [keyword.name for keyword in keywords]) + u"&" + u" ".join(str(keyword.count) for keyword in keywords)
+    return imgUrl
+
 
 @get('/:id')
 def extractFile_action(id):
@@ -153,29 +160,33 @@ def extractFile_action(id):
         text = textObject.content
     else:
         return None
-    topk = defaulttopk
-    tags = jieba.analyse.extract_tags(text,topK=topk)
-    tagsString = ""
-    from nltk.probability import FreqDist
-    fd = FreqDist(tags)
-    counts = []
     charencoding = chardet.detect(text)
-    for keyword in tags:
-        if charencoding['encoding'] != 'utf-8':
-            keywordtext = keyword.encode(charencoding['encoding'])
-        else:
-            keywordtext = keyword.encode("utf-8")
-        count = text.count(keywordtext)
-        fd[keyword] = count
-        counts.append(str(count))
-    keyCounts = []
-    for key,val in fd.iteritems():
-        keyCount = domain.KeyCount(key, val)
-        keyCounts.append(keyCount)
-    imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
+    topk = defaulttopk
+    keywords = sqlitedb.getKeywords(id, topk)
+    if(keywords is not None and len(keywords) > 0):
+        imgUrl = createKeywordImageUrl(keywords)
+    else:
+        tags = jieba.analyse.extract_tags(text,topK=topk)
+        tagsString = ""
+        from nltk.probability import FreqDist
+        fd = FreqDist(tags)
+        counts = []
+        for keyword in tags:
+            if charencoding['encoding'] != 'utf-8':
+                keywordtext = keyword.encode(charencoding['encoding'])
+            else:
+                keywordtext = keyword.encode("utf-8")
+            count = text.count(keywordtext)
+            fd[keyword] = count
+            counts.append(str(count))
+        keywords = []
+        for key,val in fd.iteritems():
+            keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
+            keywords.append(keyword)
+        imgUrl = createKeywordImageUrl(keywords)
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
+    return template("extract_form",content=text,tags=keywords,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
 
 @post('/')
 @post('/extract')
@@ -183,6 +194,21 @@ def extractSubmit_action():
     id = request.forms.selectedFile
     if "extract" in request.forms:
         text = request.forms.text
+        topk = int(request.forms.topk)
+        defaulttopk = topk
+        tags = jieba.analyse.extract_tags(text,topK=topk)
+        from nltk.probability import FreqDist
+        fd = FreqDist(tags)
+
+        for keyword in tags:
+            #keyword = keyword.encode("utf-8")
+            count = text.count(keyword)
+            fd[keyword] = count
+        keywords = []
+        for key,val in fd.iteritems():
+            keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
+            keywords.append(keyword)
+        imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
     elif "upload" in request.forms:
         #try: # Windows needs stdio set for binary mode.
             #import msvcrt
@@ -202,7 +228,6 @@ def extractSubmit_action():
             #path = os.path.dirname(os.path.abspath(__file__))
             open('files/' + fn, 'wb').write(text)
             name = filename
-            selectedFileName = fn
             author = ""
             period = ""
             uploader = ""
@@ -210,28 +235,24 @@ def extractSubmit_action():
             text = unicode(text, charencoding['encoding'], errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
             id = sqlitedb.addText(textObject)
-            message = 'The file "' + filename + '" was uploaded successfully'
-        else:
-           message = 'No file was uploaded'
+            topk = int(request.forms.topk)
+            defaulttopk = topk
+            tags = jieba.analyse.extract_tags(text,topK=-1)
+            from nltk.probability import FreqDist
+            fd = FreqDist(tags)
+            for keyword in tags:
+                #keyword = keyword.encode("utf-8")
+                count = text.count(keyword)
+                fd[keyword] = count
+            keywords = []
+            for key,val in fd.iteritems():
+                keyword = domain.Keyword(0, name=key, count=val, textId=id)
+                keywords.append(keyword)
+            sqlitedb.addKeywords(keywords)
+            keywordtopk = keywords[:topk]
+            imgUrl = createKeywordImageUrl(keywordtopk)
 
-    topk = int(request.forms.topk)
-    defaulttopk = topk
-    tags = jieba.analyse.extract_tags(text,topK=topk)
-    from nltk.probability import FreqDist
-    fd = FreqDist(tags)
-
-    counts = []
-    for keyword in tags:
-        #keyword = keyword.encode("utf-8")
-        count = text.count(keyword)
-        fd[keyword] = count
-        counts.append(str(count))
-    keyCounts = []
-    for key,val in fd.iteritems():
-        keyCount = domain.KeyCount(key, val)
-        keyCounts.append(keyCount)
-    imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
-    return template("extract_form",content=text,tags=keyCounts,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
+    return template("extract_form",content=text,tags=keywords[:topk],topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
 
 @get('/managefile')
 def managefile():

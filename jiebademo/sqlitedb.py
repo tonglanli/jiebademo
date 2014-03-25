@@ -14,13 +14,14 @@ def createTextTable():
     createDb.close()
 
 def createKeywordsTable():
-    createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
+    createDb = sqlite3.connect('/Users/mac/NLTK/PycharmProjects/jiebademo/jiebademo/lemon_keyword.db', check_same_thread=False)
     createDb.text_factory = str
     queryCurs = createDb.cursor()
     queryCurs.execute('''CREATE TABLE keywords
     (id INTEGER PRIMARY KEY, textId INTEGER, name TEXT, count INTEGER, FOREIGN KEY (textId) REFERENCES texts(id))''')
     #queryCurs.execute('''CREATE TABLE uploadertexts
     #(textid INTEGER PRIMARY KEY, uploaderid INTEGER PRIMARY KEY)''')
+    createDb.commit()
     queryCurs.close()
     createDb.close()
 
@@ -30,6 +31,19 @@ def addText(text):
     queryCurs = createDb.cursor()
     queryCurs.execute('''INSERT INTO texts (name,author,period,path,uploader,uploadDate,content)
     VALUES (?,?,?,?,?,datetime('now'),?)''',(text.name,text.author,text.period,text.path,text.uploader,text.content))
+    createDb.commit()
+    id = queryCurs.lastrowid
+    queryCurs.close()
+    createDb.close()
+    return id
+
+def addKeywords(keywords):
+    createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
+    createDb.text_factory = str
+    queryCurs = createDb.cursor()
+    for keyword in keywords:
+        queryCurs.execute('''INSERT INTO keywords (name,count,textId)
+        VALUES (?,?,?)''', (keyword.name, keyword.count, keyword.textId))
     createDb.commit()
     id = queryCurs.lastrowid
     queryCurs.close()
@@ -65,15 +79,28 @@ def getText(id):
 def deleteTexts(ids):
     createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
     queryCurs = createDb.cursor()
-    print ', '.join(ids)
     queryCurs.execute("delete FROM texts where id in (%s)" % ', '.join(ids))
+    queryCurs.execute("delete FROM keywords where textId in (%s)" % ', '.join(ids))
     createDb.commit()
     queryCurs.close()
     createDb.close()
 
+def getKeywords(textId, topK):
+    createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
+    queryCurs = createDb.cursor()
+    queryCurs = createDb.cursor()
+    queryCurs.execute("SELECT name,count FROM keywords where textId = {0} ORDER BY count desc LIMIT {1}".format(textId, topK))
+    keywords = []
+    for i in queryCurs:
+        keyword = domain.Keyword(id=0, name=i[0], count=i[1], textId=textId)
+        keywords.append(keyword)
+    queryCurs.close()
+    createDb.close()
+    return keywords
+
 def main():
     createKeywordsTable()
-
+    #print getTexts()
     #addCust('Derek Banas','5708 Highway Ave','Verona','PA',150.76)
     #addCust('Karl Tong','5708 Highway Ave','Verona','PA',250.76)
 

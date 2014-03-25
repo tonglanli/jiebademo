@@ -9,12 +9,14 @@ class Text:
         self.uploadDate = uploaddate
         self.content = content
 
-class KeyCount:
-    def __init__(self, key, count):
-        self.key = key
-        self.count = count
-
 class YKeyCount:
     def __init__(self, key, count):
         self.key = key
         self.count = count
+
+class Keyword:
+    def __init__(self, id, name, count, textId):
+        self.id = id
+        self.name = name
+        self.count = count
+        self.textId = textId
