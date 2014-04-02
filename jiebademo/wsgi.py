@@ -71,7 +71,7 @@ def match(a,b):
   else:
     return ""
 
-defaulttopk=20
+defaulttopk=25
 defaultrotation=45
 
 @get('/')
@@ -236,7 +236,7 @@ def extract():
 
 　　 威廉士 2003. 《关键词：文化与社会的词汇》. 刘建基译. 台北：巨流图书公司. '''
     topk = defaulttopk
-    tags = jieba.analyse.extract_tags(sample_text,topK=topk)
+    tags = jieba.analyse.extract_tags(sample_text,topK=int(-1))
     tagsString = ""
     from nltk.probability import FreqDist
     fd = FreqDist(tags)
@@ -250,12 +250,22 @@ def extract():
         count = sample_text.count(keywordtext)
         fd[keyword] = count
         counts.append(str(count))
+    totalWordCount = 0
     keywords = []
     for key,val in fd.iteritems():
         keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
         keywords.append(keyword)
-    imgUrl = createKeywordImageUrl(keywords)
-    return template("extract_form",content=sample_text,tags=keywords,topk=defaulttopk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile="")
+        totalWordCount += val
+    keywordtopk = keywords[:topk]
+    imgUrl = createKeywordImageUrl(keywordtopk)
+    totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
+    keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+    keywordtopk.append(keyword)
+    keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+    keywordtopk.append(keyword)
+    keyword = domain.Keyword(0, name=u"关键词汇临界次数", count=totalDifferentWordCount, textId=0)
+    keywordtopk.append(keyword)
+    return template("extract_form",content=sample_text,tags=keywordtopk,topk=defaulttopk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount)
 
 import os
 from datetime import *
@@ -282,11 +292,23 @@ def extractFile_action(id):
         return None
     charencoding = chardet.detect(text)
     topk = defaulttopk
-    keywords = sqlitedb.getKeywords(id, topk)
+    keywords = sqlitedb.getKeywords(id, int(-1))
     if(keywords is not None and len(keywords) > 0):
         imgUrl = createKeywordImageUrl(keywords)
+        totalWordCount = 0
+        for keyword in keywords:
+            totalWordCount += keyword.count
+        keywordtopk = keywords[:topk]
+        imgUrl = createKeywordImageUrl(keywordtopk)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+        keywordtopk.append(keyword)
+        totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
+        keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+        keywordtopk.append(keyword)
+        keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keywordtopk.append(keyword)
     else:
-        tags = jieba.analyse.extract_tags(text,topK=topk)
+        tags = jieba.analyse.extract_tags(text,topK=int(-1))
         tagsString = ""
         from nltk.probability import FreqDist
         fd = FreqDist(tags)
@@ -299,14 +321,24 @@ def extractFile_action(id):
             count = text.count(keywordtext)
             fd[keyword] = count
             counts.append(str(count))
+        totalWordCount = 0
         keywords = []
         for key,val in fd.iteritems():
             keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
             keywords.append(keyword)
-        imgUrl = createKeywordImageUrl(keywords)
+            totalWordCount += val
+        keywordtopk = keywords[:topk]
+        imgUrl = createKeywordImageUrl(keywordtopk)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+        keywordtopk.append(keyword)
+        totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
+        keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+        keywordtopk.append(keyword)
+        keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keywordtopk.append(keyword)
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
-    return template("extract_form",content=text,tags=keywords,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
+    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
 
 @post('/')
 @post('/extract')
@@ -316,7 +348,7 @@ def extractSubmit_action():
         text = request.forms.text
         topk = int(request.forms.topk)
         defaulttopk = topk
-        tags = jieba.analyse.extract_tags(text,topK=topk)
+        tags = jieba.analyse.extract_tags(text,topK=int(-1))
         from nltk.probability import FreqDist
         fd = FreqDist(tags)
 
@@ -325,10 +357,20 @@ def extractSubmit_action():
             count = text.count(keyword)
             fd[keyword] = count
         keywords = []
+        totalWordCount = 0
         for key,val in fd.iteritems():
-            keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
+            keyword = domain.Keyword(0, name=key, count=val, textId=id)
             keywords.append(keyword)
-        imgUrl = u"/image/" + u"test" + u"&" + str(len(fd)) + u"&" + u" ".join(fd.keys()) + u"&" + u" ".join(str(v) for v in fd.values())
+            totalWordCount += val
+        keywordtopk = keywords[:topk]
+        imgUrl = createKeywordImageUrl(keywordtopk)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+        keywordtopk.append(keyword)
+        totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
+        keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+        keywordtopk.append(keyword)
+        keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keywordtopk.append(keyword)
     elif "upload" in request.forms:
         #try: # Windows needs stdio set for binary mode.
             #import msvcrt
@@ -365,14 +407,23 @@ def extractSubmit_action():
                 count = text.count(keyword)
                 fd[keyword] = count
             keywords = []
+            totalWordCount = 0
             for key,val in fd.iteritems():
                 keyword = domain.Keyword(0, name=key, count=val, textId=id)
                 keywords.append(keyword)
+                totalWordCount += val
             sqlitedb.addKeywords(keywords)
             keywordtopk = keywords[:topk]
             imgUrl = createKeywordImageUrl(keywordtopk)
+            keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+            keywordtopk.append(keyword)
+            totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
+            keyword = domain.Keyword(0, name=u"词汇量总数", count=totalWordCount, textId=0)
+            keywordtopk.append(keyword)
+            keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+            keywordtopk.append(keyword)
 
-    return template("extract_form",content=text,tags=keywords[:topk],topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id)
+    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
 
 @get('/managefile')
 def managefile():

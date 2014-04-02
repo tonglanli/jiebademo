@@ -91,6 +91,7 @@
     <section class="row-fluid">
         <div class="sidebar-nav well">
             <input type="hidden" id="selectedFile" name="selectedFile" value="{{selectedFile}}">
+            <input type="hidden" id="totalDifferentWordCount" name="selectedFile" value="{{totalDifferentWordCount}}">
             <select id="selectFile" class="span3">
                 <option class="fileItem" value="-1">—— 请选择 ——</option>
                 %for text in texts:
@@ -117,8 +118,14 @@
                 <tr style="max-height: 540px; overflow-y: scroll">
                     <td style="background-color: #ffffff; max-height: 540px; overflow-y: scroll">
                          %for tag in tags:
-                            {{tag.name}}:{{tag.count}}
-                            <br />
+                            %if(totalDifferentWordCount != -1 and tag.count>totalDifferentWordCount):
+                                <B>{{tag.name}}:{{tag.count}}</B>
+                                <br />
+                            %else:
+                                %totalDifferentWordCount = int(-1)
+                                {{tag.name}}:{{tag.count}}
+                                <br />
+                            %end
                          %end
                     </td>
                 </tr>

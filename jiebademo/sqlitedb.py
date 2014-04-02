@@ -89,7 +89,10 @@ def getKeywords(textId, topK):
     createDb = sqlite3.connect('lemon_keyword.db', check_same_thread=False)
     queryCurs = createDb.cursor()
     queryCurs = createDb.cursor()
-    queryCurs.execute("SELECT name,count FROM keywords where textId = {0} ORDER BY count desc LIMIT {1}".format(textId, topK))
+    if(topK == -1):
+        queryCurs.execute("SELECT name,count FROM keywords where textId = {0} ORDER BY count desc".format(textId))
+    else:
+        queryCurs.execute("SELECT name,count FROM keywords where textId = {0} ORDER BY count desc LIMIT {1}".format(textId, topK))
     keywords = []
     for i in queryCurs:
         keyword = domain.Keyword(id=0, name=i[0], count=i[1], textId=textId)
