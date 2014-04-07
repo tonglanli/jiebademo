@@ -55,8 +55,12 @@ def serve_css(name, length, keys, values):
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
     plt.xticks(range(int(length)), keys)
+    widthscale = int(length)/4
+    figsize = (12*widthscale,12*widthscale)
+    print figsize
     plt.plot(range(int(length)), values)
-    plt.xticks(rotation=defaultrotation)
+    plt.xticks(rotation=defaultrotation, fontsize=10)
+    plt.yticks(fontsize=10)
     name = name + str(datetime.now()) + '.png'
     imgUrl = 'static/temp/' + name
     plt.savefig(imgUrl, bbox_inches='tight')
@@ -259,7 +263,7 @@ def extract():
     keywordtopk = keywords[:topk]
     imgUrl = createKeywordImageUrl(keywordtopk)
     totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
-    keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+    keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
     keywordtopk.append(keyword)
     keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
     keywordtopk.append(keyword)
@@ -300,7 +304,7 @@ def extractFile_action(id):
             totalWordCount += keyword.count
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
-        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
         keywordtopk.append(keyword)
         totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
         keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
@@ -364,7 +368,7 @@ def extractSubmit_action():
             totalWordCount += val
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
-        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-2)
         keywordtopk.append(keyword)
         totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
         keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
@@ -415,7 +419,7 @@ def extractSubmit_action():
             sqlitedb.addKeywords(keywords)
             keywordtopk = keywords[:topk]
             imgUrl = createKeywordImageUrl(keywordtopk)
-            keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
+            keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
             keywordtopk.append(keyword)
             totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
             keyword = domain.Keyword(0, name=u"词汇量总数", count=totalWordCount, textId=0)

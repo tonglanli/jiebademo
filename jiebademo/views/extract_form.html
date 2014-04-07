@@ -107,32 +107,42 @@
             <textarea id="text" rows="10" cols="80" name="text" style="width: 1024px;">{{content}}</textarea>
         </div>
     </section>
-    <section class="row-fluid" style="text-align: center; overflow-x: hidden">
-         <table class="table table-bordered table-striped span2" style="background-color: #ffffff; margin-top: 10px;  height: 460px; max-height: 460px; overflow-y: scroll;">
+    <section class="row-fluid" style="text-align: center; overflow-x: hidden; margin-top: 10px;">
+         <table class="table table-bordered table-striped span2 keywordListTable" style="background-color: #ffffff; margin-top: 10px;  height: 460px; max-height: 460px; overflow-y: scroll;">
             <thead>
                 <tr>
                     <th style="text-align: left; ">关键词</th>
                 </tr>
             </thead>
-            <tbody style="max-height: 460px; overflow-y: scroll">
-                <tr style="max-height: 540px; overflow-y: scroll">
-                    <td style="background-color: #ffffff; max-height: 540px; overflow-y: scroll">
-                         %for tag in tags:
-                            %if(totalDifferentWordCount != -1 and tag.count>totalDifferentWordCount):
-                                <B>{{tag.name}}:{{tag.count}}</B>
-                                <br />
-                            %else:
-                                %totalDifferentWordCount = int(-1)
-                                {{tag.name}}:{{tag.count}}
-                                <br />
-                            %end
-                         %end
-                    </td>
-                </tr>
+            <tbody style="max-height: 460px; overflow-y: scroll; font-size: small; border-width: 0; line-height: 10px; padding: 0;" class="table-detail">
+                 %for tag in tags:
+                    %if(totalDifferentWordCount != -1 and tag.count>totalDifferentWordCount):
+                        <tr style="line-height: 10px; padding: 0">
+                            <td class="span3" style="line-height: 10px"><B>{{tag.name}}</B></td>
+                            <td class="text-right" style="text-align: right;line-height: 10px"><B>{{tag.count}}</B></td>
+                        </tr>
+                    %else:
+                        %totalDifferentWordCount = int(-1)
+                        %if(tag.textId == -1):
+                            <tr>
+                                <td colspan="2" class="text-center" style="text-align: center"><B>统计</B></td>
+                            </tr>
+                            <tr style="line-height: 10px">
+                                <td class="span3" style="line-height: 10px">{{tag.name}}</td>
+                                <td class="text-right" style="text-align: right;line-height: 10px">{{tag.count}}</td>
+                            </tr>
+                        %else:
+                        <tr style="line-height: 10px">
+                            <td class="span3" style="line-height: 10px">{{tag.name}}</td>
+                            <td class="text-right" style="text-align: right;line-height: 10px">{{tag.count}}</td>
+                        </tr>
+                        %end
+                    %end
+                 %end
             </tbody>
         </table>
-        <div style="text-align: center; width: 1012px; vertical-align: middle;">
-            <img src="{{keyImgUrl}}" style="width: 580px"/>
+        <div style="text-align: center; vertical-align: middle;">
+            <img src="{{keyImgUrl}}"/>
         </div>
     </section>
     <footer class="well well-small">
