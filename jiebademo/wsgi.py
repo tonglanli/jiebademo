@@ -63,7 +63,9 @@ def serve_css(name, length, keys, values):
     plt.yticks(fontsize=10)
     name = name + str(datetime.now()) + '.png'
     imgUrl = 'static/temp/' + name
-    plt.savefig(imgUrl, bbox_inches='tight')
+    fig = matplotlib.pyplot.gcf()
+    fig.set_size_inches(10,2)
+    plt.savefig(imgUrl, bbox_inches='tight', figsize=(16,4), dpi=100)
     plt.close()
     tempfile = static_file(name, root='./static/temp')
     os.remove(imgUrl)
