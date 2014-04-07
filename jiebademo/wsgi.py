@@ -55,9 +55,6 @@ def serve_css(name, length, keys, values):
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
     plt.xticks(range(int(length)), keys)
-    widthscale = int(length)/4
-    figsize = (12*widthscale,12*widthscale)
-    print figsize
     plt.plot(range(int(length)), values)
     plt.xticks(rotation=defaultrotation, fontsize=10)
     plt.yticks(fontsize=10)
@@ -271,6 +268,9 @@ def extract():
     keywordtopk.append(keyword)
     keyword = domain.Keyword(0, name=u"关键词汇临界次数", count=totalDifferentWordCount, textId=0)
     keywordtopk.append(keyword)
+    keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
+    keyword = domain.Keyword(0, name=u"关键词汇量百分比", count=keywordsPercentage, textId=0)
+    keywordtopk.append(keyword)
     return template("extract_form",content=sample_text,tags=keywordtopk,topk=defaulttopk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount)
 
 import os
@@ -313,6 +313,9 @@ def extractFile_action(id):
         keywordtopk.append(keyword)
         keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
         keywordtopk.append(keyword)
+        keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
+        keyword = domain.Keyword(0, name=u"关键词汇量百分比", count=keywordsPercentage, textId=0)
+        keywordtopk.append(keyword)
     else:
         tags = jieba.analyse.extract_tags(text,topK=int(-1))
         tagsString = ""
@@ -341,6 +344,9 @@ def extractFile_action(id):
         keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
         keywordtopk.append(keyword)
         keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keywordtopk.append(keyword)
+        keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
+        keyword = domain.Keyword(0, name=u"关键词汇量百分比", count=keywordsPercentage, textId=0)
         keywordtopk.append(keyword)
     if charencoding['encoding'] != 'utf-8':
         text = unicode(text, charencoding['encoding'], errors="ignore")
@@ -376,6 +382,9 @@ def extractSubmit_action():
         keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
         keywordtopk.append(keyword)
         keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keywordtopk.append(keyword)
+        keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
+        keyword = domain.Keyword(0, name=u"关键词汇量百分比", count=keywordsPercentage, textId=0)
         keywordtopk.append(keyword)
     elif "upload" in request.forms:
         #try: # Windows needs stdio set for binary mode.
@@ -427,6 +436,9 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=u"词汇量总数", count=totalWordCount, textId=0)
             keywordtopk.append(keyword)
             keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+            keywordtopk.append(keyword)
+            keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
+            keyword = domain.Keyword(0, name=u"关键词汇量百分比", count=keywordsPercentage, textId=0)
             keywordtopk.append(keyword)
 
     return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
