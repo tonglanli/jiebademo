@@ -3,7 +3,7 @@
 }
 
 .container-main {
-    width: 1024px;
+    width: 1232px;
     margin: 0 auto;
 }
 
@@ -23,14 +23,6 @@ td {
 .section-detail {
     margin-bottom: 20px;
     overflow-x:scroll;
-}
-
-.keywordListTable td{
-    line-height: 10px;
-}
-
-.keywordListTable tr{
-    line-height: 10px;
 }
 
 th.DefectID {
