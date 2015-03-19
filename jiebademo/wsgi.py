@@ -81,7 +81,7 @@ defaultrotation=45
 @get('/extract')
 def extract():
     sample_text='''
-    金观涛：“自然哲学”和科学的观念:从《继承与叛逆：现代科学为何出现于西方》谈起
+    金观涛2：“自然哲学”和科学的观念:从《继承与叛逆：现代科学为何出现于西方》谈起
 
 ● 金观涛 (进入专栏)
 　　
@@ -374,6 +374,7 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=key, count=val, textId=id)
             keywords.append(keyword)
             totalWordCount += val
+        keywords.sort()
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
