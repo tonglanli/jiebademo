@@ -31,7 +31,7 @@
       <file leaf-file-name="wsgi.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/jiebademo/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="52" selection-start="1494" selection-end="1494" vertical-scroll-proportion="0.7617647" vertical-offset="446" max-vertical-offset="8655">
+            <state line="49" column="59" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.7617647" vertical-offset="446" max-vertical-offset="8655">
               <folding />
             </state>
           </provider>
@@ -731,7 +731,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/jiebademo/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="52" selection-start="1494" selection-end="1494" vertical-scroll-proportion="0.7617647" vertical-offset="446" max-vertical-offset="8655">
+        <state line="49" column="59" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.7617647" vertical-offset="446" max-vertical-offset="8655">
           <folding />
         </state>
       </provider>
