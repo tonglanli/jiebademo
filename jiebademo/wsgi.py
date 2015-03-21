@@ -259,6 +259,7 @@ def extract():
         keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
         keywords.append(keyword)
         totalWordCount += val
+    keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
     keywordtopk = keywords[:topk]
     imgUrl = createKeywordImageUrl(keywordtopk)
     totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
