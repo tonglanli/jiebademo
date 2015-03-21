@@ -47,7 +47,7 @@ def serve_css(imageName):
 @route('/image/:name&:length&:keys&:values')
 def serve_css(name, length, keys, values):
     from pylab import plt, mpl
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['font.sans-serif'] = ['wqy-microhei']
     plt.xlabel(u'')
     plt.ylabel(u'')
     plt.title(u'')
