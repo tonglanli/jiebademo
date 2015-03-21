@@ -304,6 +304,7 @@ def extractFile_action(id):
         totalWordCount = 0
         for keyword in keywords:
             totalWordCount += keyword.count
+        keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
@@ -336,6 +337,7 @@ def extractFile_action(id):
             keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
             keywords.append(keyword)
             totalWordCount += val
+        keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
@@ -374,7 +376,7 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=key, count=val, textId=id)
             keywords.append(keyword)
             totalWordCount += val
-        keywords.sort()
+        keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
