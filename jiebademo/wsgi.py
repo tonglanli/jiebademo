@@ -51,7 +51,7 @@ def serve_css(name, length, keys, values):
     mpl.rcParams['axes.unicode_minus'] = False
     from matplotlib.font_manager import FontProperties
     #font = FontProperties(fname="d:\Users\lltong\Desktop\msyh.ttf", size=12)
-    font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=9)
+    font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=11)
     plt.xlabel(u'')
     plt.ylabel(u'出现次数',fontproperties=font)
     plt.title(u'词频统计',fontproperties=font)
