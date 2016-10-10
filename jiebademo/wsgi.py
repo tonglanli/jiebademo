@@ -49,24 +49,27 @@ def serve_css(name, length, keys, values):
     from pylab import plt, mpl
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
+    from matplotlib.font_manager import FontProperties
+    #font = FontProperties(fname="d:\Users\lltong\Desktop\msyh.ttf", size=12)
+    font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=9)
     plt.xlabel(u'')
-    plt.ylabel(u'')
-    plt.title(u'')
+    plt.ylabel(u'出现次数',fontproperties=font)
+    plt.title(u'词频统计',fontproperties=font)
     plt.grid()
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
     plt.xticks(range(int(length)), keys)
     plt.plot(range(int(length)), values)
-    plt.xticks(rotation=defaultrotation, fontsize=10)
-    plt.yticks(fontsize=10)
-    name = name + str(datetime.now()) + '.png'
+    plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
+    plt.yticks(fontsize=10,fontproperties=font)
+    name = name + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
     fig = matplotlib.pyplot.gcf()
-    fig.set_size_inches(10,2)
-    plt.savefig(imgUrl, bbox_inches='tight', figsize=(16,4), dpi=100)
+    fig.set_size_inches(12.2, 2)
+    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20,4), dpi=100)
     plt.close()
-    tempfile = static_file(name, root='./static/temp')
-    os.remove(imgUrl)
+    tempfile = static_file(name, root='./static/temp/')
+    #os.remove(imgUrl)
     return tempfile
 
 def match(a,b):
