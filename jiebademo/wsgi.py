@@ -285,9 +285,7 @@ def extract():
     for tempkeyword in keywordtopk:
         tempsimilarWords = texttemp.similar(tempkeyword.name.encode('utf-8'))
         # tempsimilarWordsStr = " ".join(tempsimilarWords)
-        tempsimilarWordsStr = ""
-        for sw in tempsimilarWords:
-            tempsimilarWordsStr += str(sw) + " "
+        tempsimilarWordsStr = str(tempsimilarWords)
         tempkeyword.similarWords = tempsimilarWordsStr;
 
     imgUrl = createKeywordImageUrl(keywordtopk)
