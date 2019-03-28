@@ -306,7 +306,7 @@ def extract():
     # commonContexta = texttemp.common_contexts(u'科学')
     # commonContexta = texttemp.concordance(u'科学')
     # commonContexta2 = texttemp.common_contexts(commonWords)
-    nltk.download('stopwords')
+    # nltk.download('stopwords')
     concordance_list = texttemp.concordance_list(u'科学')
     texttemp.collocations()
     keywordtopk.append(keyword)
