@@ -283,7 +283,7 @@ def extract():
     keywordtopk = keywords[:topk]
 
     for tempkeyword in keywordtopk:
-        tempsimilarWords = texttemp.similar(tempkeyword.name)
+        tempsimilarWords = texttemp.similar(tempkeyword.name.encode('utf-8'))
         tempsimilarWordsStr = u" ".join(tempsimilarWords)
         tempkeyword.similarWords = tempsimilarWordsStr;
 
