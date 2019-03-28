@@ -15,8 +15,9 @@ class YKeyCount:
         self.count = count
 
 class Keyword:
-    def __init__(self, id, name, count, textId):
+    def __init__(self, id, name, count, textId, similarWords):
         self.id = id
         self.name = name
         self.count = count
         self.textId = textId
+        self.similarWords = similarWords
