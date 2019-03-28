@@ -273,7 +273,7 @@ def extract():
         counts.append(str(count))
     totalWordCount = 0
     keywords = []
-    words = jieba.__lcut(sample_text);
+    words = jieba.cut(sample_text);
     texttemp = nltk.Text(word for word in words)
     for key,val in fd.iteritems():
         keyword = domain.Keyword(id=0, name=key, count=val, textId=0,similarWords='')
