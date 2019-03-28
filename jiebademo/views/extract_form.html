@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>思想史研究－关键词文本分析2</title>
+	<title>思想史研究－关键词文本分析</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet" />
     <link href="../static/css/MyCss.css" rel="stylesheet" />
     <script type="text/javascript" src="../static/js/jquery-2.1.0.min.js"></script>
@@ -35,17 +35,6 @@
 
 
     </script>
-
-<meta name="baidu_union_verify" content="fa0b1ea8b0bf77be7e86ba6a25b371d3">
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-1682391728959834",
-    enable_page_level_ads: true
-  });
-</script>
-
 </head>
 <body>
 <style type="text/css">
@@ -78,7 +67,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="pull-left">
-                    <h4>思想史研究 - 数位人文</h4>
+                    <h4>科学与人文</h4>
                 </div>
             </div>
         </div>
@@ -103,45 +92,51 @@
             <textarea id="text" rows="12" cols="100" name="text" style="width: 1230px">{{content}}</textarea>
         </div>
     </section>
+     <section class="row-fluid" style="text-align: center">
+       <div style="text-align: center; vertical-align: middle;">
+            <img src="{{keyImgUrl}}"/>
+        </div>
+    </section>
     <section class="row-fluid" style="text-align: center; overflow-x: hidden; margin-top: 10px;">
-         <table class="table table-bordered table-striped span2 keywordListTable" style="background-color: #ffffff; margin-top: 10px;  height: 460px; max-height: 460px; overflow-y: scroll;">
+         <table class="table table-bordered table-striped keywordListTable" style="background-color: #ffffff; margin-top: 10px;  height: 460px; max-height: 460px; overflow-y: scroll;">
             <thead>
                 <tr>
-                    <th style="text-align: left; ">关键词</th>
+                    <th style="width:100px;text-align: left; ">关键词</th>
+                    <th style="width:50px;text-align: right; ">词频</th>
+                    <th style="text-align: left; ">相似词</th>
                 </tr>
             </thead>
             <tbody style="max-height: 460px; overflow-y: scroll; font-size: small; border-width: 0; line-height: 10px; padding: 0;" class="table-detail">
                  %for tag in tags:
                     %if(totalDifferentWordCount != -1 and tag.count>totalDifferentWordCount):
                         <tr style="line-height: 10px; padding: 0">
-                            <td class="span3" style="line-height: 10px"><B>{{tag.name}}</B></td>
-                            <td class="text-right" style="text-align: right;line-height: 10px"><B>{{tag.count}}</B></td>
+                            <td width="20%"  style="width:100px;line-height: 10px"><B>{{tag.name}}</B></td>
+                            <td width="10%"  style="text-align: right;line-height: 10px"><B>{{tag.count}}</B></td>
+                             <td width="70%"  style="">{{tag.similarWords}}</td>
                         </tr>
                     %else:
                         %totalDifferentWordCount = int(-1)
                         %if(tag.textId == -1):
                             <tr>
-                                <td colspan="2" class="text-center" style="text-align: center"><B>统计</B></td>
+                                <td colspan="3" class="text-center" style="text-align: center"><B>统计</B></td>
                             </tr>
                             <tr style="line-height: 10px">
-                                <td class="span3" style="line-height: 10px">{{tag.name}}</td>
-                                <td class="text-right" style="text-align: right;line-height: 10px">{{tag.count}}</td>
+                                 <td width="20%"  style="line-height: 10px">{{tag.name}}</td>
+                            <td width="10%"  style="text-align: right;line-height: 10px">{{tag.count}}</B></td>
+                             <td width="70%"  style="">{{tag.similarWords}}</td>
                             </tr>
                         %else:
                         <tr style="line-height: 10px">
-                            <td class="span3" style="line-height: 10px">{{tag.name}}</td>
-                            <td class="text-right" style="text-align: right;line-height: 10px">{{tag.count}}</td>
+                            <td width="20%"  style="line-height: 10px">{{tag.name}}</td>
+                            <td width="10%"  style="text-align: right;line-height: 10px">{{tag.count}}</B></td>
+                             <td width="70%"  style="">{{tag.similarWords}}</td>
                         </tr>
                         %end
                     %end
                  %end
             </tbody>
         </table>
-        <div style="text-align: center; vertical-align: middle;">
-            <img src="{{keyImgUrl}}"/>
-        </div>
     </section>
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <footer class="well well-small">
         <span>项目主页：<a href="http://github.com/tonglanli/jiebademo">http://github.com/tonglanli/jiebademo</a></span>
 	    <span>作者微博：<a href="http://weibo.com/u/1654146914">http://weibo.com/u/1654146914</a></span>
@@ -167,7 +162,7 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-109817835-1', 'auto');
+  ga('create', 'UA-11389485-1', 'auto');
   ga('send', 'pageview');
 
 </script>

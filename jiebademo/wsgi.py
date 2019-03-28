@@ -1,20 +1,29 @@
 # -*- coding: utf-8 -*-
 from bottle import route,run, request, get,post,template, static_file, default_app
 import jieba
+import jieba.analyse
 import domain
 #path = os.path.dirname(os.path.abspath(__file__))
-#jieba.set_dictionary(path + "/jieba/dict.txt.big")
+#jieba.set_dictionary(path + "/jieba/dict_old.txt")
+# jieba.set_dictionary("D:\\Ctrip\\github\\jiebademo\\jiebademo\\jieba\\dict_old.txt")
+jieba.initialize()
+# jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
 if jieba.initialized == False:
+    # jieba.set_dictionary("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
+    # jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
     jieba.initialize()
 
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
 #thr.start()
-import jieba.analyse
+
+# jieba.set_dictionary("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
+# jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
 import functools
 #from nltk.probability import FreqDist
 import sqlitedb
 import chardet
+import nltk
 
 @route('/static/:filename')
 def serve_static(filename):
@@ -50,7 +59,7 @@ def serve_css(name, length, keys, values):
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
     from matplotlib.font_manager import FontProperties
-    #font = FontProperties(fname="d:\Users\lltong\Desktop\msyh.ttf", size=12)
+    # font = FontProperties(fname="d:\Users\ll.tong\Desktop\msyh.ttf", size=12)
     font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=11)
     plt.xlabel(u'')
     plt.ylabel(u'出现次数',fontproperties=font)
@@ -58,8 +67,12 @@ def serve_css(name, length, keys, values):
     plt.grid()
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
+    valuesInt = []
+    for value in values:
+        valuesInt.append(int(value))
+
     plt.xticks(range(int(length)), keys)
-    plt.plot(range(int(length)), values)
+    plt.plot(range(int(length)), valuesInt)
     plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
     plt.yticks(fontsize=10,fontproperties=font)
     name = name + str(datetime.now().date()).replace(':', '') + '.png'
@@ -243,7 +256,8 @@ def extract():
 
 　　 威廉士 2003. 《关键词：文化与社会的词汇》. 刘建基译. 台北：巨流图书公司. '''
     topk = defaulttopk
-    tags = jieba.analyse.extract_tags(sample_text,topK=int(-1))
+    tags = jieba.analyse.extract_tags(sample_text, topK=int(-1))
+
     tagsString = ""
     from nltk.probability import FreqDist
     fd = FreqDist(tags)
@@ -259,22 +273,48 @@ def extract():
         counts.append(str(count))
     totalWordCount = 0
     keywords = []
+    words = jieba.__lcut(sample_text);
+    texttemp = nltk.Text(word for word in words)
     for key,val in fd.iteritems():
-        keyword = domain.Keyword(id=0, name=key, count=val, textId=0)
+        keyword = domain.Keyword(id=0, name=key, count=val, textId=0,similarWords='')
         keywords.append(keyword)
         totalWordCount += val
     keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
     keywordtopk = keywords[:topk]
+
+    for tempkeyword in keywordtopk:
+        tempsimilarWords = texttemp.similar_words(tempkeyword.name)
+        tempsimilarWordsStr = u" ".join(tempsimilarWords)
+        tempkeyword.similarWords = tempsimilarWordsStr;
+
     imgUrl = createKeywordImageUrl(keywordtopk)
     totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
-    keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
+    words = jieba.__lcut(sample_text);
+    texttemp = nltk.Text(word for word in words)
+    keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1, similarWords= '')
+    # similarWords = texttemp.similar(u'科学')
+    # similarWords = texttemp.similar(u'思想')
+    # similarWords = texttemp.similar(u'哲学')
+    # similarWords = texttemp.similar(u'问题')
+    # similarWords = texttemp.similar(u'理性')
+    # similarWords = texttemp.similar(u'观念')
+    # similarWords = texttemp.similar_words(u'科学')
+    commonWords = []
+    # commonWords.append(u'科学')
+    # commonWords.append(u'上帝')
+    # commonContexta = texttemp.common_contexts(u'科学')
+    # commonContexta = texttemp.concordance(u'科学')
+    # commonContexta2 = texttemp.common_contexts(commonWords)
+    nltk.download('stopwords')
+    concordance_list = texttemp.concordance_list(u'科学')
+    texttemp.collocations()
     keywordtopk.append(keyword)
-    keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+    keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0, similarWords= '')
     keywordtopk.append(keyword)
-    keyword = domain.Keyword(0, name=u"关键词汇临界次数", count=totalDifferentWordCount, textId=0)
+    keyword = domain.Keyword(0, name=u"关键词汇临界次数", count=totalDifferentWordCount, textId=0, similarWords= '')
     keywordtopk.append(keyword)
     keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
-    keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
+    keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0, similarWords= '')
     keywordtopk.append(keyword)
     return template("extract_form",content=sample_text,tags=keywordtopk,topk=defaulttopk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount)
 
@@ -304,6 +344,11 @@ def extractFile_action(id):
     charencoding = chardet.detect(text)
     topk = defaulttopk
     keywords = sqlitedb.getKeywords(id, int(-1))
+
+    #words = jieba.__lcut(text);
+    #text = nltk.Text(word for word in words)
+    #similarWords = text.similar(u'收费')
+
     if(keywords is not None and len(keywords) > 0):
         imgUrl = createKeywordImageUrl(keywords)
         totalWordCount = 0
@@ -323,7 +368,7 @@ def extractFile_action(id):
         keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
         keywordtopk.append(keyword)
     else:
-        tags = jieba.analyse.extract_tags(text,topK=int(-1))
+        tags = jieba.analyse.extract_tags(text, topK=int(-1))
         tagsString = ""
         from nltk.probability import FreqDist
         fd = FreqDist(tags)
@@ -345,6 +390,7 @@ def extractFile_action(id):
         keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
         imgUrl = createKeywordImageUrl(keywordtopk)
+
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=0)
         keywordtopk.append(keyword)
         totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
@@ -365,11 +411,16 @@ def extractSubmit_action():
     id = request.forms.selectedFile
     if "extract" in request.forms:
         text = request.forms.text
+        #text = "/ ".join(jieba.cut(text))
         topk = int(request.forms.topk)
         defaulttopk = topk
-        tags = jieba.analyse.extract_tags(text,topK=int(-1))
+        tags = jieba.analyse.extract_tags(text, topK=int(-1))
         from nltk.probability import FreqDist
         fd = FreqDist(tags)
+
+        #words = jieba.__lcut(text);
+        #text = nltk.Text(word for word in words)
+        #similarWords = text.similar(u'别墅', 10)
 
         for keyword in tags:
             #keyword = keyword.encode("utf-8")
@@ -377,22 +428,28 @@ def extractSubmit_action():
             fd[keyword] = count
         keywords = []
         totalWordCount = 0
-        for key,val in fd.iteritems():
-            keyword = domain.Keyword(0, name=key, count=val, textId=id)
+        words = jieba.__lcut(text);
+        texttemp = nltk.Text(word for word in words)
+        for key, val in fd.iteritems():
+            keyword = domain.Keyword(id=0, name=key, count=val, textId=0, similarWords='')
             keywords.append(keyword)
             totalWordCount += val
         keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
+        for tempkeyword in keywordtopk:
+            tempsimilarWords = texttemp.similar_words(tempkeyword.name)
+            tempsimilarWordsStr = u" ".join(tempsimilarWords)
+            tempkeyword.similarWords = tempsimilarWordsStr;
         imgUrl = createKeywordImageUrl(keywordtopk)
-        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1)
+        keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1, similarWords='')
         keywordtopk.append(keyword)
         totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
-        keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0)
+        keyword = domain.Keyword(0, name=u"词汇总数", count=totalWordCount, textId=0, similarWords='')
         keywordtopk.append(keyword)
-        keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0)
+        keyword = domain.Keyword(0, name=u"关键词临界次数", count=totalDifferentWordCount, textId=0, similarWords='')
         keywordtopk.append(keyword)
         keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
-        keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
+        keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0, similarWords='')
         keywordtopk.append(keyword)
     elif "upload" in request.forms:
         #try: # Windows needs stdio set for binary mode.
@@ -422,7 +479,7 @@ def extractSubmit_action():
             id = sqlitedb.addText(textObject)
             topk = int(request.forms.topk)
             defaulttopk = topk
-            tags = jieba.analyse.extract_tags(text,topK=-1)
+            tags = jieba.analyse.extract_tags(text, topK=-1)
             from nltk.probability import FreqDist
             fd = FreqDist(tags)
             for keyword in tags:
@@ -534,12 +591,29 @@ PS: 我觉得开源有一个好处，就是能够敦促自己不断改进，避�
 张晓梅去人民医院做了个B超然后去买了件T恤
 AT&T是一件不错的公司，给你发offer了吗？
 C++和c#是什么关系？11+122=133，是吗？
+峨嵋山下少人行，旌旗无光日色薄。
+蜀江水碧蜀山青，圣主朝朝暮暮情。
+行宫见月伤心色，夜雨闻铃肠断声。
+天旋日转回龙驭，到此踌躇不能去。
+马嵬坡下泥土中，不见玉颜空死处。
+君臣相顾尽沾衣，东望都门信马归。
+归来池苑皆依旧，太液芙蓉未央柳。
+芙蓉如面柳如眉，对此如何不泪垂。
+春风桃李花开日，秋雨梧桐叶落时。
+西宫南内多秋草，落叶满阶红不扫。
+梨园弟子白发新，椒房阿监青娥老。
+夕殿萤飞思悄然，孤灯挑尽未成眠。
+迟迟钟鼓初长夜，耿耿星河欲曙天。
+鸳鸯瓦冷霜华重，翡翠衾寒谁与共。
+悠悠生死别经年，魂魄不曾来入梦。
+子曰：「学而时习之，不亦说乎？有朋自远方来，不亦乐乎？人不知而不愠，不亦君子乎？」
 '''
     return template("cut_form",content=sample_sentences,selected=functools.partial(match,1))
 
 @post('/cut')
 def cut_action():
     from jieba import posseg
+    # jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
     text = request.forms.text
     if request.forms.opt=="1":
       result = "/ ".join(jieba.cut(text))
