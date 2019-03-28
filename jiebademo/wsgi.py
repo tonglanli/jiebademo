@@ -8,10 +8,10 @@ import domain
 # jieba.set_dictionary("D:\\Ctrip\\github\\jiebademo\\jiebademo\\jieba\\dict_old.txt")
 jieba.initialize()
 # jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
-if jieba.initialized == False:
+# if jieba.initialized == False:
     # jieba.set_dictionary("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
     # jieba.load_userdict("D:\Ctrip\github\jiebademo\jiebademo\jieba\dict_old.txt")
-    jieba.initialize()
+    # jieba.initialize()
 
 #import threading
 #thr = threading.Thread(target=jieba.initialize)
