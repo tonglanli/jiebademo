@@ -284,12 +284,12 @@ def extract():
 
     for tempkeyword in keywordtopk:
         tempsimilarWords = texttemp.similar(tempkeyword.name.encode('utf-8'))
-        tempsimilarWordsStr = u" ".join(tempsimilarWords)
+        tempsimilarWordsStr = " ".join(tempsimilarWords)
         tempkeyword.similarWords = tempsimilarWordsStr;
 
     imgUrl = createKeywordImageUrl(keywordtopk)
     totalDifferentWordCount = len(set([ keyword.count for keyword in keywords]))
-    words = jieba.__lcut(sample_text);
+    words = jieba.cut(sample_text);
     texttemp = nltk.Text(word for word in words)
     keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1, similarWords= '')
     # similarWords = texttemp.similar(u'科学')
