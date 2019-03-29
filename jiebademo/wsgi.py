@@ -445,8 +445,11 @@ def extractSubmit_action():
         keywords = sorted(keywords, key=lambda keyword : keyword.count, reverse=True)
         keywordtopk = keywords[:topk]
         for tempkeyword in keywordtopk:
-            tempsimilarWords = texttemp.similar_words(tempkeyword.name)
+            textword = tempkeyword.name.encode("utf-8");
+            texttemp.similar(textword)
+            tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name)
             tempsimilarWordsStr = u" ".join(tempsimilarWords)
+            # tempsimilarWordsStr = str(tempsimilarWords)
             tempkeyword.similarWords = tempsimilarWordsStr;
         imgUrl = createKeywordImageUrl(keywordtopk)
         keyword = domain.Keyword(0, name=u"不同词汇总数", count=len(keywords), textId=-1, similarWords='')
