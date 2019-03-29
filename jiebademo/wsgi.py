@@ -273,6 +273,7 @@ def extract():
         counts.append(str(count))
     totalWordCount = 0
     keywords = []
+    words = []
     words = jieba.cut(sample_text);
     texttemp = nltk.Text(word for word in words)
     for key,val in fd.iteritems():
@@ -283,8 +284,13 @@ def extract():
     keywordtopk = keywords[:topk]
 
     for tempkeyword in keywordtopk:
-        texttemp.similar(tempkeyword.name.encode("utf-8"))
-        tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name.encode("utf-8"))
+        textword = '';
+        if charencoding['encoding'] != 'utf-8':
+            textword = tempkeyword.name.encode(charencoding['encoding'])
+        else:
+            textword = tempkeyword.name.encode("utf-8")
+        texttemp.similar(textword)
+        tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name)
         tempsimilarWordsStr = u" ".join(tempsimilarWords)
         # tempsimilarWordsStr = str(tempsimilarWords)
         tempkeyword.similarWords = tempsimilarWordsStr;
