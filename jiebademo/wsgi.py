@@ -283,9 +283,10 @@ def extract():
     keywordtopk = keywords[:topk]
 
     for tempkeyword in keywordtopk:
-        tempsimilarWords = texttemp.similar(tempkeyword.name.encode('utf-8'))
-        # tempsimilarWordsStr = " ".join(tempsimilarWords)
-        tempsimilarWordsStr = str(tempsimilarWords)
+        texttemp.similar(tempkeyword.name)
+        tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name)
+        tempsimilarWordsStr = u" ".join(tempsimilarWords)
+        # tempsimilarWordsStr = str(tempsimilarWords)
         tempkeyword.similarWords = tempsimilarWordsStr;
 
     imgUrl = createKeywordImageUrl(keywordtopk)
