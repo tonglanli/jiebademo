@@ -436,7 +436,7 @@ def extractSubmit_action():
             fd[keyword] = count
         keywords = []
         totalWordCount = 0
-        words = jieba.__lcut(text);
+        words = jieba.cut(text);
         texttemp = nltk.Text(word for word in words)
         for key, val in fd.iteritems():
             keyword = domain.Keyword(id=0, name=key, count=val, textId=0, similarWords='')
