@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from bottle import route,run, request, get,post,template, static_file, default_app
+import json
+
+from bottle import route, run, request, get, post, template, static_file, default_app, response
 import jieba
 import jieba.analyse
 import domain
@@ -518,6 +520,49 @@ def extractSubmit_action():
             keywordtopk.append(keyword)
 
     return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
+
+@post('/analyze')
+def analyzefile():
+    text = request.json['text']
+    response.headers['Content-Type'] = 'application/json'
+
+    # text = "/ ".join(jieba.cut(text))
+    topk = 100
+    defaulttopk = topk
+    tags = jieba.analyse.extract_tags(text, topK=int(-1))
+    from nltk.probability import FreqDist
+    fd = FreqDist(tags)
+
+    # words = jieba.__lcut(text);
+    # text = nltk.Text(word for word in words)
+    # similarWords = text.similar(u'别墅', 10)
+
+    for keyword in tags:
+        # keyword = keyword.encode("utf-8")
+        count = text.count(keyword)
+        fd[keyword] = count
+    keywords = []
+    totalWordCount = 0
+    words = jieba.cut(text);
+    texttemp = nltk.Text(word for word in words)
+    for key, val in fd.iteritems():
+        keyword = domain.Keyword(id=0, name=key, count=val, textId=0, similarWords='')
+        keywords.append(keyword)
+        totalWordCount += val
+    keywords = sorted(keywords, key=lambda keyword: keyword.count, reverse=True)
+    keywordtopk = keywords[:topk]
+    for tempkeyword in keywordtopk:
+        textword = tempkeyword.name.encode("utf-8");
+        texttemp.similar(textword)
+        tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name)
+        tempsimilarWordsStr = u" ".join(tempsimilarWords)
+        # tempsimilarWordsStr = str(tempsimilarWords)
+        tempkeyword.similarWords = tempsimilarWordsStr;
+
+    json_string = json.dumps([tempkeyword.__dict__ for tempkeyword in keywordtopk])
+
+    return json_string;
+
 
 @get('/managefile')
 def managefile():
