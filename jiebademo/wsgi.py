@@ -58,16 +58,17 @@ def serve_css(imageName):
 @route('/image/:name&:length&:keys&:values')
 def serve_css(name, length, keys, values):
     from pylab import plt, mpl
+    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
     from matplotlib.font_manager import FontProperties
     # font = FontProperties(fname="d:\Users\ll.tong\Desktop\msyh.ttf", size=12)
-    # font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=11)
+    font = FontProperties(fname="./static/msyh.ttf", size=11)
     plt.xlabel(u'')
-    # plt.ylabel(u'出现次数',fontproperties=font)
-    # plt.title(u'词频统计',fontproperties=font)
-    plt.ylabel(u'出现次数', fontsize=12)
-    plt.title(u'词频统计')
+    plt.ylabel(u'出现次数',fontproperties=font)
+    plt.title(u'词频统计',fontproperties=font)
+    # plt.ylabel(u'出现次数', fontsize=12)
+    # plt.title(u'词频统计')
     plt.grid()
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
@@ -77,10 +78,10 @@ def serve_css(name, length, keys, values):
 
     plt.xticks(range(int(length)), keys)
     plt.plot(range(int(length)), valuesInt)
-    # plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
-    # plt.yticks(fontsize=10,fontproperties=font)
-    plt.xticks(rotation=defaultrotation, fontsize=12)
-    plt.yticks(fontsize=12)
+    plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
+    plt.yticks(fontsize=10,fontproperties=font)
+    # plt.xticks(rotation=defaultrotation, fontsize=12)
+    # plt.yticks(fontsize=12)
     name = name + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
     fig = matplotlib.pyplot.gcf()
@@ -337,6 +338,7 @@ from datetime import *
 import tempfile
 os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 import matplotlib
+# matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
 matplotlib.use('Agg')
 
 
