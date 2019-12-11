@@ -62,10 +62,12 @@ def serve_css(name, length, keys, values):
     mpl.rcParams['axes.unicode_minus'] = False
     from matplotlib.font_manager import FontProperties
     # font = FontProperties(fname="d:\Users\ll.tong\Desktop\msyh.ttf", size=12)
-    font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=11)
+    # font = FontProperties(fname="/usr/share/fonts/msyh.ttf", size=11)
     plt.xlabel(u'')
-    plt.ylabel(u'出现次数',fontproperties=font)
-    plt.title(u'词频统计',fontproperties=font)
+    # plt.ylabel(u'出现次数',fontproperties=font)
+    # plt.title(u'词频统计',fontproperties=font)
+    plt.ylabel(u'出现次数', fontsize=12)
+    plt.title(u'词频统计')
     plt.grid()
     keys = keys.decode("utf-8").split(' ')
     values = values.split(' ')
@@ -75,8 +77,10 @@ def serve_css(name, length, keys, values):
 
     plt.xticks(range(int(length)), keys)
     plt.plot(range(int(length)), valuesInt)
-    plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
-    plt.yticks(fontsize=10,fontproperties=font)
+    # plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
+    # plt.yticks(fontsize=10,fontproperties=font)
+    plt.xticks(rotation=defaultrotation, fontsize=12)
+    plt.yticks(fontsize=12)
     name = name + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
     fig = matplotlib.pyplot.gcf()
