@@ -3,6 +3,9 @@
 	<title>科学与人文</title>
     <link href="../static/css/bootstrap.css" rel="stylesheet" />
     <link href="../static/css/MyCss.css" rel="stylesheet" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="564801030262-5lapv3jqg135hd4eb3cdovikvt3ucg36.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script data-ad-client="ca-pub-8326155496000066" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script type="text/javascript" src="../static/js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript">
@@ -154,6 +157,23 @@
 <div style="text-align: center;">
 	<a href="http://www.miitbeian.gov.cn/">沪ICP备11021711号-1</a>
 </div>
+     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <script>
+      function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log('Full Name: ' + profile.getName());
+        console.log('Given Name: ' + profile.getGivenName());
+        console.log('Family Name: ' + profile.getFamilyName());
+        console.log("Image URL: " + profile.getImageUrl());
+        console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      }
+    </script>
 </form>
 
 </body>
