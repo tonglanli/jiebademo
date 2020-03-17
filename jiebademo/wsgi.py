@@ -731,7 +731,7 @@ def getWeChatAccessTocken(code):
     user['displayname'] = user['nickname']
     user['sourcefrom'] = "1"
 
-    loginedresult = requests.post("http://localhost:8080/userservice/logined", json=user)
+    loginedresult = requests.post("http://renyihome.com:8080/userservice/logined", json=user)
 
     return user
 
