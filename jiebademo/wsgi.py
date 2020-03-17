@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding=utf-8
 import json
 
 from bottle import route, run, request, get, post, template, static_file, default_app, response
@@ -103,15 +103,21 @@ def match(a,b):
 defaulttopk=25
 defaultrotation=45
 
+@get('/login')
+def extract():
+    return template("login")
+
+
 @get('/')
 @get('/extract')
 def extract():
+    wechatuser = None
     # get wechat login info
     if request.query_string is not '':
         code = request.query['code']
 
         if code is not None :
-            wechat_access_tocken = getWeChatAccessTocken(code)
+            wechatuser = getWeChatAccessTocken(code)
 
     fullname = request.cookies.get('fullname')
     sample_text='''
@@ -341,7 +347,14 @@ def extract():
     keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
     keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0, similarWords= '')
     keywordtopk.append(keyword)
-    return template("extract_form",content=sample_text,tags=keywordtopk,topk=defaulttopk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount)
+    username = ''
+    if wechatuser is not None:
+        username = wechatuser['displayname']
+
+    resp = template("extract_form", content=sample_text, tags=keywordtopk, topk=defaulttopk, keyImgUrl=imgUrl,
+                    texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount,
+                    username=username)
+    return resp
 
 import os
 from datetime import *
@@ -536,7 +549,7 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
             keywordtopk.append(keyword)
 
-    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
+    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='')
 
 @post('/analyze')
 def analyzefile():
@@ -715,6 +728,10 @@ def getWeChatAccessTocken(code):
     urluserinfo = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessTocken['access_token'] + "&openid=" + accessTocken['openid'] + "&lang=zh_CN"
     userResult = requests.get(urluserinfo)
     user = json.loads(userResult.content)
+    user['displayname'] = user['nickname']
+    user['sourcefrom'] = "1"
+
+    loginedresult = requests.post("http://localhost:8080/userservice/logined", json=user)
 
     return user
 

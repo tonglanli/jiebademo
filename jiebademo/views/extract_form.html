@@ -39,19 +39,48 @@
                 return this.value == $('#selectedFile').val();
             })
             .prop('selected', true);
-        $('#userName').text($.cookie('fullname'));
 
-        console.log(window.location.href);
-        console.log(window.location.search);
-        var url = new URL(window.location.href);
-        if (window.location.search != null && url.searchParams.get("code")) {
-            var requestAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b4ff9d53ba85a1f&secret=7ca8f66ae99544d03fe36189b0be0796&code=" + url.searchParams.get("code") + "&grant_type=authorization_code";
-            console.log(requestAccessTokenUrl);
-            $.post(requestAccessTokenUrl,  // url
-              function (data, textStatus, jqXHR) {  // success callback
-                  console.log('status: ' + textStatus + ', data:' + data);
-            });
+        $("#extractSubmit").submit(function(e){
+            username = $.cookie('username');
+            if(username == null || username == '') {
+                alert("请先登录");
+                // $.redirect('/login');
+                window.location.href = "/login";
+                e.preventDefault();
+            }
+        });
+
+        $("#extractSubmitInput").click(function(e){
+            username = $.cookie('username');
+            if(username == null || username == '') {
+                alert("请先登录!");
+                // $.redirect('/login');
+                window.location.href = "/login";
+                e.preventDefault();
+            }
+        });
+        // $('#extractSubmit').bind('submit', function () {
+        //     username = $.cookie('username');
+        //     if(username == null || username == '') {
+        //         alert("请先登录");
+        //         $.redirect('/login');
+        //         return false;
+        //     } else {
+        //         return true;
+        //     }
+        // });
+        wechatusername = $('input#wechatusername').val();
+        console.log('wechatusername' + wechatusername);
+        if(wechatusername != null && wechatusername + '' != '') {
+            $.cookie("username", wechatusername);
         }
+        username = $.cookie('username');
+        console.log('username' + username);
+        if(username != null && username != '') {
+            $('#userName').text(username);
+            $('#login').remove();
+        }
+
     });
 
 
@@ -94,18 +123,23 @@
         </div>
         <div class="row-fluid">
             <div class="span10">
-                <a href="http://search.renyihome.com">文献检索</a>
+                <a href="/">关键词分析</a>    <a href="http://search.renyihome.com">文献检索</a>
+            </div>
+            <div>
+                <span id="userName"></span>
+                <a id="login" href="/login">登录</a>
+                <input id="wechatusername" type="hidden" value={{username}} >
             </div>
         </div>
     </div>
 </header>
 
-<form enctype="multipart/form-data" action="/" method="post">
+<form enctype="multipart/form-data" id="extractSubmit" action="/" method="post">
 <div class="container-main">
     <section class="row-fluid">
         <div class="sidebar-nav well"  style="padding: 10px;">
             关键词个数(Top K): <input type="text" name="topk" value="{{topk}}">
-            <input type="submit" name="extract" value="开始提取" />
+            <input type="submit" id="extractSubmitInput" name="extract" value="开始提取" />
         </div>
     </section>
     <section class="row-fluid">
@@ -174,42 +208,7 @@
 <div style="text-align: center;">
 	<a href="http://www.miitbeian.gov.cn/">沪ICP备11021711号-1</a>
 </div>
-     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-    <span id="userName">nihao</span>
-    <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
 
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        $.cookie("fullname", profile.getName());
-        $('#userName').text(profile.getName());
-      }
-    </script>
-
-    <!--AppID：wx3b4ff9d53ba85a1f-->
-    <!--AppSecret: 7ca8f66ae99544d03fe36189b0be0796 -->
-
-    <span id="login_container"></span>
-    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-    <script>
-        var obj = new WxLogin({
-          id: "login_container",
-          appid: "wx3b4ff9d53ba85a1f",
-          scope: "snsapi_login",
-          redirect_uri: encodeURIComponent("http://renyihome.com"),
-          state: Math.ceil(Math.random()*1000),
-          style: "black",
-          href: ""});
-    </script>
 </form>
 
 </body>
