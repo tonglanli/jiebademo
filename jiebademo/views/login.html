@@ -121,17 +121,18 @@
                         console.log("headimgurl: " + googleuser.headimgurl);
                         googleuser.sourcefrom = '2';
                         googleuser.openid = profile.getId();
-
                         // $.post("http://localhost:8080/userservice/logined", JSON.stringify(profile));
 
                         $.ajax({
-                  type: "POST",
-                  url: "http://renyihome.com:8080/userservice/logined",
-                  data: JSON.stringify(googleuser),
-                  success: function(data) { console.log('data: ' + data); },
-                    contentType: "application/json",
-                    dataType: 'json'
-                });
+                          type: "POST",
+                          url: "http://renyihome.com:8080/userservice/logined",
+                          data: JSON.stringify(googleuser),
+                          success: function(data) { console.log('data: ' + data); },
+                            contentType: "application/json",
+                            dataType: 'json'
+                        });
+
+                        window.location.href = "/";
               }
             </script>
 
