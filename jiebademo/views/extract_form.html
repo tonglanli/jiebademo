@@ -4,37 +4,54 @@
     <link href="../static/css/bootstrap.css" rel="stylesheet" />
     <link href="../static/css/MyCss.css" rel="stylesheet" />
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="564801030262-5lapv3jqg135hd4eb3cdovikvt3ucg36.apps.googleusercontent.com">
+    <!--<meta name="google-signin-client_id" content="564801030262-5lapv3jqg135hd4eb3cdovikvt3ucg36.apps.googleusercontent.com">-->
+    <!--下方为本地测试账号-->
+    <meta name="google-signin-client_id" content="564801030262-i8tfgdds2mqha0fp7542if0fp0sb66c2.apps.googleusercontent.com">
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script data-ad-client="ca-pub-8326155496000066" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script type="text/javascript" src="../static/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="../static/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.cookie.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         $('#selectFile').bind('change', function () {
-           if($(this).val() != '-1'){
-              var url = $(this).val(); // get selected value
-              if (url) { // require a URL
-                  window.location = url; // redirect
-              }
-              return false;
-           }
+            if ($(this).val() != '-1') {
+                var url = $(this).val(); // get selected value
+                if (url) { // require a URL
+                    window.location = url; // redirect
+                }
+                return false;
+            }
         });
         $('#managefile').bind('click', function () {
-          window.location = '/managefile'; // redirect
-          return false;
+            window.location = '/managefile'; // redirect
+            return false;
         });
         $('#upload').bind('click', function () {
-          if($('#file').val() == ''){
-              alert('请选择文件');
-              return false;
-          }
+            if ($('#file').val() == '') {
+                alert('请选择文件');
+                return false;
+            }
         });
         $('#selectFile')
             .find('option')
-            .filter(function() {
+            .filter(function () {
                 return this.value == $('#selectedFile').val();
             })
             .prop('selected', true);
+        $('#userName').text($.cookie('fullname'));
+
+        console.log(window.location.href);
+        console.log(window.location.search);
+        var url = new URL(window.location.href);
+        if (window.location.search != null && url.searchParams.get("code")) {
+            var requestAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b4ff9d53ba85a1f&secret=7ca8f66ae99544d03fe36189b0be0796&code=" + url.searchParams.get("code") + "&grant_type=authorization_code";
+            console.log(requestAccessTokenUrl);
+            $.post(requestAccessTokenUrl,  // url
+              function (data, textStatus, jqXHR) {  // success callback
+                  console.log('status: ' + textStatus + ', data:' + data);
+            });
+        }
     });
 
 
@@ -158,6 +175,7 @@
 	<a href="http://www.miitbeian.gov.cn/">沪ICP备11021711号-1</a>
 </div>
      <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <span id="userName">nihao</span>
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -172,7 +190,25 @@
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
+        $.cookie("fullname", profile.getName());
+        $('#userName').text(profile.getName());
       }
+    </script>
+
+    <!--AppID：wx3b4ff9d53ba85a1f-->
+    <!--AppSecret: 7ca8f66ae99544d03fe36189b0be0796 -->
+
+    <span id="login_container"></span>
+    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+    <script>
+        var obj = new WxLogin({
+          id: "login_container",
+          appid: "wx3b4ff9d53ba85a1f",
+          scope: "snsapi_login",
+          redirect_uri: encodeURIComponent("http://renyihome.com"),
+          state: Math.ceil(Math.random()*1000),
+          style: "black",
+          href: ""});
     </script>
 </form>
 

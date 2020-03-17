@@ -26,6 +26,8 @@ import functools
 import sqlitedb
 import chardet
 import nltk
+import requests
+import json
 
 @route('/static/:filename')
 def serve_static(filename):
@@ -104,6 +106,14 @@ defaultrotation=45
 @get('/')
 @get('/extract')
 def extract():
+    # get wechat login info
+    if request.query_string is not '':
+        code = request.query['code']
+
+        if code is not None :
+            wechat_access_tocken = getWeChatAccessTocken(code)
+
+    fullname = request.cookies.get('fullname')
     sample_text='''
     金观涛2：“自然哲学”和科学的观念:从《继承与叛逆：现代科学为何出现于西方》谈起
 
@@ -424,6 +434,7 @@ def extractFile_action(id):
 @post('/')
 @post('/extract')
 def extractSubmit_action():
+    fullname = request.cookies.get('fullname')
     id = request.forms.selectedFile
     if "extract" in request.forms:
         text = request.forms.text
@@ -694,11 +705,24 @@ def cut_action():
 def desgin_sequence():
     return template("design_sequence_form")
 
+
+def getWeChatAccessTocken(code):
+    accessTockenurl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b4ff9d53ba85a1f&secret=7ca8f66ae99544d03fe36189b0be0796&code=" + code + "&grant_type=authorization_code"
+    accessTockenResult = requests.get(accessTockenurl)
+
+    accessTocken = json.loads(accessTockenResult.content)
+
+    urluserinfo = "https://api.weixin.qq.com/sns/userinfo?access_token=" + accessTocken['access_token'] + "&openid=" + accessTocken['openid'] + "&lang=zh_CN"
+    userResult = requests.get(urluserinfo)
+    user = json.loads(userResult.content)
+
+    return user
+
 if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8083, reloader=True)
+    run(host='localhost', port=80, reloader=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
