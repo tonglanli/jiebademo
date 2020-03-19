@@ -348,12 +348,14 @@ def extract():
     keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0, similarWords= '')
     keywordtopk.append(keyword)
     username = ''
+    useropenid = ''
     if wechatuser is not None:
         username = wechatuser['displayname']
+        useropenid = wechatuser['openid']
 
     resp = template("extract_form", content=sample_text, tags=keywordtopk, topk=defaulttopk, keyImgUrl=imgUrl,
                     texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount,
-                    username=username)
+                    username=username, useropenid=useropenid)
     return resp
 
 import os
@@ -549,7 +551,7 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
             keywordtopk.append(keyword)
 
-    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='')
+    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='', useropenid='')
 
 @post('/analyze')
 def analyzefile():
