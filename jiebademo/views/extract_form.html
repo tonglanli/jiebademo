@@ -57,8 +57,33 @@
                 // $.redirect('/login');
                 window.location.href = "/login";
                 e.preventDefault();
+            } else {
+                articlecontent = $('#text').val();
+                if(articlecontent != null && articlecontent != '') {
+                    article = {};
+                    article.content = $("#text").val();
+                    console.log($("#text").val());
+                    article.useropenid = $.cookie('useropenid');
+                    article.usersourcefrom = $.cookie('usersourcefrom');
+
+                    $.ajax({
+                          type: "POST",
+                          url: "http://renyihome.com:8080/textservice/addArticle",
+                        // url: "http://localhost:8080/addArticle",
+                        data: JSON.stringify(article),
+                          success: function(data) { console.log('data: ' + data); },
+                            contentType: "application/json",
+                            dataType: 'json'
+                        });
+                }
             }
         });
+
+        $("#logout").click(function(e){
+            $.removeCookie('username');
+            window.location.href = "/";
+        });
+
         // $('#extractSubmit').bind('submit', function () {
         //     username = $.cookie('username');
         //     if(username == null || username == '') {
@@ -73,12 +98,16 @@
         console.log('wechatusername' + wechatusername);
         if(wechatusername != null && wechatusername + '' != '') {
             $.cookie("username", wechatusername);
+            $.cookie("useropenid", $('input#wechatuseropenid').val());
+            $.cookie("usersourcefrom", "1");
         }
         username = $.cookie('username');
         console.log('username' + username);
         if(username != null && username != '') {
             $('#userName').text(username);
             $('#login').remove();
+        } else {
+            $('#logout').remove();
         }
 
     });
@@ -127,8 +156,9 @@
             </div>
             <div>
                 <span id="userName"></span>
-                <a id="login" href="/login">登录</a>
+                <a id="login" href="/login">登录</a>    <a id="logout" style="cursor: pointer;">登出</a>
                 <input id="wechatusername" type="hidden" value={{username}} >
+                <input id="wechatuseropenid" type="hidden" value={{useropenid}} >
             </div>
         </div>
     </div>
