@@ -28,6 +28,7 @@ import chardet
 import nltk
 import requests
 import json
+from collections import namedtuple
 
 @route('/static/:filename')
 def serve_static(filename):
@@ -719,6 +720,33 @@ def cut_action():
 @get('/design/sequence')
 def desgin_sequence():
     return template("design_sequence_form")
+
+@get('/article/list')
+def article_list():
+    pager = {}
+    pager['index'] = 1
+    pager['size'] = 10
+    articlerequest = {}
+    articlerequest['pager'] = pager
+
+    articlesResult = requests.post("http://renyihome.com:8080/textservice/searchArticle", json=articlerequest)
+    artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    return template("article_list", artilesearchresult=artilesearchresult.articles)
+
+@post('/article/list')
+def article_list():
+    pager = {}
+    pager['index'] = 1
+    pager['size'] = 10
+    articlerequest = {}
+    articlerequest['pager'] = pager
+    query = {}
+    query['keyword'] = request.forms.keyword
+    articlerequest['query'] = query
+
+    articlesResult = requests.post("http://renyihome.com:8080/textservice/searchArticle", json=articlerequest)
+    artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    return template("article_list", artilesearchresult=artilesearchresult.articles)
 
 
 def getWeChatAccessTocken(code):

@@ -1,0 +1,358 @@
+h3 {
+    font-size: 20px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: normal;
+}
+
+.LC20lb {
+    display: inline-block;
+}
+
+em, .rbt b, .c b, .fl b {
+    color: #dd4b39;
+    font-weight: normal;
+}
+
+.RNNXgb {
+    background: #fff;
+    display: flex;
+    border-radius: 8px;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    height: 39px;
+    width: 288px;
+    border-radius: 24px;
+    z-index: 3;
+    height: 44px;
+    margin: 0 auto;
+}
+
+.SDkEP {
+    flex: 1;
+    display: flex;
+    padding: 5px 4px 0 16px;
+    padding-left: 14px;
+}
+
+.iblpc {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    margin-top: -7px;
+}
+
+.hsuHs {
+    margin: auto;
+}
+
+.a4bIc {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.pR49Ae {
+    color: transparent;
+    flex: 100%;
+    white-space: pre;
+    height: 34px;
+}
+
+.gsfi, .lst {
+    font: 16px arial,sans-serif;
+    line-height: 34px;
+    height: 34px !important;
+}
+
+.gLFyf {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.87);
+    word-wrap: break-word;
+    outline: none;
+    display: flex;
+    flex: 100%;
+    -webkit-tap-highlight-color: transparent;
+    margin-top: -37px;
+    height: 34px;
+    font-size: 16px;
+}
+
+#main {
+    width: 100%;
+}
+
+.f, .f a:link, .m {
+    color: #70757a;
+    line-height: 1.57;
+}
+
+#res {
+    border: 0;
+    margin: 0;
+    padding: 0 16px;
+}
+
+.Tg7LZd {
+    flex: 0 0 auto;
+    padding-right: 13px;
+}
+
+.FAuhyb {
+    background: none;
+    color: #4285f4;
+    height: 24px;
+    width: 24px;
+    margin: auto;
+}
+
+.z1asCe {
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    width: 24px;
+}
+
+.HPVvwb {
+    background: url(//www.gstatic.com/images/branding/googlemic/2x/googlemic_color_24dp.png) 0 0 no-repeat;
+    height: 24px;
+    width: 24px;
+    background-size: 24px;
+    vertical-align: middle;
+}
+
+.dRYYxd {
+    display: flex;
+    flex: 0 0 auto;
+    margin-top: -5px;
+    align-items: stretch;
+    flex-direction: row;
+}
+
+#lb {
+    z-index: 1001;
+    position: absolute;
+    top: -1000px;
+}
+
+#cnt {
+    min-width: 833px;
+    margin-left: 0;
+    padding-top: 20px;
+}
+
+.g {
+    margin-top: 0;
+    margin-bottom: 27px;
+}
+
+.bNg8Rb {
+    clip: rect(1px,1px,1px,1px);
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    z-index: -1000;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+h3, .med {
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+#rso {
+    margin-top: 6px;
+}
+
+#cnt #center_col, .mw #center_col {
+    /*margin-left: 150px;*/
+    float:left;
+    display: flex;
+}
+
+#cnt #center_col, #cnt #foot {
+    width: 632px;
+}
+
+.col {
+    float: left;
+}
+
+.big .mw {
+    max-width: 1280px;
+}
+
+.A8SBwf {
+    position: relative;
+    margin: 0 auto;
+    margin-left: 119px;
+    width: 280px;
+    padding-left: 27px;
+}
+
+.logo {
+    position: absolute;
+    left: -129px;
+    padding: 4px 28px 0 30px;
+    top: 4px;
+}
+
+.st {
+    line-height: 1.57;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+#rhs .g-blk.rhsvw {
+    border: 0;
+    padding: 0;
+}
+
+#rhs.rhstc3 .rhsvw, #nyc.rhstc3 .rhsvw {
+    width: 281px;
+}
+
+.g-blk {
+    position: relative;
+}
+
+.g {
+    margin-top: 0;
+    margin-bottom: 27px;
+}
+
+#rhs .kp-blk {
+    line-height: 1.57;
+    margin: 6px 0 0 2px;
+    margin: 6px 0 0 1px;
+}
+.knowledge-panel.kp-blk {
+    padding-bottom: 1px;
+}
+.knowledge-panel {
+    font-size: 14px;
+}
+.kp-blk {
+    box-shadow: none;
+    box-shadow: none;
+    border-radius: 8px;
+}
+
+.g, body, html, input, .std, h1 {
+    font-family: arial,sans-serif;
+}
+
+.g {
+    line-height: 1.2;
+    text-align: left;
+}
+
+#rcnt {
+    margin-top: 0px;
+}
+
+#rhs {
+    display:flex;
+    float: left;
+    font: 16px arial,sans-serif;
+}
+
+#search {
+    display:flex;
+    float: left;
+}
+
+#gs_bdy_sb {
+    display:flex;
+    float: left;
+}
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+#main_detail {
+    width: 100%;
+    padding-left: 150px;
+    padding-top: 50px;
+}
+
+#gs_bdy_sb ul {
+    list-style-type: none;
+}
+
+#gs_bdy_sb .gs_ind, #gs_bdy_sb .gs_inw {
+    margin-bottom: 4px;
+}
+
+.gs_ind {
+    padding-left: 8px;
+    text-indent: -8px;
+    color: #4285f4;
+}
+
+.gs_ind_sel {
+    padding-left: 8px;
+    text-indent: -8px;
+    color: #aa0000;
+}
+
+#detail_info {
+    display: flex;
+    float: left;
+}
+
+a {
+    text-decoration: none;
+}
+a:-webkit-any-link {
+    cursor: pointer;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
