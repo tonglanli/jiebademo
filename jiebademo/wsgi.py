@@ -736,6 +736,7 @@ def article_list():
 @post('/article/list')
 def article_list():
     pager = {}
+    pageIndex = request.forms.pager.pageIndex
     pager['index'] = 1
     pager['size'] = 10
     articlerequest = {}

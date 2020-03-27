@@ -100,6 +100,10 @@
             window.location.href = "/";
         });
 
+        $('#pager').click(function(){
+            $('#searchSubmit').submit();
+        });
+
         // $('#extractSubmit').bind('submit', function () {
         //     username = $.cookie('username');
         //     if(username == null || username == '') {
@@ -178,7 +182,7 @@
     </div>
 </header>
 
-<form enctype="multipart/form-data" id="extractSubmit" action="/article/list" method="post">
+<form enctype="multipart/form-data" id="searchSubmit" action="/article/list" method="post">
 <div class="container-fluid well well-small">
 <div class="container-main">
                         <div className="A8SBwf">
