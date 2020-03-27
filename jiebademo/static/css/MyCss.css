@@ -80,3 +80,29 @@ th.OriginTeam {
 th.DetectedBy {
     width: 120.675px;
 }
+
+.btn.btn_primary {
+    border-color: #44b549;
+}
+
+.btn {
+    margin-right: 15px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 46px;
+    display: inline-block;
+    background-color: #44b549;
+    border-color: #3eac27;
+    color: #fff;
+}
+
+#webtn {
+    margin-right: 15px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 46px;
+    display: inline-block;
+    background-color: #44b549;
+    border-color: #3eac27;
+    color: #fff;
+}
