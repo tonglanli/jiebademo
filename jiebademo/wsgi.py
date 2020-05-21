@@ -1,7 +1,7 @@
 # coding=utf-8
 import json
 
-from bottle import route, run, request, get, post, template, static_file, default_app, response
+from bottle import hook, route, run, request, get, post, template, static_file, default_app, response
 import jieba
 import jieba.analyse
 import domain
@@ -42,7 +42,7 @@ def serve_files(filename):
 def serve_temp(filename):
     tempfile = static_file(filename, root='./static/temp')
     #path = os.path.dirname(os.path.abspath(__file__))
-    os.remove('static/temp/' + filename)
+    # os.remove('static/temp/' + filename)
     return tempfile
 
 @route('/static/js/:filename')
@@ -94,6 +94,174 @@ def serve_css(name, length, keys, values):
     tempfile = static_file(name, root='./static/temp/')
     #os.remove(imgUrl)
     return tempfile
+
+import networkx as nx
+
+@route('/graph', method=['OPTIONS', 'POST'])
+def graph():
+    # data = json.dumps(request.forms.dict)
+    wordFreqs = json.loads(request.body.buf)
+    # wordFreqs = request.json
+
+    nodes_from = []
+    edges_from = []
+    G = nx.Graph()
+    for wf in wordFreqs:
+        # nodes_from.append(wf['word'])
+        G.add_nodes_from(wf['word'], node_color='b',node_size=10*rwf['freq'])
+        for rwf in wf['relatedWordFreqs']:
+            if(rwf['freq'] >= 3):
+                edges_from.append((wf['word'], rwf['word']))
+
+
+    G.add_edges_from(edges_from)
+
+    from pylab import plt, mpl
+    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['axes.unicode_minus'] = False
+    name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
+    imgUrl = 'static/temp/' + name
+
+    plt.figure(figsize=(15, 15))
+    from pylab import plt, mpl
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    nx.draw_networkx(G, with_labels=True)
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
+    for pos in ['right', 'top', 'bottom', 'left']:
+        plt.gca().spines[pos].set_visible(False)
+
+
+    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
+    plt.close()
+    tempfile = static_file(name, root='./static/temp/')
+    # os.remove(imgUrl)
+    return tempfile
+
+@route('/graph_t', method=['GET'])
+def graph():
+    # data = json.dumps(request.forms.dict)
+    wordFreqs = json.loads(request.query['words'])
+    # wordFreqs = request.json
+
+    nodes_from = []
+    edges_from = []
+    G = nx.Graph()
+    for wf in wordFreqs:
+        # nodes_from.append(wf['word'])
+        G.add_nodes_from(wf['word'], node_color='b', node_size=20 * wf['freq'])
+        for rwf in wf['relatedWordFreqs']:
+            if (rwf['freq'] >= 3):
+                edges_from.append((wf['word'], rwf['word']))
+
+    G.add_edges_from(edges_from)
+
+    from pylab import plt, mpl
+    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['axes.unicode_minus'] = False
+    name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
+    imgUrl = 'static/temp/' + name
+
+    plt.figure(figsize=(15, 15))
+    from pylab import plt, mpl
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    nx.draw_networkx(G, with_labels=True)
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
+    for pos in ['right', 'top', 'bottom', 'left']:
+        plt.gca().spines[pos].set_visible(False)
+
+    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
+    plt.close()
+    tempfile = static_file(name, root='./static/temp/')
+    # os.remove(imgUrl)
+    return tempfile
+
+@route('/graph', method=['GET'])
+def graph():
+    # data = json.dumps(request.forms.dict)
+    wordFreqs = json.loads(request.query['words'])
+    # wordFreqs = request.json
+
+    nodes_from = []
+    node_colors = []
+    node_sizes = []
+    edges_from = []
+    G = nx.Graph()
+    for wf in wordFreqs:
+        nodes_from.append(wf['word'])
+        node_colors.append('TURQUOISE')
+        node_sizes.append(80 * wf['freq'])
+        # if(wf['freq'] > 15):
+        #     node_sizes.append(wf['freq']*1000/20)
+        # else:
+        #     node_sizes.append(70 * wf['freq'])
+
+        for rwf in wf['relatedWordFreqs']:
+            if (rwf['freq'] >= 3):
+                edges_from.append((wf['word'], rwf['word']))
+    G.add_nodes_from(nodes_from)
+    G.add_edges_from(edges_from)
+
+    from pylab import plt, mpl
+    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['axes.unicode_minus'] = False
+    name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
+    imgUrl = 'static/temp/' + name
+
+    plt.figure(figsize=(15, 15))
+    from pylab import plt, mpl
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
+    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+    plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
+    for pos in ['right', 'top', 'bottom', 'left']:
+        plt.gca().spines[pos].set_visible(False)
+
+    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
+    plt.close()
+    tempfile = static_file(name, root='./static/temp/')
+    # os.remove(imgUrl)
+    return tempfile
+
+
+    # from pylab import plt, mpl
+    # # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
+    # mpl.rcParams['font.sans-serif'] = ['SimHei']
+    # mpl.rcParams['axes.unicode_minus'] = False
+    # from matplotlib.font_manager import FontProperties
+    # # font = FontProperties(fname="d:\Users\ll.tong\Desktop\msyh.ttf", size=12)
+    # font = FontProperties(fname="./static/msyh.ttf", size=11)
+    # plt.xlabel(u'')
+    # plt.ylabel(u'出现次数',fontproperties=font)
+    # plt.title(u'词频统计',fontproperties=font)
+    # # plt.ylabel(u'出现次数', fontsize=12)
+    # # plt.title(u'词频统计')
+    # plt.grid()
+    # keys = keys.decode("utf-8").split(' ')
+    # values = values.split(' ')
+    # valuesInt = []
+    # for value in values:
+    #     valuesInt.append(int(value))
+    #
+    # plt.xticks(range(int(length)), keys)
+    # plt.plot(range(int(length)), valuesInt)
+    # plt.xticks(rotation=defaultrotation, fontsize=9,fontproperties=font)
+    # plt.yticks(fontsize=10,fontproperties=font)
+    # # plt.xticks(rotation=defaultrotation, fontsize=12)
+    # # plt.yticks(fontsize=12)
+    # name = name + str(datetime.now().date()).replace(':', '') + '.png'
+    # imgUrl = 'static/temp/' + name
+    # fig = matplotlib.pyplot.gcf()
+    # fig.set_size_inches(12.2, 2)
+    # plt.savefig(imgUrl, bbox_inches='tight', figsize=(20,4), dpi=100)
+    # plt.close()
+    # tempfile = static_file(name, root='./static/temp/')
+    # #os.remove(imgUrl)
+    # return tempfile
 
 def match(a,b):
   if a==b:
@@ -308,7 +476,6 @@ def extract():
     keywordtopk = keywords[:topk]
 
     for tempkeyword in keywordtopk:
-        textword = '';
         if charencoding['encoding'] != 'utf-8':
             textword = tempkeyword.name.encode(charencoding['encoding'])
         else:
@@ -444,7 +611,7 @@ def extractFile_action(id):
         keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
         keywordtopk.append(keyword)
     if charencoding['encoding'] != 'utf-8':
-        text = unicode(text, charencoding['encoding'], errors="ignore")
+        text = str(text, charencoding['encoding'], errors="ignore")
     return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
 
 @post('/')
@@ -507,11 +674,10 @@ def extractSubmit_action():
         # A nested FieldStorage instance holds the file
         fileitem = request.files.file
         # Test if the file was uploaded
-	if fileitem.filename:
 
-            # strip leading path from file name to avoid directory traversal attacks
+        if fileitem.filename:
             fn = fileitem.filename
-	    filename = fn.split('.')[0]
+            filename = fn.split('.')[0]
             text =fileitem.file.read()
             #path = os.path.dirname(os.path.abspath(__file__))
             open('files/' + fn, 'wb').write(text)
@@ -520,7 +686,7 @@ def extractSubmit_action():
             period = ""
             uploader = ""
             charencoding = chardet.detect(text)
-            text = unicode(text, charencoding['encoding'], errors="ignore")
+            text = str(text, charencoding['encoding'], errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
             id = sqlitedb.addText(textObject)
             topk = int(request.forms.topk)
@@ -627,12 +793,12 @@ def managefile():
             period = ""
             uploader = ""
             charencoding = chardet.detect(text)
-            text = unicode(text, charencoding['encoding'], errors="ignore")
+            text = str(text, charencoding['encoding'], errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
             sqlitedb.addText(textObject)
     else:
         checkedtexts = request.forms.dict['checkedtext']
-        print checkedtexts
+        print(checkedtexts)
         sqlitedb.deleteTexts(checkedtexts)
     return template("managefile_form", texts=sqlitedb.getTexts())
 
@@ -721,6 +887,9 @@ def cut_action():
 def desgin_sequence():
     return template("design_sequence_form")
 
+# textserviceUrl = "http://renyihome.com:8080/textservice/searchArticle"
+textserviceUrl = "http://localhost:8080/searchArticle"
+
 @get('/article/list')
 def article_list():
     pager = {}
@@ -729,7 +898,7 @@ def article_list():
     articlerequest = {}
     articlerequest['pager'] = pager
 
-    articlesResult = requests.post("http://renyihome.com:8080/textservice/searchArticle", json=articlerequest)
+    articlesResult = requests.post(textserviceUrl, json=articlerequest)
     artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
     return template("article_list", artilesearchresult=artilesearchresult.articles)
 
@@ -745,7 +914,12 @@ def article_list():
     query['keyword'] = request.forms.keyword
     articlerequest['query'] = query
 
-    articlesResult = requests.post("http://renyihome.com:8080/textservice/searchArticle", json=articlerequest)
+    articlesResult = {}
+    try:
+        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+    except:
+        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+
     artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
     return template("article_list", artilesearchresult=artilesearchresult.articles)
 
@@ -766,11 +940,26 @@ def getWeChatAccessTocken(code):
 
     return user
 
+# @hook('before_request')
+# def validate():
+#     REQUEST_METHOD = request.environ.get('REQUEST_METHOD')
+#
+#     HTTP_ACCESS_CONTROL_REQUEST_METHOD = request.environ.get('HTTP_ACCESS_CONTROL_REQUEST_METHOD')
+#     if REQUEST_METHOD == 'OPTIONS' and HTTP_ACCESS_CONTROL_REQUEST_METHOD:
+#         request.environ['REQUEST_METHOD'] = 'POST'
+
+
+@hook('after_request')
+def enable_cors():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'PUT, GET, DELETE, POST, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = '*'
+
 if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=80, reloader=True)
+    run(host='localhost', port=8088, reloader=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
