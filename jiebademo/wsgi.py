@@ -24,7 +24,7 @@ jieba.initialize()
 import functools
 #from nltk.probability import FreqDist
 import sqlitedb
-import chardet
+# import chardet
 import nltk
 import requests
 import json
@@ -73,7 +73,7 @@ def serve_css(name, length, keys, values):
     # plt.ylabel(u'出现次数', fontsize=12)
     # plt.title(u'词频统计')
     plt.grid()
-    keys = keys.decode("utf-8").split(' ')
+    keys = keys.split(' ')
     values = values.split(' ')
     valuesInt = []
     for value in values:
@@ -454,12 +454,12 @@ def extract():
     from nltk.probability import FreqDist
     fd = FreqDist(tags)
     counts = []
-    charencoding = chardet.detect(sample_text)
+    # charencoding = chardet.detect(sample_text)
     for keyword in tags:
-        if charencoding['encoding'] != 'utf-8':
-            keywordtext = keyword.encode(charencoding['encoding'])
-        else:
-            keywordtext = keyword.encode("utf-8")
+        # if charencoding['encoding'] != 'utf-8':
+        #     keywordtext = keyword.encode(charencoding['encoding'])
+        # else:
+        keywordtext = str(keyword)
         count = sample_text.count(keywordtext)
         fd[keyword] = count
         counts.append(str(count))
@@ -468,7 +468,7 @@ def extract():
     words = []
     words = jieba.cut(sample_text);
     texttemp = nltk.Text(word for word in words)
-    for key,val in fd.iteritems():
+    for key,val in fd.items():
         keyword = domain.Keyword(id=0, name=key, count=val, textId=0,similarWords='')
         keywords.append(keyword)
         totalWordCount += val
@@ -476,10 +476,7 @@ def extract():
     keywordtopk = keywords[:topk]
 
     for tempkeyword in keywordtopk:
-        if charencoding['encoding'] != 'utf-8':
-            textword = tempkeyword.name.encode(charencoding['encoding'])
-        else:
-            textword = tempkeyword.name.encode("utf-8")
+        textword = str(tempkeyword)
         texttemp.similar(textword)
         tempsimilarWords = texttemp._word_context_index.similar_words(tempkeyword.name)
         tempsimilarWordsStr = u" ".join(tempsimilarWords)
@@ -550,7 +547,7 @@ def extractFile_action(id):
         text = textObject.content
     else:
         return None
-    charencoding = chardet.detect(text)
+    # charencoding = chardet.detect(text)
     topk = defaulttopk
     keywords = sqlitedb.getKeywords(id, int(-1))
 
@@ -583,10 +580,10 @@ def extractFile_action(id):
         fd = FreqDist(tags)
         counts = []
         for keyword in tags:
-            if charencoding['encoding'] != 'utf-8':
-                keywordtext = keyword.encode(charencoding['encoding'])
-            else:
-                keywordtext = keyword.encode("utf-8")
+            # if charencoding['encoding'] != 'utf-8':
+            #     keywordtext = keyword.encode(charencoding['encoding'])
+            # else:
+            keywordtext = keyword.encode("utf-8")
             count = text.count(keywordtext)
             fd[keyword] = count
             counts.append(str(count))
@@ -685,8 +682,8 @@ def extractSubmit_action():
             author = ""
             period = ""
             uploader = ""
-            charencoding = chardet.detect(text)
-            text = str(text, charencoding['encoding'], errors="ignore")
+            # charencoding = chardet.detect(text)
+            text = str(text, 'utf-8', errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
             id = sqlitedb.addText(textObject)
             topk = int(request.forms.topk)
@@ -792,8 +789,9 @@ def managefile():
             author = ""
             period = ""
             uploader = ""
-            charencoding = chardet.detect(text)
-            text = str(text, charencoding['encoding'], errors="ignore")
+            # charencoding = chardet.detect(text)
+            # text = str(text, charencoding['encoding'], errors="ignore")
+            text = str(text, 'utf-8', errors="ignore")
             textObject = domain.Text('',name,author,period,fn,uploader,'',text)
             sqlitedb.addText(textObject)
     else:
