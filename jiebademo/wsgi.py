@@ -182,8 +182,8 @@ def graph():
 
     from pylab import plt, mpl
     # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
-    mpl.rcParams['axes.unicode_minus'] = False
+    # mpl.rcParams['font.sans-serif'] = ['SimHei']
+    # mpl.rcParams['axes.unicode_minus'] = False
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
@@ -201,7 +201,7 @@ def graph():
 
 
 
-    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,fontproperties=font)
+    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,font_family='SimHei')
     # nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
     # nx.draw_networkx(G, node_size=node_sizes, with_labels=True)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
