@@ -58,13 +58,15 @@ def serve_css(filename):
 def serve_css(imageName):
     return static_file(imageName, root='./static/design/sequenceimage')
 
+from matplotlib.font_manager import FontProperties
+
 @route('/image/:name&:length&:keys&:values')
 def serve_css(name, length, keys, values):
     from pylab import plt, mpl
     # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     mpl.rcParams['axes.unicode_minus'] = False
-    from matplotlib.font_manager import FontProperties
+
     # font = FontProperties(fname="d:\Users\ll.tong\Desktop\msyh.ttf", size=12)
     font = FontProperties(fname="./static/msyh.ttf", size=11)
     plt.xlabel(u'')
@@ -194,7 +196,9 @@ def graph():
         node_colors.append('white')
         i += 1
 
-    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
+    font = FontProperties(fname="./static/msyh.ttf", size=11)
+
+    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,fontproperties=font)
     # nx.draw_networkx(G, node_size=node_sizes, with_labels=True)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
