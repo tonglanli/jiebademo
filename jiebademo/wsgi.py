@@ -153,7 +153,9 @@ def graph():
     node_colors = []
     node_sizes = []
     edges_from = []
-    G = nx.Graph()
+
+    font = FontProperties(fname="./static/msyh.ttf", size=11)
+    G = nx.Graph(fontproperties=font)
     for wf in wordFreqs:
         nodes_from.append(wf['word'])
         # node_colors.append('white')
@@ -187,7 +189,7 @@ def graph():
 
     plt.figure(figsize=(15, 15))
     from pylab import plt, mpl
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    # mpl.rcParams['font.sans-serif'] = ['SimHei']
 
 
     i = 0
@@ -196,10 +198,11 @@ def graph():
         node_colors.append('white')
         i += 1
 
-    font = FontProperties(fname="./static/msyh.ttf", size=11)
+
 
 
     nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,fontproperties=font)
+    # nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
     # nx.draw_networkx(G, node_size=node_sizes, with_labels=True)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
