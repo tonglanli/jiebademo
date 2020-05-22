@@ -139,59 +139,22 @@ def graph():
     # os.remove(imgUrl)
     return tempfile
 
-@route('/graph_t', method=['GET'])
-def graph():
-    # data = json.dumps(request.forms.dict)
-    wordFreqs = json.loads(request.query['words'])
-    # wordFreqs = request.json
-
-    nodes_from = []
-    edges_from = []
-    G = nx.Graph()
-    for wf in wordFreqs:
-        # nodes_from.append(wf['word'])
-        G.add_nodes_from(wf['word'], node_color='b', node_size=20 * wf['freq'])
-        for rwf in wf['relatedWordFreqs']:
-            if (rwf['freq'] >= 3):
-                edges_from.append((wf['word'], rwf['word']))
-
-    G.add_edges_from(edges_from)
-
-    from pylab import plt, mpl
-    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
-    mpl.rcParams['axes.unicode_minus'] = False
-    name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
-    imgUrl = 'static/temp/' + name
-
-    plt.figure(figsize=(15, 15))
-    from pylab import plt, mpl
-    mpl.rcParams['font.sans-serif'] = ['SimHei']
-    nx.draw_networkx(G, with_labels=True)
-    plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
-    plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
-    for pos in ['right', 'top', 'bottom', 'left']:
-        plt.gca().spines[pos].set_visible(False)
-
-    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
-    plt.close()
-    tempfile = static_file(name, root='./static/temp/')
-    # os.remove(imgUrl)
-    return tempfile
 
 @route('/graph', method=['GET'])
 def graph():
     # data = json.dumps(request.forms.dict)
-    wordFreqs = json.loads(request.query['words'])
+    wordFreqs = json.loads(request.query.getunicode('words'))
     # wordFreqs = request.json
 
     nodes_from = []
+    # nodes_to = []
     node_colors = []
     node_sizes = []
     edges_from = []
     G = nx.Graph()
     for wf in wordFreqs:
         nodes_from.append(wf['word'])
+        # node_colors.append('white')
         node_colors.append('TURQUOISE')
         node_sizes.append(80 * wf['freq'])
         # if(wf['freq'] > 15):
@@ -201,7 +164,15 @@ def graph():
 
         for rwf in wf['relatedWordFreqs']:
             if (rwf['freq'] >= 3):
+                # nodes_to.append(rwf['word'])
                 edges_from.append((wf['word'], rwf['word']))
+
+    # for nodeto in nodes_to:
+    #     if(nodes_from.count(nodeto) == 0):
+    #         node_colors.append('white')
+
+
+
     G.add_nodes_from(nodes_from)
     G.add_edges_from(edges_from)
 
@@ -215,7 +186,16 @@ def graph():
     plt.figure(figsize=(15, 15))
     from pylab import plt, mpl
     mpl.rcParams['font.sans-serif'] = ['SimHei']
+
+
+    i = 0
+    lenloss = len(G.nodes) - len(node_colors)
+    while i < lenloss:
+        node_colors.append('white')
+        i += 1
+
     nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
+    # nx.draw_networkx(G, node_size=node_sizes, with_labels=True)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
     for pos in ['right', 'top', 'bottom', 'left']:
