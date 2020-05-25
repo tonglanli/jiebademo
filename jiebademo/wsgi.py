@@ -181,9 +181,9 @@ def graph():
     G.add_edges_from(edges_from)
 
     from pylab import plt, mpl
-    # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
-    # mpl.rcParams['font.sans-serif'] = ['SimHei']
-    # mpl.rcParams['axes.unicode_minus'] = False
+    matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
+    mpl.rcParams['font.sans-serif'] = ['SimHei']
+    mpl.rcParams['axes.unicode_minus'] = False
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
