@@ -202,7 +202,7 @@ def graph():
 
 
 
-    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,font_family='SimHei')
+    nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True,font_family='Microsoft YaHei')
     # nx.draw_networkx(G, node_color=node_colors, node_size=node_sizes, with_labels=True)
     # nx.draw_networkx(G, node_size=node_sizes, with_labels=True)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
