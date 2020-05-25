@@ -196,6 +196,7 @@ def graph():
     lenloss = len(G.nodes) - len(node_colors)
     while i < lenloss:
         node_colors.append('white')
+        node_sizes.append(80)
         i += 1
 
 
