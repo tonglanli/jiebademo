@@ -193,7 +193,10 @@ def graph():
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
-    plt.figure(figsize=(15, 15))
+    figsize = 12.2
+    if len(wordFreqs) == 0 :
+        figsize = 1
+    plt.figure(figsize=(figsize, figsize))
     from pylab import plt, mpl
     # mpl.rcParams['font.sans-serif'] = ['SimHei']
 
@@ -513,9 +516,13 @@ def extract():
         username = wechatuser['displayname']
         useropenid = wechatuser['openid']
 
+    # wordFreqs = wordFreq(sample_text)
+    wfs = []
+    # if(wordFreqs is not None):
+    #     wfs = wordFreqs.wordFreqs
     resp = template("extract_form", content=sample_text, tags=keywordtopk, topk=defaulttopk, keyImgUrl=imgUrl,
                     texts=sqlitedb.getTexts(), selectedFile="", totalDifferentWordCount=totalDifferentWordCount,
-                    username=username, useropenid=useropenid)
+                    username=username, useropenid=useropenid,wordFreqs=wfs)
     return resp
 
 import os
@@ -602,8 +609,7 @@ def extractFile_action(id):
         keywordsPercentage = 100*sum([keyword.count for keyword in list(filter((lambda x: x.count > totalDifferentWordCount), keywords))])/totalWordCount
         keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
         keywordtopk.append(keyword)
-    if charencoding['encoding'] != 'utf-8':
-        text = str(text, charencoding['encoding'], errors="ignore")
+    text = str(text, 'utf-8', errors="ignore")
     return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount)
 
 @post('/')
@@ -612,7 +618,7 @@ def extractSubmit_action():
     fullname = request.cookies.get('fullname')
     id = request.forms.selectedFile
     if "extract" in request.forms:
-        text = request.forms.text
+        text = request.forms.dict['text'][0]
         #text = "/ ".join(jieba.cut(text))
         topk = int(request.forms.topk)
         defaulttopk = topk
@@ -632,7 +638,7 @@ def extractSubmit_action():
         totalWordCount = 0
         words = jieba.cut(text);
         texttemp = nltk.Text(word for word in words)
-        for key, val in fd.iteritems():
+        for key, val in fd.items():
             keyword = domain.Keyword(id=0, name=key, count=val, textId=0, similarWords='')
             keywords.append(keyword)
             totalWordCount += val
@@ -710,7 +716,11 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
             keywordtopk.append(keyword)
 
-    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='', useropenid='')
+    # wordFreqs = wordFreq(text)
+    wfs = []
+    # if (wordFreqs is not None):
+    #     wfs = wordFreqs.wordFreqs
+    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='', useropenid='', wordFreqs=wfs)
 
 @post('/analyze')
 def analyzefile():
@@ -880,8 +890,8 @@ def cut_action():
 def desgin_sequence():
     return template("design_sequence_form")
 
-# textserviceUrl = "http://renyihome.com:8080/textservice/searchArticle"
 textserviceUrl = "http://localhost:8080/searchArticle"
+# textserviceUrl = "http://g2.renyihome.com:8080/textservice/searchArticle"
 
 @get('/article/list')
 def article_list():
@@ -915,6 +925,22 @@ def article_list():
 
     artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
     return template("article_list", artilesearchresult=artilesearchresult.articles)
+
+def wordFreq(doc):
+
+    articlerequest = {}
+    query = {}
+    query['articleContent'] = doc
+    articlerequest['query'] = query
+
+    articlesResult = {}
+    try:
+        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+    except:
+        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+
+    artilesearchresult = json.loads(articlesResult.content, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    return artilesearchresult
 
 
 def getWeChatAccessTocken(code):
@@ -952,7 +978,7 @@ if __name__ == "__main__":
     # Interactive mode
     #debug(True)
     #run(server='CherryPy',host='localhost', port=8080, debug=True)
-    run(host='localhost', port=8088, reloader=True)
+    run(host='localhost', port=8083, reloader=True)
     #from cherrypy import wsgiserver
     #from bottle import CherryPyServer
     #run(host='localhost', port=8099, server=CherryPyServer)
