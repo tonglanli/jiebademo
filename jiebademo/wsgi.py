@@ -125,7 +125,7 @@ def graph():
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
-    plt.figure(figsize=(15, 15))
+    plt.figure(figsize=(12.2, 12.2))
     from pylab import plt, mpl
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     nx.draw_networkx(G, with_labels=True)
@@ -156,7 +156,11 @@ def graph():
 
     font = FontProperties(fname="./static/msyh.ttf", size=11)
     G = nx.Graph(fontproperties=font)
+    wi = 0
     for wf in wordFreqs:
+        if(wi >= 20) :
+            continue
+        wi += 1
         nodes_from.append(wf['word'])
         # node_colors.append('white')
         node_colors.append('TURQUOISE')
@@ -166,10 +170,12 @@ def graph():
         # else:
         #     node_sizes.append(70 * wf['freq'])
 
+        ri = 0
         for rwf in wf['relatedWordFreqs']:
-            if (rwf['freq'] >= 3):
+            if (rwf['freq'] >= 3 and ri <3):
                 # nodes_to.append(rwf['word'])
                 edges_from.append((wf['word'], rwf['word']))
+                ri += 1
 
     # for nodeto in nodes_to:
     #     if(nodes_from.count(nodeto) == 0):
