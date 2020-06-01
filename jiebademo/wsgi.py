@@ -158,12 +158,15 @@ def graph():
     G = nx.Graph(fontproperties=font)
     wi = 0
     dividen = 1
-    if(wordFreqs[0] > 10000) :
-        dividen = wordFreqs[0] / 2000
-    elif(wordFreqs[0] > 1000):
-        dividen = wordFreqs[0] / 200
-    elif (wordFreqs[0] > 100):
-        dividen = wordFreqs[0] / 20
+    if(len(wordFreqs) > 0):
+        biggestFreq = wordFreqs[0]['freq']
+        if(biggestFreq > 10000) :
+            dividen = wordFreqs[0] / 2000
+        elif(biggestFreq > 1000):
+            dividen = wordFreqs[0] / 200
+        elif (biggestFreq > 100):
+            dividen = wordFreqs[0] / 20
+
     for wf in wordFreqs:
         if(wi >= 20) :
             continue
