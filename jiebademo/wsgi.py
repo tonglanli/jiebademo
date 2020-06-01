@@ -161,11 +161,11 @@ def graph():
     if(len(wordFreqs) > 0):
         biggestFreq = wordFreqs[0]['freq']
         if(biggestFreq > 10000) :
-            dividen = wordFreqs[0] / 2000
+            dividen = biggestFreq / 2000
         elif(biggestFreq > 1000):
-            dividen = wordFreqs[0] / 200
+            dividen = biggestFreq / 200
         elif (biggestFreq > 100):
-            dividen = wordFreqs[0] / 20
+            dividen = biggestFreq / 20
 
     for wf in wordFreqs:
         if(wi >= 20) :
