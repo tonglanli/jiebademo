@@ -157,6 +157,13 @@ def graph():
     font = FontProperties(fname="./static/msyh.ttf", size=11)
     G = nx.Graph(fontproperties=font)
     wi = 0
+    dividen = 1
+    if(wordFreqs[0] > 10000) :
+        dividen = wordFreqs[0] / 2000
+    elif(wordFreqs[0] > 1000):
+        dividen = wordFreqs[0] / 200
+    elif (wordFreqs[0] > 100):
+        dividen = wordFreqs[0] / 20
     for wf in wordFreqs:
         if(wi >= 20) :
             continue
@@ -164,7 +171,7 @@ def graph():
         nodes_from.append(wf['word'])
         # node_colors.append('white')
         node_colors.append('TURQUOISE')
-        node_sizes.append(80 * wf['freq'])
+        node_sizes.append(80 * wf['freq'] / dividen)
         # if(wf['freq'] > 15):
         #     node_sizes.append(wf['freq']*1000/20)
         # else:
