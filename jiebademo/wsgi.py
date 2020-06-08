@@ -210,7 +210,7 @@ def graph():
     figsize = 12.2
     if len(wordFreqs) == 0 :
         figsize = 1
-    plt.figure(figsize=(figsize, figsize * 0.6))
+    plt.figure(figsize=(figsize * 0.6, figsize * 0.6))
     from pylab import plt, mpl
     # mpl.rcParams['font.sans-serif'] = ['SimHei']
 
