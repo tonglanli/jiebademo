@@ -207,10 +207,10 @@ def graph():
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
-    figsize = 12.2
+    figsize = 10
     if len(wordFreqs) == 0 :
         figsize = 1
-    plt.figure(figsize=(figsize, figsize * 0.6))
+    plt.figure(figsize=(figsize, figsize*0.8))
     from pylab import plt, mpl
     # mpl.rcParams['font.sans-serif'] = ['SimHei']
 
