@@ -128,7 +128,7 @@ def graph():
     plt.figure(figsize=(12.2, 12.2))
     from pylab import plt, mpl
     mpl.rcParams['font.sans-serif'] = ['SimHei']
-    nx.draw_networkx(G, with_labels=True)
+    nx.draw_networkx(G, with_labels=True, font_size=11)
     plt.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
     plt.tick_params(axis='y', which='both', right=False, left=False, labelleft=False)
     for pos in ['right', 'top', 'bottom', 'left']:
@@ -475,7 +475,7 @@ def extractSubmit_action():
     fullname = request.cookies.get('fullname')
     id = request.forms.selectedFile
     if "extract" in request.forms:
-        text = request.forms.dict['text'][0]
+        text = request.forms['text']
         #text = "/ ".join(jieba.cut(text))
         topk = int(request.forms.topk)
         defaulttopk = topk
@@ -573,11 +573,11 @@ def extractSubmit_action():
             keyword = domain.Keyword(0, name=u"关键词数量百分比", count=keywordsPercentage, textId=0)
             keywordtopk.append(keyword)
 
-    wordFreqs = wordFreq(text)
+    wordFreqs = wordFreq(request.forms['text'])
     wfs = ""
     if (wordFreqs is not None):
         wfs = json.dumps(wordFreqs)
-    return template("extract_form",content=text,tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='', useropenid='', wordFreqs=wfs)
+    return template("extract_form",content=request.forms['text'],tags=keywordtopk,topk=topk,keyImgUrl=imgUrl, texts=sqlitedb.getTexts(), selectedFile=id, totalDifferentWordCount=totalDifferentWordCount, username='', useropenid='', wordFreqs=wfs)
 
 @post('/analyze')
 def analyzefile():
@@ -788,15 +788,21 @@ def wordFreq(doc):
     articlerequest = {}
     query = {}
     query['articleContent'] = doc
+    query['useropenid'] = request.cookies.get('useropenid')
+    query['usersourcefrom'] = request.cookies.get('usersourcefrom')
     articlerequest['query'] = query
 
     articlesResult = {}
+    artilesearchresult = {}
     try:
-        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+        try:
+            articlesResult = requests.post(textserviceUrl, json=articlerequest)
+        except:
+            articlesResult = requests.post(textserviceUrl, json=articlerequest)
+        artilesearchresult = json.loads(articlesResult.content.decode('utf-8'))['wordFreqs']
     except:
-        articlesResult = requests.post(textserviceUrl, json=articlerequest)
+        artilesearchresult = {}
 
-    artilesearchresult = json.loads(articlesResult.content.decode('utf-8'))['wordFreqs']
     return artilesearchresult
 
 
