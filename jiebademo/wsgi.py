@@ -69,7 +69,7 @@ plotIsProcessing = 0
 def serve_css(name, length, keys, values):
     global plotIsProcessing
     while plotIsProcessing >= 1 :
-        time.sleep(1)
+        time.sleep(0.2)
     plotIsProcessing = 1
     from pylab import plt, mpl
     # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
@@ -155,7 +155,7 @@ def graph():
 def graph():
     global plotIsProcessing
     while plotIsProcessing >= 1 :
-        time.sleep(1)
+        time.sleep(0.2)
     plotIsProcessing = 1
     # data = json.dumps(request.forms.dict)
     wordFreqs = json.loads(request.query.getunicode('words'))
