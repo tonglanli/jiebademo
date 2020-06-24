@@ -60,8 +60,17 @@ def serve_css(imageName):
 
 from matplotlib.font_manager import FontProperties
 
+
+
+import time
+
+plotIsProcessing = 0
 @route('/image/:name&:length&:keys&:values')
 def serve_css(name, length, keys, values):
+    global plotIsProcessing
+    while plotIsProcessing >= 1 :
+        time.sleep(1)
+    plotIsProcessing = 1
     from pylab import plt, mpl
     # matplotlib.rcParams['font.family'] = 'Microsoft YaHei'
     mpl.rcParams['font.sans-serif'] = ['SimHei']
@@ -93,6 +102,7 @@ def serve_css(name, length, keys, values):
     fig.set_size_inches(12.2, 2)
     plt.savefig(imgUrl, bbox_inches='tight', figsize=(20,4), dpi=100)
     plt.close()
+    plotIsProcessing = 0
     tempfile = static_file(name, root='./static/temp/')
     #os.remove(imgUrl)
     return tempfile
@@ -125,7 +135,7 @@ def graph():
     name = "graph" + str(datetime.now().date()).replace(':', '') + '.png'
     imgUrl = 'static/temp/' + name
 
-    plt.figure(figsize=(12.2, 12.2))
+    fig = plt.figure(figsize=(12.2, 12.2))
     from pylab import plt, mpl
     mpl.rcParams['font.sans-serif'] = ['SimHei']
     nx.draw_networkx(G, with_labels=True, font_size=11)
@@ -134,8 +144,7 @@ def graph():
     for pos in ['right', 'top', 'bottom', 'left']:
         plt.gca().spines[pos].set_visible(False)
 
-
-    plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
+    fig.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
     plt.close()
     tempfile = static_file(name, root='./static/temp/')
     # os.remove(imgUrl)
@@ -144,6 +153,10 @@ def graph():
 
 @route('/graph', method=['GET'])
 def graph():
+    global plotIsProcessing
+    while plotIsProcessing >= 1 :
+        time.sleep(1)
+    plotIsProcessing = 1
     # data = json.dumps(request.forms.dict)
     wordFreqs = json.loads(request.query.getunicode('words'))
     # wordFreqs = request.json
@@ -235,6 +248,7 @@ def graph():
 
     plt.savefig(imgUrl, bbox_inches='tight', figsize=(20, 4), dpi=100)
     plt.close()
+    plotIsProcessing = 0
     tempfile = static_file(name, root='./static/temp/')
     # os.remove(imgUrl)
     return tempfile
